@@ -16,11 +16,33 @@ int listaParesVazia(listaEncadPares listaPares){
     return (listaPares.primeiro == listaPares.ultimo);
 }
 
-void insereListaPares(tipoPar par, listaEncadPares *listaPares){
-    listaPares->ultimo->prox = (tipoApontadorPar)malloc(sizeof(tipoCelula));
-    listaPares->ultimo = listaPares->ultimo->prox;
-    listaPares->ultimo->par = par;
-    listaPares->ultimo->prox = NULL;
+void insereListaPares(tipoPar par, listaEncadPares *listaPares){        //Função adaptada para inserir ordenadamente
+
+    tipoApontadorPar novaCelula, ant, atual = listaPares->primeiro->prox;
+    novaCelula = (tipoApontadorPar)malloc(sizeof(tipoCelula));
+    novaCelula->par = par;
+    
+    if (listaParesVazia(*listaPares)){
+        novaCelula->prox = NULL;
+        listaPares->primeiro->prox = novaCelula;
+        listaPares->ultimo = novaCelula;
+        printf("inseriu lista vazia\n");
+
+    } else{
+
+        while (atual != NULL && atual->par.idDoc < par.idDoc){
+            ant = atual;
+            atual = atual->prox;
+        }
+
+        if (atual == listaPares->primeiro->prox){
+            novaCelula->prox = listaPares->primeiro->prox;
+            listaPares->primeiro->prox = novaCelula;
+        } else{
+            novaCelula->prox = ant->prox;
+            ant->prox = novaCelula;
+        }
+    }
 }
 
 void retiraListaPares(tipoApontadorPar p, listaEncadPares *listaPares, tipoPar *par){ /*  ---   Obs.: o item a ser retirado e  o seguinte ao apontado por  p --- */
