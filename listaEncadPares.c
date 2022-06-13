@@ -67,3 +67,17 @@ void imprimeListaPares(listaEncadPares listaPares){
         aux = aux->prox;
     }
 }
+
+void aumentaQtde(listaEncadPares listaPares, int idDoc){
+    tipoApontadorPar aux;
+    aux = listaPares.primeiro->prox;
+    while (aux != NULL){
+        if (aux->par.idDoc == idDoc){
+            aux->par.qtde++;
+            return;
+        } else{
+            aux = aux->prox;
+        }
+    }
+    printf("idDoc nao encontrado: %d\n", idDoc);
+}
