@@ -32,3 +32,5 @@ void insereListaPares(tipoPar par, listaEncadPares *lista);
 void retiraListaPares(tipoApontadorPar p, listaEncadPares *lista, tipoPar *par);
 
 void imprimeListaPares(listaEncadPares lista);
+
+void aumentaQtde(listaEncadPares lista ,int idDoc);
