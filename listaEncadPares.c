@@ -81,3 +81,18 @@ void aumentaQtde(listaEncadPares listaPares, int idDoc){
     }
     printf("idDoc nao encontrado: %d\n", idDoc);
 }
+
+#include "listaEncadPares.h"
+
+tipoPar* buscaPar(listaEncadPares listaPares, int idDoc){
+    tipoApontadorPar aux;
+    aux = listaPares.primeiro->prox;
+    while (aux != NULL){
+        if (aux->par.idDoc == idDoc) {
+            return &(*aux).par;
+        }else{
+            aux = aux->prox;
+        }
+   }
+    printf("idDoc nao encontrado: %d\n", idDoc);
+}
