@@ -2,7 +2,7 @@
 #include "listaEncadPares.h"
 
 #include <sys/time.h>
-#define MAX 10
+#define MAX 15
 
 int main(int argc, char *argv[])
 {
@@ -51,17 +51,20 @@ int main(int argc, char *argv[])
 
     imprimeListaPares(lista);
 
-    /*Retira cada chave da lista */
-    for (i = 0; i < MAX/2; i++)
-    { /*escolhe uma chave aleatoriamente */
-        k = (int)((tamanho)*rand() / (RAND_MAX + 1.0));
-        p = lista.primeiro;
-        /*retira chave apontada */
-        retiraListaPares(p, &lista, &parTeste);
-        tamanho--;
-        printf("Retirou: "); imprimePar(parTeste);
-        printf("Nova lista:\n"); imprimeListaPares(lista);
-    }
+
+
+    putchar('\n');
+    aumentaQtde(lista, 5); aumentaQtde(lista, 5); aumentaQtde(lista, 5); aumentaQtde(lista, 5);
+    aumentaQtde(lista, 13); aumentaQtde(lista, 13);
+    
+    imprimeListaPares(lista);
+    putchar('\n');
+
+    aumentaQtde(lista, 5);
+    aumentaQtde(lista, 2);
+    aumentaQtde(lista, 3); aumentaQtde(lista, 3);
+    aumentaQtde(lista, 26);
+    imprimeListaPares(lista);
 
     return (0);
 }
