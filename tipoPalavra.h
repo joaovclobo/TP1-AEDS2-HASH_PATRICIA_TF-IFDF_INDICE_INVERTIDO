@@ -22,7 +22,7 @@ void setListaPares(tipoPalavra* palavra, listaEncadPares* listapares);
 
 /*---------------- Funções auxiliares ---------------- */
 
-void inicialzaPalavra(tipoPalavra* palavra, char* valPalavra, tipoPar primPar); //Inicia um tipoPalavra já com o valor da palavra e um par(qnte, idDoc)
+void inicializaPalavra(tipoPalavra* palavra, char* valPalavra, int idDoc); //Inicia um tipoPalavra já com o valor da palavra e um par(qnte, idDoc)
 
 void aumentaQtdePar(tipoPalavra* palavra, int idDoc);  //Aumenta em 1 o valor de repetições de uma palavra do documento
 

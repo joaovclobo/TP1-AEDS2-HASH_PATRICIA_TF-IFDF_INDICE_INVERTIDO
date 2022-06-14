@@ -12,8 +12,22 @@ char* getPalavra(tipoPalavra* palavra){
     return palavra->valPalavra;
 }
 
-tipoPar* getPar(tipoPalavra* palavra, int idDoc){ //Avaliar necessidade 
-    return palavra->listaPares;
+void encontraPar(tipoApontadorPar vendoPar, tipoPar* res){
+    if (vendoPar->par.idDoc == res->idDoc){
+        res->qtde = vendoPar->par.qtde;
+    }
+    if (vendoPar->prox == NULL){
+        res->qtde = 0;
+    }
+    encontraPar(vendoPar->prox, res);
+}
+
+tipoPar getPar(tipoPalavra* palavra, int idDoc){ //Avaliar necessidade
+    tipoApontadorPar vendoPar = palavra->listaPares->primeiro;
+    tipoPar res;
+    res.idDoc = idDoc;
+    encontraPar(vendoPar, &res);
+    return res;
 }
 
 listaEncadPares* getListaPares(tipoPalavra* palavra){
@@ -35,11 +49,13 @@ void setListaPares(tipoPalavra* palavra, listaEncadPares* listapares){
 
 /*---------------- Funções auxiliares ---------------- */
 
-void inicialzaPalavra(tipoPalavra* palavra, char* valPalavra, tipoPar primPar){
+void inicializaPalavra(tipoPalavra* palavra, char* valPalavra, int idDoc){
     listaEncadPares* listaPares = (listaEncadPares*) malloc(sizeof(listaEncadPares));
     flParesVazia(listaPares);
     setListaPares(palavra, listaPares);
     setPalavra(palavra, valPalavra);
+    tipoPar primPar;
+    inicializaPar(&primPar, idDoc);
     setPar(palavra, primPar);
 } 
 

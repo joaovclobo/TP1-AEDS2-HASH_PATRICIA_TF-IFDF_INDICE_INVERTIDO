@@ -21,6 +21,8 @@ typedef struct listaEncadPares{
     tipoApontadorPar primeiro, ultimo;
 }listaEncadPares;
 
+void inicializaPar(tipoPar* par, int idDoc);
+
 void imprimePar(tipoPar par);
 
 void flParesVazia(listaEncadPares *lista);

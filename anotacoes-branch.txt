@@ -1,0 +1,11 @@
+Tipo Palavra (alterações):
+    Inicializa palavra:
+        Função não recebe mais um tipo par para inicializar a palavra, e sim o id do documento onde ela está localizada, uma vez que a quantidade da palavra inicializada será sempre 1, o tipo par é então inicializado dentro da própria função.
+
+Lista Encadeada de Pares:
+    Função inicializa par adicionada:
+        Inicializa um par recebendo um id de documento, criando um par com quantidade 1.
+    Função getPar modificada:
+        Retorna um par, caso esse par for achado na  lista encadeada, caso contrário, retorna o par com quantidade 0.
+
+CMakeLists criado.

@@ -2,6 +2,11 @@
 
 #include "listaEncadPares.h"
 
+void inicializaPar(tipoPar* par, int idDoc){
+    par->idDoc = idDoc;
+    par->qtde = 1;
+}
+
 void imprimePar(tipoPar par){
     printf("<%d, %d>\n", par.qtde, par.idDoc);
 }
@@ -81,8 +86,6 @@ void aumentaQtde(listaEncadPares listaPares, int idDoc){
     }
     printf("idDoc nao encontrado: %d\n", idDoc);
 }
-
-#include "listaEncadPares.h"
 
 tipoPar* buscaPar(listaEncadPares listaPares, int idDoc){
     tipoApontadorPar aux;
