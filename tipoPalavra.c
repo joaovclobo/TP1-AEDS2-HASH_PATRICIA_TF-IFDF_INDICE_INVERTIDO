@@ -14,7 +14,7 @@
     Arquivo: 
         anotacoes-branch-Joao.txt
         Descrição do arquivo: Arquivo de código do TAD tipo palavra
-        Ultima modificação: 14/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 15/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -64,6 +64,7 @@ void inicializaPalavra(tipoPalavra* palavra, char* valPalavra, int idDoc){
     setPalavra(palavra, valPalavra);
 
     tipoPar* primPar = (tipoPar*) malloc(sizeof(tipoPar));
+
     inicializaPar(primPar, idDoc);
     setPar(palavra, *primPar);
 } 
@@ -73,17 +74,17 @@ void aumentaQtdePar(tipoPalavra* palavra, int idDoc){
 }  
 
 int comparaPalavra(tipoPalavra palavra1, tipoPalavra palavra2){
-    return !strcmp(palavra1.valPalavra, palavra2.valPalavra);
+    return !strcmp(getValPalavra(&palavra1), getValPalavra(&palavra2));
 } 
 
 void imprimePalavra(tipoPalavra palavra){
     printf("Palavra - %s | ", getValPalavra(&palavra));
-    imprimeListaPares(*palavra.listaPares);
+    imprimeListaPares(*getListaPares(&palavra));
 }
 
 void insereNovoIdDoc(tipoPalavra* palavra, int idDoc){
     tipoPar* par = (tipoPar*) malloc(sizeof(tipoPar));
 
     inicializaPar(par, idDoc);
-    insereListaPares(*par, palavra->listaPares);
+    insereListaPares(*par, getListaPares(palavra));
 }
