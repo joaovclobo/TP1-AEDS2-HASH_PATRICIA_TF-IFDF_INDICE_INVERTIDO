@@ -1,4 +1,5 @@
-/*  
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     Universidade Federal De Viçosa - Campus Florestal
     Trabalho prático 1 de Algorítimos e estrutura de dados
     
@@ -14,7 +15,8 @@
         anotacoes-branch-Joao.txt
         Descrição do arquivo: Arquivo "main" contendo o menu e a execução das principais funções
         Ultima modificação: 14/06 - Por: João Vitor Chagas Lobo
-*/
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 #include <stdio.h>
 #include <stdlib.h>

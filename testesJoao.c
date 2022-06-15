@@ -1,4 +1,5 @@
-/*  
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     Universidade Federal De Viçosa - Campus Florestal
     Trabalho prático 1 de Algorítimos e estrutura de dados
     
@@ -13,7 +14,8 @@
         anotacoes-branch-Joao.txt
         Descrição do arquivo: Arquivo para testes de funções implementadas sob pelo aluno João Vitor Chagas Lobo
         Ultima modificação: 14/06 - Por: João Vitor Chagas Lobo
-*/
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 #include "tipoPalavra.h"
 
