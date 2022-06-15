@@ -1,9 +1,30 @@
-//VEM CABEÇALHO
+/*  
+    Universidade Federal De Viçosa - Campus Florestal
+    Trabalho prático 1 de Algorítimos e estrutura de dados
+    
+    Professora responsável: 
+        Glaucia Braga e Silva
+        
+    Integrantes do Gupo:
+        Caio Oliveira Almeida - 4237
+        Guilherme Augusto Schwann Wilke - 4685
+        João Vitor Chagas Lobo - 4693
+
+    Arquivo: 
+        anotacoes-branch-Joao.txt
+        Descrição do arquivo: Arquivo de código do TAD tipo lista encadeada de pares (qtde, idDoc)
+        Ultima modificação: 14/06 - Por: João Vitor Chagas Lobo
+*/
 
 #include "listaEncadPares.h"
 
+void inicializaPar(tipoPar* par, int idDoc){
+    par->idDoc = idDoc;
+    par->qtde = 1;
+}
+
 void imprimePar(tipoPar par){
-    printf("<%d, %d>\n", par.qtde, par.idDoc);
+    printf("<%d, %d> | ", par.qtde, par.idDoc);
 }
 
 void flParesVazia(listaEncadPares *listaPares){
@@ -26,7 +47,6 @@ void insereListaPares(tipoPar par, listaEncadPares *listaPares){        //Funç�
         novaCelula->prox = NULL;
         listaPares->primeiro->prox = novaCelula;
         listaPares->ultimo = novaCelula;
-        printf("inseriu lista vazia\n");
 
     } else{
 
@@ -66,6 +86,7 @@ void imprimeListaPares(listaEncadPares listaPares){
         imprimePar(aux->par);
         aux = aux->prox;
     }
+    printf("\n\n");
 }
 
 void aumentaQtde(listaEncadPares listaPares, int idDoc){
@@ -81,8 +102,6 @@ void aumentaQtde(listaEncadPares listaPares, int idDoc){
     }
     printf("idDoc nao encontrado: %d\n", idDoc);
 }
-
-#include "listaEncadPares.h"
 
 tipoPar* buscaPar(listaEncadPares listaPares, int idDoc){
     tipoApontadorPar aux;

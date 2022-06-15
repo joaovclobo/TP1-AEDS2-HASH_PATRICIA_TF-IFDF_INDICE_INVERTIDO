@@ -1,0 +1,41 @@
+/*  
+    Universidade Federal De Viçosa - Campus Florestal
+    Trabalho prático 1 de Algorítimos e estrutura de dados
+    
+    Professora responsável: 
+        Glaucia Braga e Silva
+        
+    Integrantes do Gupo:
+        Caio Oliveira Almeida - 4237
+        Guilherme Augusto Schwann Wilke - 4685
+        João Vitor Chagas Lobo - 4693
+
+    Arquivo: 
+        anotacoes-branch-Joao.txt
+        Descrição do arquivo: Arquivo que contem o resumo das modificações feitas pelo aluno João Vitor Chagas Lobo no "commit" atual
+        Ultima modificação: 14/06 - Por: João Vitor Chagas Lobo
+*/
+
+Modificações dia 14/06/22:
+
+    Criação Função "imprimePalavra"
+    
+    Mudança na formatação da função "imprimePar" e "imprimeListaPares"
+
+    Mudança no arquivo de testes para o teste da iserção e modificação do TAD palavra
+
+    Mudança do nome da função "getPalavra" pra "getValPalavra"
+
+    Nome da "lista" estava diferente no arquivo "listaPares.h". Alterado em todas as funções para "listaPares"
+    
+    Inclusão do cabeçalho de identificação em todos os arquivos
+    
+    Mudança da função "inicializaPalavra" para adequar à do branch do Guto e mudança da variável "tipoPar primPar" para alocação dinâmica
+    
+    Mudança da função "aumentaQtdePar" para usar uma função de "get"
+    
+    Criação da função "insereNovoIdDoc"
+    
+    Remoção "print" na função insere
+    
+    Arquivos .h atualizados de acordo com as mudanças e criações das funções
