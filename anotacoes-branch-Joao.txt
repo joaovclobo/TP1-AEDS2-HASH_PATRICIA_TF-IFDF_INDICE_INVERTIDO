@@ -59,4 +59,7 @@ Anotações dia 15/06 - 9h00
     
     7 - Precisamos de um "tipoPar" separado?
     
-    8 - Lista de palavras na hash table precisa estar ordenada?
+    *8 - Lista de palavras na hash table precisa estar ordenada?
+
+    *9 - Contruir o "indice invertido" no menu seria inserir as palvras nos TADS?
+
