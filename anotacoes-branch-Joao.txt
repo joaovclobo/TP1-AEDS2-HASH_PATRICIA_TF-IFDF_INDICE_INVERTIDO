@@ -1,4 +1,4 @@
-/*  
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------ 
     Universidade Federal De Viçosa - Campus Florestal
     Trabalho prático 1 de Algorítimos e estrutura de dados
     
@@ -14,7 +14,7 @@
         anotacoes-branch-Joao.txt
         Descrição do arquivo: Arquivo que contem o resumo das modificações feitas pelo aluno João Vitor Chagas Lobo no "commit" atual
         Ultima modificação: 14/06 - Por: João Vitor Chagas Lobo
-*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 Modificações dia 14/06/22:
 
@@ -39,3 +39,22 @@ Modificações dia 14/06/22:
     Remoção "print" na função insere
     
     Arquivos .h atualizados de acordo com as mudanças e criações das funções
+
+
+Anotações dia 15/06 - 9h00
+    
+    1 - Falta conferir funções "comparaPalavra" e getListaPares e adiciona-las às já implementadas
+       
+    2 - Fazer e testar o TAD lista encadeada de palavras (verificar no ziviani como foi feito)
+    
+    3 - Atenção pra alocação de memória, principalmente para os "aux"
+    
+    4 - Atualizar os cabeçalhos
+    
+    5 - Separar melhor o código  
+    
+    6 - Comentar melhor as funções quando necessário
+    
+    7 - Precisamos de um "tipoPar" separado?
+    
+    8 - Lista de palavras na hash table precisa estar ordenada?
