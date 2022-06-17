@@ -12,7 +12,7 @@
         João Vitor Chagas Lobo - 4693
 
     Arquivo: 
-        anotacoes-branch-Joao.txt
+        listaEncadPares.c
         Descrição do arquivo: Arquivo de código do TAD tipo lista encadeada de pares (qtde, idDoc)
         Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 

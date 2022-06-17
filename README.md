@@ -11,8 +11,8 @@ Integrantes do Gupo:
     João Vitor Chagas Lobo - 4693
 
 Arquivo: 
-    anotacoes-branch-Joao.txt
-    Descrição do arquivo: Arquivo "main" contendo o menu e a execução das principais funções
+    README.md
+    Descrição do arquivo: Arquivo contendo as instrunções para execução do programa
     Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 
 # tp01-AEDS2

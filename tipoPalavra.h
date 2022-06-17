@@ -12,7 +12,7 @@
         João Vitor Chagas Lobo - 4693
 
     Arquivo: 
-        anotacoes-branch-Joao.txt
+        tipoPalavra.h
         Descrição do arquivo: Cabeçalho do TAD tipo palavra
         Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 

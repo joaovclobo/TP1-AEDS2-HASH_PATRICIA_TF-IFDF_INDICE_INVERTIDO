@@ -12,7 +12,7 @@
         João Vitor Chagas Lobo - 4693
 
     Arquivo: 
-        anotacoes-branch-Joao.txt
+        listaEncadPares.h
         Descrição do arquivo: Cabeçalho do TAD tipo lista encadeada de pares (qtde, idDoc)
         Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 

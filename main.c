@@ -12,7 +12,7 @@
         João Vitor Chagas Lobo - 4693
 
     Arquivo: 
-        anotacoes-branch-Joao.txt
+        main.c
         Descrição do arquivo: Arquivo "main" contendo o menu e a execução das principais funções
         Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 
