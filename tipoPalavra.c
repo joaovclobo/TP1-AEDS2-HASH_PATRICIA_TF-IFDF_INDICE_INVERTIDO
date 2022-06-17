@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------  
 
     Universidade Federal De Viçosa - Campus Florestal
-    Trabalho prático 1 de Algorítimos e estrutura de dados
+    Trabalho prático 1 de Algorítimos e estrutura de dados 2
 
     Professora responsável: 
         Glaucia Braga e Silva
@@ -14,27 +14,17 @@
     Arquivo: 
         anotacoes-branch-Joao.txt
         Descrição do arquivo: Arquivo de código do TAD tipo palavra
-        Ultima modificação: 15/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
-#include "listaEncadPares.h"
-#define tamMaxPalavra 50
-
-typedef struct tipoPalavra{
-    char valPalavra[tamMaxPalavra];
-    listaEncadPares* listaPares;
-}tipoPalavra;
+#include "tipoPalavra.h"
 
 /*---------------- Gets e sets ---------------- */
 
 char* getValPalavra(tipoPalavra* palavra){
     return palavra->valPalavra;
 }
-
-// tipoPar* getPar(tipoPalavra* palavra, int idDoc){ //Avaliar necessidade 
-//     return palavra->listaPares;
-// }
 
 listaEncadPares* getListaPares(tipoPalavra* palavra){
     return palavra->listaPares;

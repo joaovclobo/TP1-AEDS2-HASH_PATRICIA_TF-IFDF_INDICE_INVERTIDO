@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     Universidade Federal De Viçosa - Campus Florestal
-    Trabalho prático 1 de Algorítimos e estrutura de dados
+    Trabalho prático 1 de Algorítimos e estrutura de dados 2
     
     Professora responsável: 
         Glaucia Braga e Silva
@@ -14,7 +14,7 @@
     Arquivo: 
         anotacoes-branch-Joao.txt
         Descrição do arquivo: Cabeçalho do TAD tipo palavra
-        Ultima modificação: 14/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -24,7 +24,7 @@
 typedef struct tipoPalavra{
     char valPalavra[tamMaxPalavra];
     listaEncadPares* listaPares;
-}tipoPalavra;
+} tipoPalavra;
 
 /*---------------- Gets e sets ---------------- */
 

@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------  
 
     Universidade Federal De Viçosa - Campus Florestal
-    Trabalho prático 1 de Algorítimos e estrutura de dados
+    Trabalho prático 1 de Algorítimos e estrutura de dados 2
     
     Professora responsável: 
         Glaucia Braga e Silva
