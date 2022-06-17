@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     Universidade Federal De Viçosa - Campus Florestal
-    Trabalho prático 1 de Algorítimos e estrutura de dados
+    Trabalho prático 1 de Algorítimos e estrutura de dados 2
     
     Professora responsável: 
         Glaucia Braga e Silva
@@ -11,47 +11,71 @@
         João Vitor Chagas Lobo - 4693
 
     Arquivo: 
-        anotacoes-branch-Joao.txt
+        testesJoao.c
         Descrição do arquivo: Arquivo para testes de funções implementadas sob pelo aluno João Vitor Chagas Lobo
-        Ultima modificação: 15/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
-#include "tipoPalavra.h"
+#include "hashTablePalavras.h"
 
-int main()
-{
+int main(int argc, char *argv[]){
 
-    tipoPalavra *palavra1 = (tipoPalavra*) malloc(sizeof(tipoPalavra));
-    tipoPalavra *palavra2 = (tipoPalavra*) malloc(sizeof(tipoPalavra));
-    tipoPalavra *palavra3 = (tipoPalavra*) malloc(sizeof(tipoPalavra));
+    criaHashTablePalavra(Tabela);
+    geraVetPesos(p);
 
-    char* valpalavra1 = "abacate";
-    char* valPalavra2 = "Bacia";
-    char* valPalavra3 = "calma";
+/*----------- Testa inserções -----------*/
 
+    LerPalavra(Elemento.Chave, tamMaxPalavra);
+    while (strcmp(Elemento.Chave, "aaaaaa") != 0){
+        insereListaPalavra(Elemento, p, Tabela);
+        LerPalavra(Elemento.Chave, tamMaxPalavra);
 
-    inicializaPalavra(palavra1, valpalavra1, 1);
-    inicializaPalavra(palavra2, valPalavra2, 35);
+    }
+    printf("Tabela apos insercao:\n");
+    imprimeListaPalavras(Tabela);
 
-    imprimePalavra(*palavra1);
-    imprimePalavra(*palavra2);
+/*----------- Testa pesquisa -----------*/
 
-    printf("Aumentou\n"); aumentaQtdePar(palavra1, 1); aumentaQtdePar(palavra1, 1); aumentaQtdePar(palavra1, 1);
-    imprimePalavra(*palavra1);
+    printf("Pesquisar :  ");
+    LerPalavra(Elemento.Chave, tamMaxPalavra);
 
-    printf("Insere 2\n"); insereNovoIdDoc(palavra2, 5); insereNovoIdDoc(palavra2, 13);
-    imprimePalavra(*palavra2);
+    while (strcmp(Elemento.Chave, "aaaaaa") != 0){
+        i = pesquisaPalavra(Elemento.Chave, p, Tabela);
 
-    inicializaPalavra(palavra3, valPalavra3, 35);
-    imprimePalavra(*palavra3);
+        if (i == NULL)
+            printf("pesquisa sem sucesso \n");
 
-    printf("Aumentou\n");
-    aumentaQtdePar(palavra2, 5); aumentaQtdePar(palavra2, 13); aumentaQtdePar(palavra2, 13);
-    imprimePalavra(*palavra2);
+        else
+            printf("sucesso \n");
 
-    printf("Insere 5\n"); insereNovoIdDoc(palavra1, 23); insereNovoIdDoc(palavra1, 75); insereNovoIdDoc(palavra1, 6); insereNovoIdDoc(palavra1, 156); insereNovoIdDoc(palavra1, 2);
-    imprimePalavra(*palavra1);
+        printf("Pesquisar :  ");
+        LerPalavra(Elemento.Chave, tamMaxPalavra);
 
-    return (0);
+    }
+
+/*----------- Testa retirada -----------*/
+
+    printf("Retirar seguintes chaves:\n");
+    LerPalavra(Elemento.Chave, tamMaxPalavra);
+
+    while (strcmp(Elemento.Chave, "aaaaaa") != 0) {
+        retiraListaPalavra(Elemento, p, Tabela);
+        LerPalavra(Elemento.Chave, tamMaxPalavra);
+
+    }
+    printf("Tabela apos retiradas:\n");
+    imprimeListaPalavras(Tabela);
+
+/*----------- Testa inserções de novo -----------*/
+    // printf("Inserir de novo os elementos seguintes:\n");
+    // LerPalavra(Elemento.Chave, tamMaxPalavra);
+
+    // while (strcmp(Elemento.Chave, "aaaaaa") != 0){
+    //     insereListaPalavra(Elemento, p, Tabela);
+    //     LerPalavra(Elemento.Chave, tamMaxPalavra);
+    // }
+    // printf("Tabela apos novas insxercoes:\n");
+    // imprimeListaPalavras(Tabela);
+    return 0;
 }

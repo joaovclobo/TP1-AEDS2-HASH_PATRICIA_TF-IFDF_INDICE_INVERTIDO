@@ -28,15 +28,15 @@ typedef struct tipoPar{
     int idDoc;
 }tipoPar;
 
-typedef struct tipoCelulaPar *tipoApontadorPar;
+typedef struct tipoCelulaPar *apontadorCelPar;
 
 typedef struct tipoCelulaPar{
     tipoPar par;
-    tipoApontadorPar prox;
+    apontadorCelPar prox;
 } tipoCelulaPar;
 
 typedef struct listaEncadPares{
-    tipoApontadorPar primeiro, ultimo;
+    apontadorCelPar primeiro, ultimo;
 }listaEncadPares;
 
 void inicializaPar(tipoPar* par, int idDoc);
@@ -49,7 +49,7 @@ int listaParesVazia(listaEncadPares listaPares);
 
 void insereListaPares(tipoPar par, listaEncadPares *listaPares);
 
-void retiraListaPares(tipoApontadorPar p, listaEncadPares *listaPares, tipoPar *par);
+void retiraListaPares(apontadorCelPar p, listaEncadPares *listaPares, tipoPar *par);
 
 void imprimeListaPares(listaEncadPares listaPares);
 

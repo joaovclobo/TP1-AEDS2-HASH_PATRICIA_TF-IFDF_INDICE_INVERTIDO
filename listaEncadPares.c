@@ -30,7 +30,7 @@ void imprimePar(tipoPar par){
 }
 
 void flParesVazia(listaEncadPares *listaPares){
-    listaPares->primeiro = (tipoApontadorPar) malloc(sizeof(tipoCelulaPar));
+    listaPares->primeiro = (apontadorCelPar) malloc(sizeof(tipoCelulaPar));
     listaPares->ultimo = listaPares->primeiro;
     listaPares->primeiro->prox = NULL;
 }
@@ -41,8 +41,8 @@ int listaParesVazia(listaEncadPares listaPares){
 
 void insereListaPares(tipoPar par, listaEncadPares *listaPares){        //Função adaptada para inserir ordenadamente
 
-    tipoApontadorPar novaCelula, ant, atual = listaPares->primeiro->prox;
-    novaCelula = (tipoApontadorPar)malloc(sizeof(tipoCelulaPar));
+    apontadorCelPar novaCelula, ant, atual = listaPares->primeiro->prox;
+    novaCelula = (apontadorCelPar)malloc(sizeof(tipoCelulaPar));
     novaCelula->par = par;
     
     if (listaParesVazia(*listaPares)){
@@ -70,8 +70,8 @@ void insereListaPares(tipoPar par, listaEncadPares *listaPares){        //Funç�
     }
 }
 
-void retiraListaPares(tipoApontadorPar p, listaEncadPares *listaPares, tipoPar *par){ /*  ---   Obs.: o item a ser retirado e  o seguinte ao apontado por  p --- */
-    tipoApontadorPar q;
+void retiraListaPares(apontadorCelPar p, listaEncadPares *listaPares, tipoPar *par){ /*  ---   Obs.: o item a ser retirado e  o seguinte ao apontado por  p --- */
+    apontadorCelPar q;
     if (listaParesVazia(*listaPares) || p == NULL || p->prox == NULL){
         printf(" Erro listaPares vazia ou posicao nao existe\n");
         return;
@@ -88,7 +88,7 @@ void retiraListaPares(tipoApontadorPar p, listaEncadPares *listaPares, tipoPar *
 }
 
 void imprimeListaPares(listaEncadPares listaPares){
-    tipoApontadorPar aux;
+    apontadorCelPar aux;
 
     aux = listaPares.primeiro->prox;
 
@@ -102,7 +102,7 @@ void imprimeListaPares(listaEncadPares listaPares){
 }
 
 void aumentaQtde(listaEncadPares listaPares, int idDoc){
-    tipoApontadorPar aux;
+    apontadorCelPar aux;
 
     aux = listaPares.primeiro->prox;
 
@@ -121,7 +121,7 @@ void aumentaQtde(listaEncadPares listaPares, int idDoc){
 }
 
 tipoPar* buscaPar(listaEncadPares listaPares, int idDoc){
-    tipoApontadorPar aux;
+    apontadorCelPar aux;
 
     aux = listaPares.primeiro->prox;
 
