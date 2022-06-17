@@ -14,7 +14,7 @@
     Arquivo: 
         anotacoes-branch-Joao.txt
         Descrição do arquivo: Arquivo de código do TAD tipo lista encadeada de pares (qtde, idDoc)
-        Ultima modificação: 15/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -30,7 +30,7 @@ void imprimePar(tipoPar par){
 }
 
 void flParesVazia(listaEncadPares *listaPares){
-    listaPares->primeiro = (tipoApontadorPar) malloc(sizeof(tipoCelula));
+    listaPares->primeiro = (tipoApontadorPar) malloc(sizeof(tipoCelulaPar));
     listaPares->ultimo = listaPares->primeiro;
     listaPares->primeiro->prox = NULL;
 }
@@ -42,7 +42,7 @@ int listaParesVazia(listaEncadPares listaPares){
 void insereListaPares(tipoPar par, listaEncadPares *listaPares){        //Função adaptada para inserir ordenadamente
 
     tipoApontadorPar novaCelula, ant, atual = listaPares->primeiro->prox;
-    novaCelula = (tipoApontadorPar)malloc(sizeof(tipoCelula));
+    novaCelula = (tipoApontadorPar)malloc(sizeof(tipoCelulaPar));
     novaCelula->par = par;
     
     if (listaParesVazia(*listaPares)){

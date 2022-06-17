@@ -14,7 +14,7 @@
     Arquivo: 
         anotacoes-branch-Joao.txt
         Descrição do arquivo: Cabeçalho do TAD tipo lista encadeada de pares (qtde, idDoc)
-        Ultima modificação: 14/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -28,12 +28,12 @@ typedef struct tipoPar{
     int idDoc;
 }tipoPar;
 
-typedef struct tipoCelula *tipoApontadorPar;
+typedef struct tipoCelulaPar *tipoApontadorPar;
 
-typedef struct tipoCelula{
+typedef struct tipoCelulaPar{
     tipoPar par;
     tipoApontadorPar prox;
-} tipoCelula;
+} tipoCelulaPar;
 
 typedef struct listaEncadPares{
     tipoApontadorPar primeiro, ultimo;
