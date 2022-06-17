@@ -26,16 +26,16 @@
 typedef char TipoChave[tamMaxPalavra];          //tirar
 typedef unsigned int tipoVetPesos[tamMaxPalavra];
 
-typedef struct TipoItem{          //tirar
-    /* outros componentes */
-    TipoChave Chave;
-} TipoItem;
+// typedef struct TipoItem{          //tirar
+//     /* outros componentes */
+//     TipoChave Chave;
+// } TipoItem;
 
 typedef unsigned int tipoIndice;
 typedef struct tipoCelulaPalavra *apontadorCelPalavra;
 
 typedef struct tipoCelulaPalavra{
-    TipoItem Item;          //tirar
+    tipoPalavra palavra;
     apontadorCelPalavra prox;
 } tipoCelulaPalavra;
 
@@ -46,7 +46,7 @@ typedef struct tipoListaPalavras{
 
 typedef tipoListaPalavras TipoDicionario[M];        //Ver se da pra variar o "M"
 TipoDicionario Tabela;              //Avaliar a necessidade
-TipoItem Elemento;                  //Avaliar a necessidade
+tipoPalavra Elemento;                  //Avaliar a necessidade
 tipoVetPesos p;                     //Avaliar a necessidade
 apontadorCelPalavra i;              //Avaliar a necessidade
 
@@ -55,24 +55,24 @@ void flPalavrasVazia(tipoListaPalavras *listaPalvras);
 
 short listaPalavrasVazia(tipoListaPalavras listaPalvras);
 
-void insereListaPalavrasI(TipoItem x, tipoListaPalavras *listaPalvras);
+void insereListaPalavrasI(tipoPalavra palavra, tipoListaPalavras *listaPalvras);
 
-void retiraListaPalavrasI(apontadorCelPalavra p, tipoListaPalavras *listaPalvras, TipoItem *Item);
+void retiraListaPalavrasI(apontadorCelPalavra p, tipoListaPalavras *listaPalvras, tipoPalavra *palavra);
 
 void geraVetPesos(tipoVetPesos p);
 
 tipoIndice hashPalavra(TipoChave Chave, tipoVetPesos p);
 
-void criaHashTablePalavra(TipoDicionario T);
+void criaHashTablePalavras(TipoDicionario T);
 
 apontadorCelPalavra pesquisaPalavra(TipoChave Ch, tipoVetPesos p, TipoDicionario T);
 
-void insereListaPalavra(TipoItem x, tipoVetPesos p, TipoDicionario T);
+void insereListaPalavras(tipoPalavra palavra, tipoVetPesos p, TipoDicionario T);
 
-void retiraListaPalavra(TipoItem x, tipoVetPesos p, TipoDicionario T);
+void retiraListaPalavras(tipoPalavra palavra, tipoVetPesos p, TipoDicionario T);
 
 void imprimeListaPalavrasI(tipoListaPalavras listaPalvras);
 
 void imprimeListaPalavras(TipoDicionario Tabela);
 
-void LerPalavra(char *p, int Tam);
+void lerPalavra(char *p, int Tam);

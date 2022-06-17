@@ -20,7 +20,7 @@
 #include "hashTablePalavras.h"
 
 void flPalavrasVazia(tipoListaPalavras *listaPalvras){
-  listaPalvras->primeiro = (tipoCelulaPalavra *)malloc(sizeof(tipoCelulaPalavra));
+  listaPalvras->primeiro = (tipoCelulaPalavra*) malloc(sizeof(tipoCelulaPalavra));
 
   listaPalvras->ultimo = listaPalvras->primeiro;
   listaPalvras->primeiro->prox = NULL;
@@ -30,15 +30,16 @@ short listaPalavrasVazia(tipoListaPalavras listaPalvras){
   return (listaPalvras.primeiro == listaPalvras.ultimo);
 }
 
-void insereListaPalavrasI(TipoItem x, tipoListaPalavras *listaPalvras){
-  listaPalvras->ultimo->prox = (tipoCelulaPalavra *)malloc(sizeof(tipoCelulaPalavra));
+void insereListaPalavrasI(tipoPalavra palavra, tipoListaPalavras *listaPalvras){
+  
+  listaPalvras->ultimo->prox = (tipoCelulaPalavra*) malloc(sizeof(tipoCelulaPalavra));
 
   listaPalvras->ultimo = listaPalvras->ultimo->prox;
-  listaPalvras->ultimo->Item = x;
+  listaPalvras->ultimo->palavra = palavra;
   listaPalvras->ultimo->prox = NULL;
 }
 
-void retiraListaPalavrasI(apontadorCelPalavra p, tipoListaPalavras *listaPalvras, TipoItem *Item){ /* -- Obs.: o item a ser retirado o seguinte ao apontado por p -- */
+void retiraListaPalavrasI(apontadorCelPalavra p, tipoListaPalavras *listaPalvras, tipoPalavra *palavra){ /* -- Obs.: o item a ser retirado o seguinte ao apontado por p -- */
   apontadorCelPalavra q;
 
   if (listaPalavrasVazia(*listaPalvras) || p == NULL || p->prox == NULL){
@@ -47,7 +48,7 @@ void retiraListaPalavrasI(apontadorCelPalavra p, tipoListaPalavras *listaPalvras
 
   }
   q = p->prox;
-  *Item = q->Item;
+  *palavra = q->palavra;
   p->prox = q->prox;
 
   if (p->prox == NULL)
@@ -56,7 +57,7 @@ void retiraListaPalavrasI(apontadorCelPalavra p, tipoListaPalavras *listaPalvras
   free(q);
 }
 
-void geraVetPesos(tipoVetPesos p){
+void geraVetPesos(tipoVetPesos p){      //Mudar nome do vetor de pesos
     int i;
 
     srand(13);
@@ -64,40 +65,40 @@ void geraVetPesos(tipoVetPesos p){
         p[i] = 1 + (int)(10000.0 * rand() / (RAND_MAX + 1.0));
 }
 
-tipoIndice hashPalavra(TipoChave Chave, tipoVetPesos p){
+tipoIndice hashPalavra(char* valPalavra, tipoVetPesos p){
     int i;
-    unsigned int Soma = 0;
-    int comp = strlen(Chave);
+    unsigned int soma = 0;
+    int comp = strlen(valPalavra);
 
     for (i = 0; i < comp; i++)
-        Soma += (unsigned int)Chave[i] * p[i];
+        soma += (unsigned int) valPalavra[i] * p[i];
 
-    return (Soma % M);
+    return (soma % M);
 }
 
-void criaHashTablePalavra(TipoDicionario T){
+void criaHashTablePalavras(TipoDicionario T){
   int i;
 
   for (i = 0; i < M; i++)
     flPalavrasVazia(&T[i]);
 }
 
-apontadorCelPalavra pesquisaPalavra(TipoChave Ch, tipoVetPesos p, TipoDicionario T){ /* Obs.: apontadorCelPalavra de retorno aponta para o item anterior da lista */
+apontadorCelPalavra pesquisaPalavra(char* valPalavra, tipoVetPesos p, TipoDicionario T){ /* Obs.: apontadorCelPalavra de retorno aponta para o item anterior da lista */
   tipoIndice i;
   apontadorCelPalavra Ap;
 
-  i = hashPalavra(Ch, p);
+  i = hashPalavra(valPalavra, p);
   if (listaPalavrasVazia(T[i]))
     return NULL; /* Pesquisa sem sucesso */
   else{
     Ap = T[i].primeiro;
 
     while (Ap->prox->prox != NULL &&
-           strncmp(Ch, Ap->prox->Item.Chave, sizeof(TipoChave)))
+           strncmp(valPalavra, Ap->prox->palavra.valPalavra, sizeof(TipoChave)))
 
       Ap = Ap->prox;
 
-    if (!strncmp(Ch, Ap->prox->Item.Chave, sizeof(TipoChave)))
+    if (!strncmp(valPalavra, Ap->prox->palavra.valPalavra, sizeof(TipoChave)))
       return Ap;
 
     else
@@ -105,48 +106,48 @@ apontadorCelPalavra pesquisaPalavra(TipoChave Ch, tipoVetPesos p, TipoDicionario
   }
 }
 
-void insereListaPalavra(TipoItem x, tipoVetPesos p, TipoDicionario T){
-  if (pesquisaPalavra(x.Chave, p, T) == NULL)
-    insereListaPalavrasI(x, &T[hashPalavra(x.Chave, p)]);
+void insereListaPalavras(tipoPalavra palavra, tipoVetPesos p, TipoDicionario T){
+  if (pesquisaPalavra(palavra.valPalavra, p, T) == NULL)
+    insereListaPalavrasI(palavra, &T[hashPalavra(palavra.valPalavra, p)]);
 
   else
     printf(" Registro ja  esta  presente\n");
 }
 
-void retiraListaPalavra(TipoItem x, tipoVetPesos p, TipoDicionario T){
+void retiraListaPalavras(tipoPalavra palavra, tipoVetPesos p, TipoDicionario T){
   apontadorCelPalavra Ap;
 
-  Ap = pesquisaPalavra(x.Chave, p, T);
+  Ap = pesquisaPalavra(palavra.valPalavra, p, T);
   if (Ap == NULL)
     printf(" Registro nao esta  presente\n");
 
   else
-    retiraListaPalavrasI(Ap, &T[hashPalavra(x.Chave, p)], &x);
+    retiraListaPalavrasI(Ap, &T[hashPalavra(palavra.valPalavra, p)], &palavra);
 }
 
 void imprimeListaPalavrasI(tipoListaPalavras listaPalvras){
-  apontadorCelPalavra Aux;
+  apontadorCelPalavra aux;
 
-  Aux = listaPalvras.primeiro->prox;
-  while (Aux != NULL){
-    printf("%.*s ", tamMaxPalavra, Aux->Item.Chave);
-    Aux = Aux->prox;
+  aux = listaPalvras.primeiro->prox;
+  while (aux != NULL){
+    printf("%.*s ", tamMaxPalavra, aux->palavra.valPalavra);
+    aux = aux->prox;
   }
 }
 
-void imprimeListaPalavras(TipoDicionario Tabela){
+void imprimeListaPalavras(TipoDicionario tabela){
   int i;
 
   for (i = 0; i < M; i++){
     printf("%d: ", i);
-    if (!listaPalavrasVazia(Tabela[i]))
-      imprimeListaPalavrasI(Tabela[i]);
+    if (!listaPalavrasVazia(tabela[i]))
+      imprimeListaPalavrasI(tabela[i]);
 
     putchar('\n');
   }
 }
 
-void LerPalavra(char *p, int Tam){ //Avaliar ncessidade
+void lerPalavra(char *p, int Tam){ //Avaliar ncessidade
   char c;
   int i, j;
 

@@ -21,15 +21,15 @@
 
 int main(int argc, char *argv[]){
 
-    criaHashTablePalavra(Tabela);
+    criaHashTablePalavras(Tabela);
     geraVetPesos(p);
 
 /*----------- Testa inserções -----------*/
 
-    LerPalavra(Elemento.Chave, tamMaxPalavra);
-    while (strcmp(Elemento.Chave, "aaaaaa") != 0){
-        insereListaPalavra(Elemento, p, Tabela);
-        LerPalavra(Elemento.Chave, tamMaxPalavra);
+    lerPalavra(Elemento.valPalavra, tamMaxPalavra);
+    while (strcmp(Elemento.valPalavra, "aaaaaa") != 0){
+        insereListaPalavras(Elemento, p, Tabela);
+        lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
     }
     printf("Tabela apos insercao:\n");
@@ -38,10 +38,10 @@ int main(int argc, char *argv[]){
 /*----------- Testa pesquisa -----------*/
 
     printf("Pesquisar :  ");
-    LerPalavra(Elemento.Chave, tamMaxPalavra);
+    lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
-    while (strcmp(Elemento.Chave, "aaaaaa") != 0){
-        i = pesquisaPalavra(Elemento.Chave, p, Tabela);
+    while (strcmp(Elemento.valPalavra, "aaaaaa") != 0){
+        i = pesquisaPalavra(Elemento.valPalavra, p, Tabela);
 
         if (i == NULL)
             printf("pesquisa sem sucesso \n");
@@ -50,18 +50,18 @@ int main(int argc, char *argv[]){
             printf("sucesso \n");
 
         printf("Pesquisar :  ");
-        LerPalavra(Elemento.Chave, tamMaxPalavra);
+        lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
     }
 
 /*----------- Testa retirada -----------*/
 
     printf("Retirar seguintes chaves:\n");
-    LerPalavra(Elemento.Chave, tamMaxPalavra);
+    lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
-    while (strcmp(Elemento.Chave, "aaaaaa") != 0) {
-        retiraListaPalavra(Elemento, p, Tabela);
-        LerPalavra(Elemento.Chave, tamMaxPalavra);
+    while (strcmp(Elemento.valPalavra, "aaaaaa") != 0) {
+        retiraListaPalavras(Elemento, p, Tabela);
+        lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
     }
     printf("Tabela apos retiradas:\n");
@@ -69,11 +69,11 @@ int main(int argc, char *argv[]){
 
 /*----------- Testa inserções de novo -----------*/
     // printf("Inserir de novo os elementos seguintes:\n");
-    // LerPalavra(Elemento.Chave, tamMaxPalavra);
+    // lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
-    // while (strcmp(Elemento.Chave, "aaaaaa") != 0){
-    //     insereListaPalavra(Elemento, p, Tabela);
-    //     LerPalavra(Elemento.Chave, tamMaxPalavra);
+    // while (strcmp(Elemento.valPalavra, "aaaaaa") != 0){
+    //     insereListaPalavras(Elemento, p, Tabela);
+    //     lerPalavra(Elemento.valPalavra, tamMaxPalavra);
     // }
     // printf("Tabela apos novas insxercoes:\n");
     // imprimeListaPalavras(Tabela);

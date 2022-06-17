@@ -31,6 +31,7 @@ void imprimePar(tipoPar par){
 
 void flParesVazia(listaEncadPares *listaPares){
     listaPares->primeiro = (apontadorCelPar) malloc(sizeof(tipoCelulaPar));
+
     listaPares->ultimo = listaPares->primeiro;
     listaPares->primeiro->prox = NULL;
 }
@@ -72,18 +73,19 @@ void insereListaPares(tipoPar par, listaEncadPares *listaPares){        //FunÃ§Ã
 
 void retiraListaPares(apontadorCelPar p, listaEncadPares *listaPares, tipoPar *par){ /*  ---   Obs.: o item a ser retirado e  o seguinte ao apontado por  p --- */
     apontadorCelPar q;
+
     if (listaParesVazia(*listaPares) || p == NULL || p->prox == NULL){
         printf(" Erro listaPares vazia ou posicao nao existe\n");
         return;
 
     }
-
     q = p->prox;
     *par = q->par;
     p->prox = q->prox;
 
     if (p->prox == NULL)
         listaPares->ultimo = p;
+        
     free(q);
 }
 
