@@ -19,67 +19,6 @@
 
 #include "hashTablePalavras.h"
 
-// int main(int argc, char *argv[]){
-
-//     criaHashTablePalavras(Tabela);
-//     geraVetPesos(p);
-
-// /*----------- Testa inserções -----------*/
-
-//     lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-//     while (strcmp(Elemento.valPalavra, "aaaaaa") != 0){
-//         insereListaPalavras(Elemento, p, Tabela);
-//         lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-
-//     }
-//     printf("Tabela apos insercao:\n");
-//     imprimeListaPalavras(Tabela);
-
-// /*----------- Testa pesquisa -----------*/
-
-//     printf("Pesquisar :  ");
-//     lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-
-//     while (strcmp(Elemento.valPalavra, "aaaaaa") != 0){
-//         i = pesquisaPalavra(Elemento.valPalavra, p, Tabela);
-
-//         if (i == NULL)
-//             printf("pesquisa sem sucesso \n");
-
-//         else
-//             printf("sucesso \n");
-
-//         printf("Pesquisar :  ");
-//         lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-
-//     }
-
-// /*----------- Testa retirada -----------*/
-
-//     printf("Retirar seguintes chaves:\n");
-//     lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-
-//     while (strcmp(Elemento.valPalavra, "aaaaaa") != 0) {
-//         retiraListaPalavras(Elemento, p, Tabela);
-//         lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-
-//     }
-//     printf("Tabela apos retiradas:\n");
-//     imprimeListaPalavras(Tabela);
-
-// /*----------- Testa inserções de novo -----------*/
-//     // printf("Inserir de novo os elementos seguintes:\n");
-//     // lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-
-//     // while (strcmp(Elemento.valPalavra, "aaaaaa") != 0){
-//     //     insereListaPalavras(Elemento, p, Tabela);
-//     //     lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-//     // }
-//     // printf("Tabela apos novas insxercoes:\n");
-//     // imprimeListaPalavras(Tabela);
-//     return 0;
-// }
-
 int main(){
 
     int opcao = 1;
@@ -98,7 +37,7 @@ int main(){
         case 1:
             lerPalavra(Elemento.valPalavra, tamMaxPalavra);
             while (strcmp(Elemento.valPalavra, "fim") != 0){
-                insereListaPalavras(Elemento.valPalavra, 1, p, Tabela);
+                insereListaPalavras(Elemento, p, Tabela);
                 lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
             }
@@ -113,16 +52,7 @@ int main(){
             break;
 
         case 3:
-            // printf("Retirar seguintes chaves:\n");
-            // lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-
-            // while (strcmp(Elemento.valPalavra, "fim") != 0) {
-            //     retiraListaPalavras(Elemento, p, Tabela);
-            //     lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-
-            // }
-            // printf("Tabela apos retiradas:\n");
-            // imprimeListaPalavras(Tabela);
+            imprimeListaPalavras(Tabela);
             break;
 
         case 4:
@@ -130,7 +60,7 @@ int main(){
             lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
             while (strcmp(Elemento.valPalavra, "fim") != 0){
-                i = pesquisaPalavra(Elemento.valPalavra, 1, p, Tabela);
+                i = pesquisaPalavra(Elemento.valPalavra, p, Tabela);
 
                 if (i == NULL)
                     printf("pesquisa sem sucesso \n");

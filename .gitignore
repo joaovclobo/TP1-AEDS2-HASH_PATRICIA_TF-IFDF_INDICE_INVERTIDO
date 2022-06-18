@@ -20,4 +20,6 @@
 *.out
 *.exe
 *.gch
+arquivo1.txt
+arquivo2.txt
 build

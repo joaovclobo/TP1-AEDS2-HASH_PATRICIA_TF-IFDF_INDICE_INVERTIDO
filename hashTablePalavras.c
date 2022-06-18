@@ -30,33 +30,6 @@ short listaPalavrasVazia(tipoListaPalavras listaPalvras){
   return (listaPalvras.primeiro == listaPalvras.ultimo);
 }
 
-void insereListaPalavrasI(tipoPalavra palavra, tipoListaPalavras *listaPalvras){
-  
-  listaPalvras->ultimo->prox = (tipoCelulaPalavra*) malloc(sizeof(tipoCelulaPalavra));
-
-  listaPalvras->ultimo = listaPalvras->ultimo->prox;
-  listaPalvras->ultimo->palavra = palavra;
-  listaPalvras->ultimo->prox = NULL;
-}
-
-void retiraListaPalavrasI(apontadorCelPalavra p, tipoListaPalavras *listaPalvras, tipoPalavra *palavra){ /* -- Obs.: o item a ser retirado o seguinte ao apontado por p -- */
-  apontadorCelPalavra q;
-
-  if (listaPalavrasVazia(*listaPalvras) || p == NULL || p->prox == NULL){
-    printf(" Erro Lista vazia ou posicao nao existe\n");
-    return;
-
-  }
-  q = p->prox;
-  *palavra = q->palavra;
-  p->prox = q->prox;
-
-  if (p->prox == NULL)
-    listaPalvras->ultimo = p;
-    
-  free(q);
-}
-
 void geraVetPesos(tipoVetPesos p){      //Mudar nome do vetor de pesos
     int i;
 
@@ -83,6 +56,23 @@ void criaHashTablePalavras(TipoDicionario T){
     flPalavrasVazia(&T[i]);
 }
 
+void insereListaPalavrasI(tipoPalavra palavra, tipoListaPalavras *listaPalvras){
+  
+  listaPalvras->ultimo->prox = (tipoCelulaPalavra*) malloc(sizeof(tipoCelulaPalavra));
+
+  listaPalvras->ultimo = listaPalvras->ultimo->prox;
+  listaPalvras->ultimo->palavra = palavra;
+  listaPalvras->ultimo->prox = NULL;
+}
+
+void insereListaPalavras(tipoPalavra palavra, tipoVetPesos p, TipoDicionario T){
+  if (pesquisaPalavra(palavra.valPalavra, p, T) == NULL)
+    insereListaPalavrasI(palavra, &T[hashPalavra(palavra.valPalavra, p)]);
+
+  else
+    printf(" Registro ja  esta  presente\n");
+}
+
 apontadorCelPalavra pesquisaPalavra(char* valPalavra, tipoVetPesos p, TipoDicionario T){ /* Obs.: apontadorCelPalavra de retorno aponta para o item anterior da lista */
   tipoIndice i;
   apontadorCelPalavra Ap;
@@ -94,35 +84,16 @@ apontadorCelPalavra pesquisaPalavra(char* valPalavra, tipoVetPesos p, TipoDicion
     Ap = T[i].primeiro;
 
     while (Ap->prox->prox != NULL &&
-           strncmp(valPalavra, Ap->prox->palavra.valPalavra, sizeof(TipoChave)))
+           strncmp(valPalavra, Ap->prox->palavra.valPalavra, sizeof(char[tamMaxPalavra])))
 
       Ap = Ap->prox;
 
-    if (!strncmp(valPalavra, Ap->prox->palavra.valPalavra, sizeof(TipoChave)))
+    if (!strncmp(valPalavra, Ap->prox->palavra.valPalavra, sizeof(char[tamMaxPalavra])))
       return Ap;
 
     else
       return NULL; /* Pesquisa sem sucesso */
   }
-}
-
-void insereListaPalavras(tipoPalavra palavra, tipoVetPesos p, TipoDicionario T){
-  if (pesquisaPalavra(palavra.valPalavra, p, T) == NULL)
-    insereListaPalavrasI(palavra, &T[hashPalavra(palavra.valPalavra, p)]);
-
-  else
-    printf(" Registro ja  esta  presente\n");
-}
-
-void retiraListaPalavras(tipoPalavra palavra, tipoVetPesos p, TipoDicionario T){
-  apontadorCelPalavra Ap;
-
-  Ap = pesquisaPalavra(palavra.valPalavra, p, T);
-  if (Ap == NULL)
-    printf(" Registro nao esta  presente\n");
-
-  else
-    retiraListaPalavrasI(Ap, &T[hashPalavra(palavra.valPalavra, p)], &palavra);
 }
 
 void imprimeListaPalavrasI(tipoListaPalavras listaPalvras){
