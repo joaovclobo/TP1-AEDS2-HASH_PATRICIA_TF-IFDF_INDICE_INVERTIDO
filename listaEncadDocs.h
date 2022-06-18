@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include "hashTablePalavras.h"
 
 typedef struct tipoDoc{
     char nomeDoc[50];
@@ -33,8 +34,8 @@ void imprimeListaDocs(listaEncadDocs listaDocs);
 
 int buscaNomeDoc(char *nomeDoc, listaEncadDocs listaDocs);
 
-void escrevePalavrasDocs(listaEncadDocs listaDocs);
+void escrevePalavrasDocs(tipoVetPesos p, TipoDicionario T, listaEncadDocs listaDocs);
 
-void lerPalavras(char* arquivo);
+void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, TipoDicionario T);
 
 void lerArquivos(char* arquivo, listaEncadDocs* listaDocs);

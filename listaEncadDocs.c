@@ -64,19 +64,21 @@ int buscaNomeDoc(char *nomeDoc, listaEncadDocs listaDocs){
     return 0;
 }
 
-void escrevePalavrasDocs(listaEncadDocs listaDocs){
+void escrevePalavrasDocs(tipoVetPesos p, TipoDicionario T, listaEncadDocs listaDocs){
     apontadorDoc aux;
 
     aux = listaDocs.primeiro->prox;
 
     while (aux != NULL){
-        lerPalavras(aux->doc.nomeDoc);
+        lerPalavras(aux->doc.nomeDoc, aux->doc.idDoc, p, T);
+        printf("Inseriu TAD hash M = 7 - Para o arquivo %s\n", aux->doc.nomeDoc);
+
         aux = aux->prox;
-        //Mudar flag
+        //Mudar flag "lido" do arquivo
     }
 }
 
-void lerPalavras(char* arquivo){
+void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, TipoDicionario T){
     FILE *fp;
     fp = fopen(arquivo, "r");
     char palavra[50];
@@ -90,7 +92,7 @@ void lerPalavras(char* arquivo){
                     strcpy(&palavra[i], &palavra[i + 1]);
                 }
             }
-            printf("%s\n", palavra);
+            insereListaPalavras(palavra, idDoc, p, T);
         }
     }
     fclose(fp);

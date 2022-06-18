@@ -18,7 +18,6 @@
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
-#include "tipoPalavra.h"
 #include "listaEncadDocs.h"
 #include <ctype.h>
 
@@ -26,8 +25,12 @@ int main(){
 
     int opcao = 1;
     char arqEntrada[50];
+    int idDocTemp;
     listaEncadDocs* listaDocs = (listaEncadDocs*) malloc(sizeof(listaEncadDocs));
+
     flDocsVazia(listaDocs);
+    criaHashTablePalavras(Tabela);
+    geraVetPesos(p);
 
     printf("\n|----------------- Universidade Federal De Vicosa - Campus Florestal -----------------|\n|------------- Trabalho pratico 1 de Algoritimos e estrutura de dados 2 -----------------|\n\n");
     printf("Professora responsavel:\n    Glaucia Braga e Silva\n\nIntegrantes do Gupo:\n    Caio Oliveira Almeida - 4237\n    Guilherme Augusto Schwann Wilke - 4685\n    Joao Vitor Chagas Lobo - 4693\n\n\n");
@@ -49,18 +52,38 @@ int main(){
             printf("Gerando indice invertido...\n");
             // lerPalavras();
             //Colocar confimação para cada TAD
-            escrevePalavrasDocs(*listaDocs);
-
+            escrevePalavrasDocs(p, Tabela, *listaDocs);
             printf("\nFim da criacao do indice invertido\n");
             break;
 
         case 3:
             //Função pra imprimir os 2 TADs em ordem alfabética
+            imprimeListaPalavras(Tabela);
             printf("---------------3\n");
             break;
 
         case 4:
             //Função pra buscar um ou mais termos nos TADs
+            printf("Pesquisar :  ");
+            lerPalavra(Elemento.valPalavra, tamMaxPalavra);
+            printf("idDoc: ");
+            scanf("%d", idDocTemp);
+
+            while (strcmp(Elemento.valPalavra, "fim") != 0){
+                i = pesquisaPalavra(Elemento.valPalavra, idDocTemp, p, Tabela);
+
+                if (i == NULL)
+                    printf("pesquisa sem sucesso \n");
+
+                else
+                    printf("sucesso \n");
+
+                printf("Pesquisar :  ");
+                lerPalavra(Elemento.valPalavra, tamMaxPalavra);
+                printf("idDoc: ");
+                scanf("%d", idDocTemp);  
+
+            }
             printf("---------------4\n");
             break;
 
@@ -75,4 +98,5 @@ int main(){
     }
 
     printf("Programa encerrado :)\n");
+    return 0;
 }
