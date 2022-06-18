@@ -43,7 +43,7 @@ int listaParesVazia(listaEncadPares listaPares){
 void insereListaPares(tipoPar par, listaEncadPares *listaPares){        //Função adaptada para inserir ordenadamente
 
     apontadorCelPar novaCelula, ant, atual = listaPares->primeiro->prox;
-    novaCelula = (apontadorCelPar)malloc(sizeof(tipoCelulaPar));
+    novaCelula = (apontadorCelPar) malloc(sizeof(tipoCelulaPar));
     novaCelula->par = par;
     
     if (listaParesVazia(*listaPares)){

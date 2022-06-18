@@ -97,8 +97,6 @@ void insereListaPalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicion
 
   }
   else {
-    printf(" Registro ja  esta  presente\n");
-
     if (buscaIdDoc(*temp->prox->palavra.listaPares, idDoc)){
       aumentaQtdePar(&temp->prox->palavra, idDoc);
 
@@ -138,7 +136,6 @@ void imprimeListaPalavrasI(tipoListaPalavras listaPalvras){
   aux = listaPalvras.primeiro->prox;
   while (aux != NULL){
     imprimePalavra(aux->palavra);
-    // printf("%.*s ", tamMaxPalavra, aux->palavra.valPalavra);
     aux = aux->prox;
   }
 }
