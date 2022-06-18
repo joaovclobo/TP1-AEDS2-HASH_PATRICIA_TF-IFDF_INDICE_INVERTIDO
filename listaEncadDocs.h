@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 typedef struct tipoDoc{
     char nomeDoc[50];
@@ -18,15 +19,22 @@ typedef struct tipoCelulaDoc{
 typedef struct{
     apontadorDoc primeiro, ultimo;
     int qtdeDocs;
-} tipoListaDocs;
+} listaEncadDocs;
 
+void flDocsVazia(listaEncadDocs *listaDocs);
 
-void flDocsVazia(tipoListaDocs *listaDocs);
+int listaDocsVazia(listaEncadDocs listaDocs);
 
-int listaDocsVazia(tipoListaDocs listaDocs);
+void insereDocI(tipoDoc doc, listaEncadDocs *listaDocs);
 
-void insereDocI(tipoDoc doc, tipoListaDocs *listaDocs);
+void insereDoc(char *nomeDoc, listaEncadDocs *listaDocs);
 
-apontadorDoc insereDoc(char *nomeDoc, tipoListaDocs *listaDocs);
+void imprimeListaDocs(listaEncadDocs listaDocs);
 
-void imprimeListaDocs(tipoListaDocs listaDocs);
+int buscaNomeDoc(char *nomeDoc, listaEncadDocs listaDocs);
+
+void escrevePalavrasDocs(listaEncadDocs listaDocs);
+
+void lerPalavras(char* arquivo);
+
+void lerArquivos(char* arquivo, listaEncadDocs* listaDocs);

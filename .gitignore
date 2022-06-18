@@ -14,12 +14,12 @@
 #     Arquivo: 
 #         .gitignore
 #         Descrição do arquivo: Arquivo de configuração do git que contém os arquivos a serem ignorados no momento do "commit"
-#         Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
+#         Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 *.out
 *.exe
 *.gch
-arquivo1.txt
-arquivo2.txt
+*.txt
+testesJoao2.c
 build

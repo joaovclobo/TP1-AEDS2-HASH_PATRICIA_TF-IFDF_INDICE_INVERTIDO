@@ -72,8 +72,18 @@ Mudanças dia 17/06
 
     3 - Criação do TAD hashTablePalavras com base na implemntação proposta pelo Nivio Ziviani (sem matriz de pesos de Zobrist)
 
-    4 - Falta adaptação para leitura da chave como a palavra do TAD palavra
+    4 - Ok - Falta adaptação para leitura da chave como a palavra do TAD palavra
 
-    5 - Variar o numero de "M"
+Anotações dia 18/06 
 
-    6 - Ordenar a lista de palavras
+    1 - Variar o numero de "M"
+
+    2 - Ok - Ordenar a lista de palavras
+
+    3 - Falta:
+        
+        Metodo para aramazenar os docs e idDocs
+
+        *Como imprimir as palavras pelo indice em ordem alfabetica?
+
+        *Funcao de busca

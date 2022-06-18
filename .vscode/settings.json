@@ -1,6 +1,9 @@
 {
     "files.associations": {
+        "listaEncadPares.h": "c",
         "tipopalavra.h": "c",
+        "hashTablePalavras.h": "c",
+        "listaEncadDocs.h": "c",
         "cctype": "c",
         "cerrno": "c",
         "clocale": "c",
@@ -14,4 +17,5 @@
         "numeric": "c",
         "tuple": "c"
     }
+    
 }
