@@ -13,7 +13,7 @@
     Arquivo: 
         hashTablePalavras.c
         Descrição do arquivo: Arquivo de código do TAD hash table de palavras
-        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -56,40 +56,52 @@ void criaHashTablePalavras(TipoDicionario T){
     flPalavrasVazia(&T[i]);
 }
 
-void insereListaPalavrasI(tipoPalavra palavra, tipoListaPalavras *listaPalvras){
+void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras){
+  tipoPalavra* palavra = (tipoPalavra*) malloc(sizeof(tipoPalavra));
   
+  inicializaPalavra(palavra, valPalavra, idDoc);
   listaPalvras->ultimo->prox = (tipoCelulaPalavra*) malloc(sizeof(tipoCelulaPalavra));
 
   listaPalvras->ultimo = listaPalvras->ultimo->prox;
-  listaPalvras->ultimo->palavra = palavra;
+  listaPalvras->ultimo->palavra = *palavra;
   listaPalvras->ultimo->prox = NULL;
 }
 
-void insereListaPalavras(tipoPalavra palavra, tipoVetPesos p, TipoDicionario T){
-  if (pesquisaPalavra(palavra.valPalavra, p, T) == NULL)
-    insereListaPalavrasI(palavra, &T[hashPalavra(palavra.valPalavra, p)]);
+void insereListaPalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T){
+  apontadorCelPalavra temp = pesquisaPalavra(valPalavra, idDoc, p, T);
+  if (temp == NULL){
+    insereListaPalavrasI(valPalavra, idDoc, &T[hashPalavra(valPalavra, p)]);
 
-  else
+  }
+  else {
     printf(" Registro ja  esta  presente\n");
+    if (buscaIdDoc(*temp->prox->palavra.listaPares, idDoc)){
+      aumentaQtdePar(&temp->prox->palavra, idDoc);
+
+    } else{
+      insereNovoIdDoc(&temp->prox->palavra, idDoc);
+
+    }
+  }
 }
 
-apontadorCelPalavra pesquisaPalavra(char* valPalavra, tipoVetPesos p, TipoDicionario T){ /* Obs.: apontadorCelPalavra de retorno aponta para o item anterior da lista */
+apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T){ /* Obs.: apontadorCelPalavra de retorno aponta para o item anterior da lista */
   tipoIndice i;
-  apontadorCelPalavra Ap;
+  apontadorCelPalavra ap;
 
   i = hashPalavra(valPalavra, p);
   if (listaPalavrasVazia(T[i]))
     return NULL; /* Pesquisa sem sucesso */
   else{
-    Ap = T[i].primeiro;
+    ap = T[i].primeiro;
 
-    while (Ap->prox->prox != NULL &&
-           strncmp(valPalavra, Ap->prox->palavra.valPalavra, sizeof(char[tamMaxPalavra])))
+    while (ap->prox->prox != NULL &&
+           strncmp(valPalavra, ap->prox->palavra.valPalavra, sizeof(char[tamMaxPalavra])))
 
-      Ap = Ap->prox;
+      ap = ap->prox;
 
-    if (!strncmp(valPalavra, Ap->prox->palavra.valPalavra, sizeof(char[tamMaxPalavra])))
-      return Ap;
+    if (!strncmp(valPalavra, ap->prox->palavra.valPalavra, sizeof(char[tamMaxPalavra])))
+      return ap;
 
     else
       return NULL; /* Pesquisa sem sucesso */
@@ -101,7 +113,8 @@ void imprimeListaPalavrasI(tipoListaPalavras listaPalvras){
 
   aux = listaPalvras.primeiro->prox;
   while (aux != NULL){
-    printf("%.*s ", tamMaxPalavra, aux->palavra.valPalavra);
+    imprimePalavra(aux->palavra);
+    // printf("%.*s ", tamMaxPalavra, aux->palavra.valPalavra);
     aux = aux->prox;
   }
 }
@@ -110,7 +123,7 @@ void imprimeListaPalavras(TipoDicionario tabela){
   int i;
 
   for (i = 0; i < M; i++){
-    printf("%d: ", i);
+    printf("Indice %d:\n", i);
     if (!listaPalavrasVazia(tabela[i]))
       imprimeListaPalavrasI(tabela[i]);
 

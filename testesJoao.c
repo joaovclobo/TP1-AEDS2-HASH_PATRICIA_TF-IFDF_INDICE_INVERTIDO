@@ -13,7 +13,7 @@
     Arquivo: 
         testesJoao.c
         Descrição do arquivo: Arquivo para testes de funções implementadas sob pelo aluno João Vitor Chagas Lobo
-        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -21,7 +21,7 @@
 
 int main(){
 
-    int opcao = 1;
+    int idDoctemp = 1, opcao = 1;
     criaHashTablePalavras(Tabela);
     geraVetPesos(p);
 
@@ -37,7 +37,7 @@ int main(){
         case 1:
             lerPalavra(Elemento.valPalavra, tamMaxPalavra);
             while (strcmp(Elemento.valPalavra, "fim") != 0){
-                insereListaPalavras(Elemento, p, Tabela);
+                insereListaPalavras(Elemento.valPalavra, idDoctemp, p, Tabela);
                 lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
             }
@@ -48,6 +48,8 @@ int main(){
 
         case 2:
             //Função pra carregar as palavras de cada arquivo nos 2 TADs
+            printf("Novo idDoc: ");
+            scanf("%d", &idDoctemp);
             printf("---------------2\n");
             break;
 
@@ -60,7 +62,7 @@ int main(){
             lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
             while (strcmp(Elemento.valPalavra, "fim") != 0){
-                i = pesquisaPalavra(Elemento.valPalavra, p, Tabela);
+                i = pesquisaPalavra(Elemento.valPalavra, idDoctemp, p, Tabela);
 
                 if (i == NULL)
                     printf("pesquisa sem sucesso \n");

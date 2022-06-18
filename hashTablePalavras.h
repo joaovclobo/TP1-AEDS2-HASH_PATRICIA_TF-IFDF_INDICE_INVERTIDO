@@ -13,7 +13,7 @@
     Arquivo:
         hashTablePalavras.h
         Descrição do arquivo: Cabeçalho do TAD hash table de palavras
-        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -43,9 +43,9 @@ tipoVetPesos p;                     //Avaliar a necessidade
 apontadorCelPalavra i;              //Avaliar a necessidade
 
 
-void flPalavrasVazia(tipoListaPalavras *listaPalvras);                  //Ok 
+void flPalavrasVazia(tipoListaPalavras *listaPalvras);  
 
-short listaPalavrasVazia(tipoListaPalavras listaPalvras);                //Ok 
+short listaPalavrasVazia(tipoListaPalavras listaPalvras);
 
 void geraVetPesos(tipoVetPesos p);                                      //Mudar nome do vetor de pesos
 
@@ -53,11 +53,11 @@ tipoIndice hashPalavra(char* valPalavra, tipoVetPesos p);
 
 void criaHashTablePalavras(TipoDicionario T);
 
-void insereListaPalavrasI(tipoPalavra palavra, tipoListaPalavras *listaPalvras);
+void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras);
 
-void insereListaPalavras(tipoPalavra palavra, tipoVetPesos p, TipoDicionario T);
+void insereListaPalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T);
 
-apontadorCelPalavra pesquisaPalavra(char* valPalavra, tipoVetPesos p, TipoDicionario T);
+apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T);
 
 void imprimeListaPalavrasI(tipoListaPalavras listaPalvras);
 

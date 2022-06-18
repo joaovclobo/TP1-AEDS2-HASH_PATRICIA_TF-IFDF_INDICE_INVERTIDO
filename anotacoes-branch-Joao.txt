@@ -14,7 +14,7 @@
     Arquivo: 
         anotacoes-branch-Joao.txt
         Descrição do arquivo: Arquivo que contem o resumo das modificações feitas pelo aluno João Vitor Chagas Lobo no "commit" atual
-        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -73,3 +73,7 @@ Mudanças dia 17/06
     3 - Criação do TAD hashTablePalavras com base na implemntação proposta pelo Nivio Ziviani (sem matriz de pesos de Zobrist)
 
     4 - Falta adaptação para leitura da chave como a palavra do TAD palavra
+
+    5 - Variar o numero de "M"
+
+    6 - Ordenar a lista de palavras
