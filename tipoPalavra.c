@@ -68,7 +68,7 @@ int comparaPalavra(tipoPalavra palavra1, tipoPalavra palavra2){
 } 
 
 void imprimePalavra(tipoPalavra palavra){
-    printf("Palavra - %s | ", getValPalavra(&palavra));
+    printf("Palavra - %-15s | ", getValPalavra(&palavra));
     imprimeListaPares(*getListaPares(&palavra));
 }
 

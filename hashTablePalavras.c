@@ -57,24 +57,48 @@ void criaHashTablePalavras(TipoDicionario T){
 }
 
 void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras){
-  tipoPalavra* palavra = (tipoPalavra*) malloc(sizeof(tipoPalavra));
-  
-  inicializaPalavra(palavra, valPalavra, idDoc);
-  listaPalvras->ultimo->prox = (tipoCelulaPalavra*) malloc(sizeof(tipoCelulaPalavra));
 
-  listaPalvras->ultimo = listaPalvras->ultimo->prox;
-  listaPalvras->ultimo->palavra = *palavra;
-  listaPalvras->ultimo->prox = NULL;
+  apontadorCelPalavra novaCelula, ant, atual = listaPalvras->primeiro->prox;
+  tipoPalavra* palavra = (tipoPalavra*) malloc(sizeof(tipoPalavra));
+  inicializaPalavra(palavra, valPalavra, idDoc);
+  novaCelula = (apontadorCelPalavra) malloc(sizeof(tipoCelulaPalavra));
+  novaCelula->palavra = *palavra;
+
+  if (listaPalavrasVazia(*listaPalvras)){
+    novaCelula->prox = NULL;
+    listaPalvras->primeiro->prox = novaCelula;
+    listaPalvras->ultimo = novaCelula;
+
+  } else {
+
+     while (atual != NULL && (strcmp(atual->palavra.valPalavra, valPalavra) == -1)){
+            ant = atual;
+            atual = atual->prox;
+
+        }
+
+        if (atual == listaPalvras->primeiro->prox){
+            novaCelula->prox = listaPalvras->primeiro->prox;
+            listaPalvras->primeiro->prox = novaCelula;
+
+        } else{
+            novaCelula->prox = ant->prox;
+            ant->prox = novaCelula;
+
+        }
+  }
 }
 
 void insereListaPalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T){
   apontadorCelPalavra temp = pesquisaPalavra(valPalavra, idDoc, p, T);
+
   if (temp == NULL){
     insereListaPalavrasI(valPalavra, idDoc, &T[hashPalavra(valPalavra, p)]);
 
   }
   else {
     printf(" Registro ja  esta  presente\n");
+
     if (buscaIdDoc(*temp->prox->palavra.listaPares, idDoc)){
       aumentaQtdePar(&temp->prox->palavra, idDoc);
 
