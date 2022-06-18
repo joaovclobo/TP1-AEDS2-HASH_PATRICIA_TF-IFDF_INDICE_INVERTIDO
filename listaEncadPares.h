@@ -53,4 +53,6 @@ void retiraListaPares(apontadorCelPar p, listaEncadPares *listaPares, tipoPar *p
 
 void imprimeListaPares(listaEncadPares listaPares);
 
-void aumentaQtde(listaEncadPares listaPares ,int idDoc);
+void aumentaQtde(listaEncadPares listaPares, int idDoc);
+
+int buscaIdDoc(listaEncadPares listaPares, int idDoc);

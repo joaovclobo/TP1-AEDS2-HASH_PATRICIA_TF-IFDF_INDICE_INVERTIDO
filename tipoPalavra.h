@@ -30,8 +30,6 @@ typedef struct tipoPalavra{
 
 char* getValPalavra(tipoPalavra* palavra);
 
-// tipoPar* getPar(tipoPalavra* palavra, int idDoc); //Busca e retorna o valor de um par da lista com base em um idDoc
-
 listaEncadPares* getListaPares(tipoPalavra* palavra);
 
 void setPalavra(tipoPalavra* palavra, char* valPalavra); 

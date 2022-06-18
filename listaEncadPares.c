@@ -99,7 +99,7 @@ void imprimeListaPares(listaEncadPares listaPares){
         aux = aux->prox;
 
     }
-    printf("\n\n");
+    printf("\n");
 
 }
 
@@ -122,14 +122,14 @@ void aumentaQtde(listaEncadPares listaPares, int idDoc){
     printf("idDoc nao encontrado: %d\n", idDoc);
 }
 
-tipoPar* buscaPar(listaEncadPares listaPares, int idDoc){
+int buscaIdDoc(listaEncadPares listaPares, int idDoc){
     apontadorCelPar aux;
 
     aux = listaPares.primeiro->prox;
 
     while (aux != NULL){
         if (aux->par.idDoc == idDoc) {
-            return &(*aux).par;
+            return 1;
 
         }else{
             aux = aux->prox;
@@ -137,5 +137,5 @@ tipoPar* buscaPar(listaEncadPares listaPares, int idDoc){
         }
 
    }
-    printf("idDoc nao encontrado: %d\n", idDoc);
+    return 0;
 }
