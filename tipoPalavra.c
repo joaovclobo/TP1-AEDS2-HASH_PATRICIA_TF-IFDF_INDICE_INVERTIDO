@@ -1,19 +1,29 @@
-#include "listaEncadPares.h"
-#define tamMaxPalavra 50
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------  
 
-typedef struct tipoPalavra{
-    char valPalavra[tamMaxPalavra];
-    listaEncadPares* listaPares;
-}tipoPalavra;
+    Universidade Federal De Viçosa - Campus Florestal
+    Trabalho prático 1 de Algorítimos e estrutura de dados 2
+
+    Professora responsável: 
+        Glaucia Braga e Silva
+        
+    Integrantes do Gupo:
+        Caio Oliveira Almeida - 4237
+        Guilherme Augusto Schwann Wilke - 4685
+        João Vitor Chagas Lobo - 4693
+
+    Arquivo: 
+        tipoPalavra.c
+        Descrição do arquivo: Arquivo de código do TAD tipo palavra
+        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+#include "tipoPalavra.h"
 
 /*---------------- Gets e sets ---------------- */
 
-char* getPalavra(tipoPalavra* palavra){
+char* getValPalavra(tipoPalavra* palavra){
     return palavra->valPalavra;
-}
-
-tipoPar* getPar(tipoPalavra* palavra, int idDoc){ //Avaliar necessidade 
-    return palavra->listaPares;
 }
 
 listaEncadPares* getListaPares(tipoPalavra* palavra){
@@ -29,24 +39,42 @@ void setPar(tipoPalavra* palavra, tipoPar par){
     insereListaPares(par, palavra->listaPares);
 }
 
-void setListaPares(tipoPalavra* palavra, listaEncadPares* listapares){
-    palavra->listaPares = listapares;
+void setListaPares(tipoPalavra* palavra, listaEncadPares *listaPares){
+    palavra->listaPares = listaPares;
 }
 
 /*---------------- Funções auxiliares ---------------- */
 
-void inicialzaPalavra(tipoPalavra* palavra, char* valPalavra, tipoPar primPar){
+void inicializaPalavra(tipoPalavra* palavra, char* valPalavra, int idDoc){
     listaEncadPares* listaPares = (listaEncadPares*) malloc(sizeof(listaEncadPares));
+
     flParesVazia(listaPares);
     setListaPares(palavra, listaPares);
+
     setPalavra(palavra, valPalavra);
-    setPar(palavra, primPar);
+
+    tipoPar* primPar = (tipoPar*) malloc(sizeof(tipoPar));
+
+    inicializaPar(primPar, idDoc);
+    setPar(palavra, *primPar);
 } 
 
 void aumentaQtdePar(tipoPalavra* palavra, int idDoc){
-    aumentaQtde(*palavra->listaPares, idDoc);
+    aumentaQtde(*getListaPares(palavra), idDoc);
 }  
 
 int comparaPalavra(tipoPalavra palavra1, tipoPalavra palavra2){
-    return !strcmp(palavra1.valPalavra, palavra2.valPalavra);
+    return !strcmp(getValPalavra(&palavra1), getValPalavra(&palavra2));
 } 
+
+void imprimePalavra(tipoPalavra palavra){
+    printf("Palavra - %-15s | ", getValPalavra(&palavra));
+    imprimeListaPares(*getListaPares(&palavra));
+}
+
+void insereNovoIdDoc(tipoPalavra* palavra, int idDoc){
+    tipoPar* par = (tipoPar*) malloc(sizeof(tipoPar));
+
+    inicializaPar(par, idDoc);
+    insereListaPares(*par, getListaPares(palavra));
+}

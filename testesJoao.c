@@ -1,70 +1,90 @@
-// VEM CABEÇALHO
-#include "listaEncadPares.h"
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#include <sys/time.h>
-#define MAX 15
-
-int main(int argc, char *argv[])
-{
-    struct timeval t;
-
-    listaEncadPares lista;
-    tipoPar parTeste;
-    int mat[MAX][2];
-    tipoApontadorPar p;
-    int i, j, k, n;
-    float tamanho = 0;
-    gettimeofday(&t, NULL);
-    srand((unsigned int)t.tv_usec);
-    flParesVazia(&lista);
-
-    /*Gera uma permutacao aleatoria de chaves entre 1 e MAX*/
-    for (i = 0; i < MAX; i++) mat[i][0] = i + 1;
-    for (i = 0; i < MAX; i++)
-    {
-        k = (int)(10.0 * rand() / (RAND_MAX + 1.0));
-        j = (int)(10.0 * rand() / (RAND_MAX + 1.0));
-        n = mat[k][0];
-        mat[k][0] = mat[j][0];
-        mat[j][0] = n;
-    }
-
-    for (i = 0; i < MAX; i++) mat[i][1] = i + 1;
-    for (i = 0; i < MAX; i++)
-    {
-        k = (int)(10.0 * rand() / (RAND_MAX + 1.0));
-        j = (int)(10.0 * rand() / (RAND_MAX + 1.0));
-        n = mat[k][1];
-        mat[k][1] = mat[j][1];
-        mat[j][1] = n;
-    }
-    /*Insere cada chave na lista */
-    for (i = 0; i < MAX; i++)
-    {
-        parTeste.qtde = mat[i][0];
-        parTeste.idDoc = mat[i][1];
-
-        insereListaPares(parTeste, &lista);
-        tamanho++;
-        printf("Inseriu: "); imprimePar(parTeste);
-    }
-
-    imprimeListaPares(lista);
-
-
-
-    putchar('\n');
-    aumentaQtde(lista, 5); aumentaQtde(lista, 5); aumentaQtde(lista, 5); aumentaQtde(lista, 5);
-    aumentaQtde(lista, 13); aumentaQtde(lista, 13);
+    Universidade Federal De Viçosa - Campus Florestal
+    Trabalho prático 1 de Algorítimos e estrutura de dados 2
     
-    imprimeListaPares(lista);
-    putchar('\n');
+    Professora responsável: 
+        Glaucia Braga e Silva
+    Integrantes do Gupo:
+        Caio Oliveira Almeida - 4237
+        Guilherme Augusto Schwann Wilke - 4685
+        João Vitor Chagas Lobo - 4693
 
-    aumentaQtde(lista, 5);
-    aumentaQtde(lista, 2);
-    aumentaQtde(lista, 3); aumentaQtde(lista, 3);
-    aumentaQtde(lista, 26);
-    imprimeListaPares(lista);
+    Arquivo: 
+        testesJoao.c
+        Descrição do arquivo: Arquivo para testes de funções implementadas sob pelo aluno João Vitor Chagas Lobo
+        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
 
-    return (0);
+------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+#include "hashTablePalavras.h"
+
+int main(){
+
+    int idDoctemp = 1, opcao = 1;
+    criaHashTablePalavras(Tabela);
+    geraVetPesos(p);
+
+    printf("\n|----------------- Universidade Federal De Vicosa - Campus Florestal -----------------|\n|------------- Trabalho pratico 1 de Algoritimos e estrutura de dados 2 -----------------|\n\n");
+    printf("Professora responsavel:\n    Glaucia Braga e Silva\n\nIntegrantes do Gupo:\n    Caio Oliveira Almeida - 4237\n    Guilherme Augusto Schwann Wilke - 4685\n    Joao Vitor Chagas Lobo - 4693\n\n\n");
+    
+    while (opcao != 0){
+        printf("Selecione uma opcao digitando o numero correspondente:\n    1 - Ler arquivos.\n    2 - Criar indice invertido.\n    3 - Imprimir indice invertido.\n    4 - Fazer busca.\n    0 - Encerar programa.\n\n");
+        scanf("%d", &opcao);
+        
+        switch (opcao){
+
+        case 1:
+            lerPalavra(Elemento.valPalavra, tamMaxPalavra);
+            while (strcmp(Elemento.valPalavra, "fim") != 0){
+                insereListaPalavras(Elemento.valPalavra, idDoctemp, p, Tabela);
+                lerPalavra(Elemento.valPalavra, tamMaxPalavra);
+
+            }
+            printf("Tabela apos insercao:\n");
+            imprimeListaPalavras(Tabela);
+
+            break;
+
+        case 2:
+            //Função pra carregar as palavras de cada arquivo nos 2 TADs
+            printf("Novo idDoc: ");
+            scanf("%d", &idDoctemp);
+            printf("---------------2\n");
+            break;
+
+        case 3:
+            imprimeListaPalavras(Tabela);
+            break;
+
+        case 4:
+            printf("Pesquisar :  ");
+            lerPalavra(Elemento.valPalavra, tamMaxPalavra);
+
+            while (strcmp(Elemento.valPalavra, "fim") != 0){
+                i = pesquisaPalavra(Elemento.valPalavra, idDoctemp, p, Tabela);
+
+                if (i == NULL)
+                    printf("pesquisa sem sucesso \n");
+
+                else
+                    printf("sucesso \n");
+
+                printf("Pesquisar :  ");
+                lerPalavra(Elemento.valPalavra, tamMaxPalavra);
+
+            }
+            break;
+
+        case 0:
+            break;
+
+        default:
+            printf("Opcao invalida!\n");
+            break;
+            
+        }
+    }
+
+    printf("Programa encerrado :)\n");
 }
