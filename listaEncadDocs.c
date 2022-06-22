@@ -50,6 +50,7 @@ void insereDoc(char *nomeDoc, listaEncadDocs *listaDocs){
         listaDocs->qtdeDocs++;
         doc->idDoc = listaDocs->qtdeDocs;
         strcpy(doc->nomeDoc, nomeDoc);
+        doc->documentoLido = naoLido;
 
         insereDocI(*doc, listaDocs);
 
@@ -63,7 +64,13 @@ void imprimeListaDocs(listaEncadDocs listaDocs){
     printf("\nDocumentos inseridos:\n\n");
 
     while (aux != NULL){
-        printf("Nome doc: %-5s | idDoc: %-3d\n", aux->doc.nomeDoc, aux->doc.idDoc);
+        if (aux->doc.documentoLido == lido){
+            printf("Nome doc: %-5s | idDoc: %-3d | docLido: Sim\n", aux->doc.nomeDoc, aux->doc.idDoc);
+
+        } else{
+            printf("Nome doc: %-5s | idDoc: %-3d | docLido: Nao\n", aux->doc.nomeDoc, aux->doc.idDoc);
+
+        }
         aux = aux->prox;
 
     }
@@ -90,29 +97,42 @@ void escrevePalavrasDocs(tipoVetPesos p, TipoDicionario T, listaEncadDocs listaD
     aux = listaDocs.primeiro->prox;
 
     while (aux != NULL){
-        lerPalavras(aux->doc.nomeDoc, aux->doc.idDoc, p, T);
-        printf("Inseriu TAD hash M = 7 - Para o arquivo %s\n", aux->doc.nomeDoc);
+        if (aux->doc.documentoLido == lido){
+            printf("As palavras do documento *%s* ja foram inseridas no indice invertido e nao foram inseridas novamente\n", aux->doc.nomeDoc);
 
+        } else{
+            lerPalavras(aux->doc.nomeDoc, aux->doc.idDoc, p, T);
+            printf("Inseriu TAD hash M = 7 - Para o arquivo %s\n", aux->doc.nomeDoc);
+            aux->doc.documentoLido = lido;
+
+        }
         aux = aux->prox;
-        //Mudar flag "lido" do arquivo
     }
 }
 
 void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, TipoDicionario T){
     FILE *fp;
-    fp = fopen(arquivo, "r");
     char palavra[50];
+    fp = fopen(arquivo, "r");
+    
     if(fp == NULL){
         printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
-    }else{
+        return;
+        
+    } else{
+
     while(fscanf(fp, "%50s", palavra) != EOF){
+
         for(int i=0; palavra[i] != '\0'; i++){
                 palavra[i] = tolower(palavra[i]);
+
                 if ('a' > palavra[i] || palavra[i] > 'z'){
                     strcpy(&palavra[i], &palavra[i + 1]);
+
                 }
             }
             insereHashTablePalavras(palavra, idDoc, p, T);
+            
         }
     }
     fclose(fp);
@@ -120,14 +140,18 @@ void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, TipoDicionario T){
 
 void lerArquivos(char* arquivo, listaEncadDocs* listaDocs){
     FILE *fp, *fp2;
-    fp = fopen(arquivo, "r");
     int numArq;
-    char nomeArquivo[100];  
+    char nomeArquivo[100];
+
+    fp = fopen(arquivo, "r");
+    
     if (fp == NULL){
       printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
-    }
-    else{
+      return;
+
+    } else{
       fscanf(fp, "%d", &numArq);
+
       for(int i=0; i<numArq; i++){
         fscanf(fp, "%100s", nomeArquivo);
         fp2 = fopen(nomeArquivo, "r");
@@ -137,9 +161,12 @@ void lerArquivos(char* arquivo, listaEncadDocs* listaDocs){
 
         } else{
             insereDoc(nomeArquivo, listaDocs);
+            
         }
         fclose(fp2);
+
         }
     }
     fclose(fp);
+    
 }

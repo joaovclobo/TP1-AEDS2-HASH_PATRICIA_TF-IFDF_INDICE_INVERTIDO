@@ -26,7 +26,7 @@ void inicializaPar(tipoPar* par, int idDoc){
 }
 
 void imprimePar(tipoPar par){
-    printf("<%d, %d> | ", par.qtde, par.idDoc);
+    printf("<%3d, %3d> | ", par.qtde, par.idDoc);
 }
 
 void flParesVazia(listaEncadPares *listaPares){

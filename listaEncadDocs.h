@@ -25,9 +25,15 @@
 #include <ctype.h>
 #include "hashTablePalavras.h"
 
+typedef enum docLido{
+    lido,
+    naoLido
+}docLido;
+
 typedef struct tipoDoc{
     char nomeDoc[50];
     int idDoc;
+    docLido documentoLido;
 } tipoDoc;
 
 typedef struct tipoCelulaDoc *apontadorDoc;
