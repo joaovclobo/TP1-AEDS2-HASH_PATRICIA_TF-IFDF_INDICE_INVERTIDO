@@ -13,7 +13,7 @@
     Arquivo:
         hashTablePalavras.h
         Descrição do arquivo: Cabeçalho do TAD hash table de palavras
-        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 22/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -37,11 +37,6 @@ typedef struct tipoListaPalavras{
 
 
 typedef tipoListaPalavras TipoDicionario[M];        //Ver se da pra variar o "M"
-TipoDicionario Tabela;              //Avaliar a necessidade
-tipoPalavra Elemento;                  //Avaliar a necessidade
-tipoVetPesos p;                     //Avaliar a necessidade
-apontadorCelPalavra i;              //Avaliar a necessidade
-
 
 void flPalavrasVazia(tipoListaPalavras *listaPalvras);  
 
@@ -53,14 +48,16 @@ tipoIndice hashPalavra(char* valPalavra, tipoVetPesos p);
 
 void criaHashTablePalavras(TipoDicionario T);
 
-void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras);
+void insereHashTablePalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras);
 
-void insereListaPalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T);
+void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T);
+
+void insereListaPalavras(tipoPalavra palavra, tipoListaPalavras *listaPalvras);
 
 apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T);
 
-void imprimeListaPalavrasI(tipoListaPalavras listaPalvras);
+void imprimeListaPalavras(tipoListaPalavras listaPalvras);
 
-void imprimeListaPalavras(TipoDicionario Tabela);
+void imprimeHashTable(TipoDicionario tabela);
 
 void lerPalavra(char *p, int Tam);

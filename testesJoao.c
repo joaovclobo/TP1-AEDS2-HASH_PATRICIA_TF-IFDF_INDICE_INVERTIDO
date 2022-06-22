@@ -13,7 +13,7 @@
     Arquivo: 
         testesJoao.c
         Descrição do arquivo: Arquivo para testes de funções implementadas sob pelo aluno João Vitor Chagas Lobo
-        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 22/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -37,7 +37,7 @@ int main(){
         case 1:
             lerPalavra(Elemento.valPalavra, tamMaxPalavra);
             while (strcmp(Elemento.valPalavra, "fim") != 0){
-                insereListaPalavras(Elemento.valPalavra, idDoctemp, p, Tabela);
+                insereHashTablePalavras(Elemento.valPalavra, idDoctemp, p, Tabela);
                 lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
             }

@@ -1,3 +1,23 @@
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    Universidade Federal De Viçosa - Campus Florestal
+    Trabalho prático 1 de Algorítimos e estrutura de dados 2
+    
+    Professora responsável: 
+        Glaucia Braga e Silva
+        
+    Integrantes do Gupo:
+        Caio Oliveira Almeida - 4237
+        Guilherme Augusto Schwann Wilke - 4685
+        João Vitor Chagas Lobo - 4693
+
+    Arquivo: 
+        listaEncadDocs.c
+        Descrição do arquivo: Arquivo de codigo do TAD listaEncadDocs
+        Ultima modificação: 22/06 - Por: João Vitor Chagas Lobo
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
 #include "listaEncadDocs.h"
 
 void flDocsVazia(listaEncadDocs *listaDocs){
@@ -92,7 +112,7 @@ void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, TipoDicionario T){
                     strcpy(&palavra[i], &palavra[i + 1]);
                 }
             }
-            insereListaPalavras(palavra, idDoc, p, T);
+            insereHashTablePalavras(palavra, idDoc, p, T);
         }
     }
     fclose(fp);

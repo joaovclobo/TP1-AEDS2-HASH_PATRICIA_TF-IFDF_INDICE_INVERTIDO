@@ -14,7 +14,7 @@
     Arquivo: 
         main.c
         Descrição do arquivo: Arquivo "main" contendo o menu e a execução das principais funções
-        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 22/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -22,10 +22,14 @@
 #include <ctype.h>
 
 int main(){
-
-    int opcao = 1;
+    TipoDicionario Tabela;              //Avaliar a necessidade
+    tipoPalavra Elemento;                  //Avaliar a necessidade
+    tipoVetPesos p;                     //Avaliar a necessidade
+    apontadorCelPalavra i;              //Avaliar a necessidade
+    int opcao;
     char arqEntrada[50];
-    int idDocTemp;
+    
+    int idDocTemp = 1;
     listaEncadDocs* listaDocs = (listaEncadDocs*) malloc(sizeof(listaEncadDocs));
 
     flDocsVazia(listaDocs);
@@ -35,22 +39,25 @@ int main(){
     printf("\n|----------------- Universidade Federal De Vicosa - Campus Florestal -----------------|\n|------------- Trabalho pratico 1 de Algoritimos e estrutura de dados 2 -----------------|\n\n");
     printf("Professora responsavel:\n    Glaucia Braga e Silva\n\nIntegrantes do Gupo:\n    Caio Oliveira Almeida - 4237\n    Guilherme Augusto Schwann Wilke - 4685\n    Joao Vitor Chagas Lobo - 4693\n\n\n");
     
+    printf("\nSelecione uma opcao digitando o numero correspondente:\n    1 - Ler arquivos.\n    2 - Criar indice invertido.\n    3 - Imprimir indice invertido.\n    4 - Fazer busca.\n    0 - Encerar programa.\n\n");
+    scanf("%d", &opcao);
+
     while (opcao != 0){
-        printf("\nSelecione uma opcao digitando o numero correspondente:\n    1 - Ler arquivos.\n    2 - Criar indice invertido.\n    3 - Imprimir indice invertido.\n    4 - Fazer busca.\n    0 - Encerar programa.\n\n");
-        scanf("%d", &opcao);
         
         switch (opcao){
 
         case 1:
             printf("Digite o nome do arquivo de entrada com os textos a serem indexados com sua extensao (Ex.: entrada.txt):\n");
             scanf("%s", arqEntrada);
+
             lerArquivos(arqEntrada, listaDocs);
             imprimeListaDocs(*listaDocs);
+
             break;
 
         case 2:
             printf("Gerando indice invertido...\n");
-            // lerPalavras();
+
             //Colocar confimação para cada TAD
             escrevePalavrasDocs(p, Tabela, *listaDocs);
             printf("\nFim da criacao do indice invertido\n");
@@ -58,16 +65,13 @@ int main(){
 
         case 3:
             //Função pra imprimir os 2 TADs em ordem alfabética
-            imprimeListaPalavras(Tabela);
-            printf("---------------3\n");
+            imprimeHashTable(Tabela);
             break;
 
         case 4:
             //Função pra buscar um ou mais termos nos TADs
             printf("Pesquisar :  ");
             lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-            printf("idDoc: ");
-            scanf("%d", idDocTemp);
 
             while (strcmp(Elemento.valPalavra, "fim") != 0){
                 i = pesquisaPalavra(Elemento.valPalavra, idDocTemp, p, Tabela);
@@ -80,8 +84,6 @@ int main(){
 
                 printf("Pesquisar :  ");
                 lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-                printf("idDoc: ");
-                scanf("%d", idDocTemp);  
 
             }
             printf("---------------4\n");
@@ -95,6 +97,9 @@ int main(){
             break;
             
         }
+        printf("\nSelecione uma opcao digitando o numero correspondente:\n    1 - Ler arquivos.\n    2 - Criar indice invertido.\n    3 - Imprimir indice invertido.\n    4 - Fazer busca.\n    0 - Encerar programa.\n\n");
+        scanf("%d", &opcao);
+
     }
 
     printf("Programa encerrado :)\n");

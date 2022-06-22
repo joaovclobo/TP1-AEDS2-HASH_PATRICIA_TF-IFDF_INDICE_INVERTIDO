@@ -13,7 +13,7 @@
     Arquivo: 
         hashTablePalavras.c
         Descrição do arquivo: Arquivo de código do TAD hash table de palavras
-        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 22/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -56,13 +56,13 @@ void criaHashTablePalavras(TipoDicionario T){
     flPalavrasVazia(&T[i]);
 }
 
-void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras){
+void insereListaPalavras(tipoPalavra palavra, tipoListaPalavras *listaPalvras){ /* Esta função é utilizada para ordenar em uma lista encadeada as palavras inseridas na hash table*/
 
   apontadorCelPalavra novaCelula, ant, atual = listaPalvras->primeiro->prox;
-  tipoPalavra* palavra = (tipoPalavra*) malloc(sizeof(tipoPalavra));
-  inicializaPalavra(palavra, valPalavra, idDoc);
+  
   novaCelula = (apontadorCelPalavra) malloc(sizeof(tipoCelulaPalavra));
-  novaCelula->palavra = *palavra;
+  
+  novaCelula->palavra = palavra;
 
   if (listaPalavrasVazia(*listaPalvras)){
     novaCelula->prox = NULL;
@@ -71,7 +71,7 @@ void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaP
 
   } else {
 
-     while (atual != NULL && (strcmp(atual->palavra.valPalavra, valPalavra) == -1)){
+     while ((atual != NULL) && (strcmp(atual->palavra.valPalavra, palavra.valPalavra) < 0)){
             ant = atual;
             atual = atual->prox;
 
@@ -89,11 +89,37 @@ void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaP
   }
 }
 
-void insereListaPalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T){
+void insereListaOrdenadaTemp(tipoListaPalavras listaPalvrasHash, tipoListaPalavras listaOrdenadaTemp){
+  apontadorCelPalavra aux;
+
+  aux = listaPalvrasHash.primeiro->prox;
+
+  while (aux != NULL){
+    insereListaPalavras(aux->palavra, &listaOrdenadaTemp);
+    aux = aux->prox;
+
+  }
+}
+
+void insereHashTablePalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras){
+
+  apontadorCelPalavra novaCelula, ant, atual = listaPalvras->primeiro->prox;
+  tipoPalavra* palavra = (tipoPalavra*) malloc(sizeof(tipoPalavra));
+
+  inicializaPalavra(palavra, valPalavra, idDoc);
+  
+  listaPalvras->ultimo->prox = (apontadorCelPalavra) malloc(sizeof(tipoCelulaPalavra));
+  listaPalvras->ultimo = listaPalvras->ultimo->prox;
+  listaPalvras->ultimo->palavra = *palavra;
+  listaPalvras->ultimo->prox = NULL;
+
+}
+
+void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T){
   apontadorCelPalavra temp = pesquisaPalavra(valPalavra, idDoc, p, T);
 
   if (temp == NULL){
-    insereListaPalavrasI(valPalavra, idDoc, &T[hashPalavra(valPalavra, p)]);
+    insereHashTablePalavrasI(valPalavra, idDoc, &T[hashPalavra(valPalavra, p)]);
 
   }
   else {
@@ -130,29 +156,37 @@ apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p,
   }
 }
 
-void imprimeListaPalavrasI(tipoListaPalavras listaPalvras){
+void imprimeListaPalavras(tipoListaPalavras listaPalvras){
   apontadorCelPalavra aux;
 
   aux = listaPalvras.primeiro->prox;
+
   while (aux != NULL){
     imprimePalavra(aux->palavra);
     aux = aux->prox;
+
   }
 }
 
-void imprimeListaPalavras(TipoDicionario tabela){
+void imprimeHashTable(TipoDicionario tabela){
   int i;
+  tipoListaPalavras* listaOrdenadaTemp = (tipoListaPalavras*) malloc(sizeof(tipoListaPalavras));
+  
+  flPalavrasVazia(listaOrdenadaTemp);
 
   for (i = 0; i < M; i++){
-    printf("Indice %d:\n", i);
-    if (!listaPalavrasVazia(tabela[i]))
-      imprimeListaPalavrasI(tabela[i]);
 
-    putchar('\n');
+    if (!listaPalavrasVazia(tabela[i]))
+      insereListaOrdenadaTemp(tabela[i], *listaOrdenadaTemp);
+
   }
+
+  imprimeListaPalavras(*listaOrdenadaTemp);
+
+  free(listaOrdenadaTemp);
 }
 
-void lerPalavra(char *p, int Tam){ //Avaliar ncessidade
+void lerPalavra(char *p, int Tam){ 
   char c;
   int i, j;
 
