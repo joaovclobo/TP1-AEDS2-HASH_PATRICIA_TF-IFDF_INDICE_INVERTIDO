@@ -3,7 +3,7 @@
 #include "tipoPalavra.h"
 
 typedef enum {
-  Interno, Externo
+  interno, externo
 } tipoLoc;
 
 typedef struct tipoNo* tipoArvore; 
@@ -11,11 +11,12 @@ typedef struct tipoNo {
   tipoLoc nt;
   union {
     struct {
-      char index;
-      tipoArvore Esq, Dir;
-    } NInterno ;
+      int index;
+      char indexLetra;
+      tipoArvore esq, dir;
+    } nInterno ;
     tipoPalavra palavra;
   } no;
 } tipoNo;
 
-void insere(tipoPalavra k, tipoArvore *t);
+tipoArvore insere(tipoPalavra k, tipoArvore *t);
