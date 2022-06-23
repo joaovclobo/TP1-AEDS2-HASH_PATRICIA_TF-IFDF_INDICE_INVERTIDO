@@ -60,8 +60,8 @@ void imprimeListaDocs(listaEncadDocs listaDocs);
 
 int buscaNomeDoc(char *nomeDoc, listaEncadDocs listaDocs);
 
-void escrevePalavrasDocs(tipoVetPesos p, TipoDicionario T, listaEncadDocs listaDocs);
+void escrevePalavrasDocs(tipoVetPesos p, hashTablePalavras tabela, listaEncadDocs listaDocs, int tamTabela);
 
-void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, TipoDicionario T);
+void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela);
 
 void lerArquivos(char* arquivo, listaEncadDocs* listaDocs);

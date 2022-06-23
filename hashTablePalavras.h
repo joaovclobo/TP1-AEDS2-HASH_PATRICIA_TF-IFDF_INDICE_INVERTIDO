@@ -18,8 +18,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 #include "tipoPalavra.h"
-#define M 7
-#define TAMALFABETO 256
 
 typedef unsigned int tipoVetPesos[tamMaxPalavra];
 
@@ -36,7 +34,7 @@ typedef struct tipoListaPalavras{
 } tipoListaPalavras;
 
 
-typedef tipoListaPalavras TipoDicionario[M];        //Ver se da pra variar o "M"
+typedef tipoListaPalavras* hashTablePalavras;
 
 void flPalavrasVazia(tipoListaPalavras *listaPalvras);  
 
@@ -44,20 +42,22 @@ short listaPalavrasVazia(tipoListaPalavras listaPalvras);
 
 void geraVetPesos(tipoVetPesos p);                                      //Mudar nome do vetor de pesos
 
-tipoIndice hashPalavra(char* valPalavra, tipoVetPesos p);
+tipoIndice hashPalavra(char* valPalavra, tipoVetPesos p, int tamTabela);
 
-void criaHashTablePalavras(TipoDicionario T);
+void criaHashTablePalavras(hashTablePalavras tabela, int tamTabela);
 
 void insereHashTablePalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras);
 
-void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T);
+void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela);
 
 void insereListaPalavras(tipoPalavra palavra, tipoListaPalavras *listaPalvras);
 
-apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T);
+void insereListaOrdenadaTemp(tipoListaPalavras listaPalvrasHash, tipoListaPalavras* listaOrdenadaTemp);
+
+apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela);
 
 void imprimeListaPalavras(tipoListaPalavras listaPalvras);
 
-void imprimeHashTable(TipoDicionario tabela);
+void imprimeHashTable(hashTablePalavras tabela, int tamTabela);
 
 void lerPalavra(char *p, int Tam);

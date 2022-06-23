@@ -19,10 +19,10 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 #include "listaEncadDocs.h"
-#include <ctype.h>
 
 int main(){
-    TipoDicionario Tabela;              //Avaliar a necessidade
+    hashTablePalavras Tabela = (hashTablePalavras) malloc(7*sizeof(tipoListaPalavras));              //Avaliar a necessidade
+    hashTablePalavras Tabela2 = (hashTablePalavras) malloc(101*sizeof(tipoListaPalavras)); ;
     tipoPalavra Elemento;                  //Avaliar a necessidade
     tipoVetPesos p;                     //Avaliar a necessidade
     apontadorCelPalavra i;              //Avaliar a necessidade
@@ -33,7 +33,8 @@ int main(){
     listaEncadDocs* listaDocs = (listaEncadDocs*) malloc(sizeof(listaEncadDocs));
 
     flDocsVazia(listaDocs);
-    criaHashTablePalavras(Tabela);
+    criaHashTablePalavras(Tabela, 7);
+    criaHashTablePalavras(Tabela2, 101);
     geraVetPesos(p);
 
     printf("\n|----------------- Universidade Federal De Vicosa - Campus Florestal -----------------|\n|------------- Trabalho pratico 1 de Algoritimos e estrutura de dados 2 -----------------|\n\n");
@@ -59,13 +60,17 @@ int main(){
             printf("Gerando indice invertido...\n");
 
             //Colocar confimação para cada TAD
-            escrevePalavrasDocs(p, Tabela, *listaDocs);
+            escrevePalavrasDocs(p, Tabela, *listaDocs, 7);
+            escrevePalavrasDocs(p, Tabela2, *listaDocs, 101);
+
             printf("\nFim da criacao do indice invertido\n");
             break;
 
         case 3:
             //Função pra imprimir os 2 TADs em ordem alfabética
-            imprimeHashTable(Tabela);
+            imprimeHashTable(Tabela, 7);
+            putchar('\n');
+            imprimeHashTable(Tabela2, 101);
             break;
 
         case 4:
@@ -74,7 +79,7 @@ int main(){
             lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
             while (strcmp(Elemento.valPalavra, "fim") != 0){
-                i = pesquisaPalavra(Elemento.valPalavra, idDocTemp, p, Tabela);
+                i = pesquisaPalavra(Elemento.valPalavra, idDocTemp, p, Tabela, 7);
 
                 if (i == NULL)
                     printf("pesquisa sem sucesso \n");
@@ -87,6 +92,7 @@ int main(){
 
             }
             printf("---------------4\n");
+            imprimeListaDocs(*listaDocs);
             break;
 
         case 0:
