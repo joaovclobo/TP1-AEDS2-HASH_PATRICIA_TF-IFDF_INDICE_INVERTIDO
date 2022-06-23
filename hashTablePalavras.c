@@ -30,21 +30,21 @@ short listaPalavrasVazia(tipoListaPalavras listaPalvras){
   return (listaPalvras.primeiro == listaPalvras.ultimo);
 }
 
-void geraVetPesos(tipoVetPesos p){      //Mudar nome do vetor de pesos
+void geraVetPesos(tipoVetPesos vetPesos){      //Mudar nome do vetor de pesos
     int i;
 
     srand(13);
     for (i = 0; i < tamMaxPalavra; i++)
-        p[i] = 1 + (int)(10000.0 * rand() / (RAND_MAX + 1.0));
+        vetPesos[i] = 1 + (int)(10000.0 * rand() / (RAND_MAX + 1.0));
 }
 
-tipoIndice hashPalavra(char* valPalavra, tipoVetPesos p, int tamTabela){
+tipoIndice hashPalavra(char* valPalavra, tipoVetPesos vetPesos, int tamTabela){
     int i;
     unsigned int soma = 0;
     int comp = strlen(valPalavra);
 
     for (i = 0; i < comp; i++)
-        soma += (unsigned int) valPalavra[i] * p[i];
+        soma += (unsigned int) valPalavra[i] * vetPesos[i];
 
     return (soma % tamTabela);
 }
@@ -114,11 +114,11 @@ void insereHashTablePalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *li
 
 }
 
-void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela){
-  apontadorCelPalavra temp = pesquisaPalavra(valPalavra, idDoc, p, tabela, tamTabela);
+void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela){
+  apontadorCelPalavra temp = pesquisaPalavra(valPalavra, idDoc, vetPesos, tabela, tamTabela);
 
   if (temp == NULL){
-    insereHashTablePalavrasI(valPalavra, idDoc, &tabela[hashPalavra(valPalavra, p, tamTabela)]);
+    insereHashTablePalavrasI(valPalavra, idDoc, &tabela[hashPalavra(valPalavra, vetPesos, tamTabela)]);
 
   }
   else {
@@ -132,11 +132,11 @@ void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos p, hashTa
   }
 }
 
-apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela){ /* Obs.: apontadorCelPalavra de retorno aponta para o item anterior da lista */
+apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela){ /* Obs.: apontadorCelPalavra de retorno aponta para o item anterior da lista */
   tipoIndice i;
   apontadorCelPalavra ap;
 
-  i = hashPalavra(valPalavra, p, tamTabela);
+  i = hashPalavra(valPalavra, vetPesos, tamTabela);
   if (listaPalavrasVazia(tabela[i]))
     return NULL; /* Pesquisa sem sucesso */
   else{
@@ -176,6 +176,7 @@ void imprimeHashTable(hashTablePalavras tabela, int tamTabela){
 
     if (!listaPalavrasVazia(tabela[i])){
 
+      printf("\nIndice: %d\n\n", i);
       insereListaOrdenadaTemp(tabela[i], listaOrdenadaTemp);
     }
   }

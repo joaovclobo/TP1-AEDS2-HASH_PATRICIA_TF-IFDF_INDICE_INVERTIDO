@@ -19,25 +19,33 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 #include "listaEncadDocs.h"
+#define M1 37
+#define M2 677
+#define M3 7
 
 int main(){
-    hashTablePalavras Tabela = (hashTablePalavras) malloc(7*sizeof(tipoListaPalavras));              //Avaliar a necessidade
-    hashTablePalavras Tabela2 = (hashTablePalavras) malloc(101*sizeof(tipoListaPalavras)); ;
-    tipoPalavra Elemento;                  //Avaliar a necessidade
-    tipoVetPesos p;                     //Avaliar a necessidade
-    apontadorCelPalavra i;              //Avaliar a necessidade
+    hashTablePalavras tambela1 = (hashTablePalavras) malloc(M1*sizeof(tipoListaPalavras));
+    hashTablePalavras tambela2 = (hashTablePalavras) malloc(M2*sizeof(tipoListaPalavras));
+    hashTablePalavras tambela3 = (hashTablePalavras) malloc(M3*sizeof(tipoListaPalavras));
+    
     int opcao;
     char arqEntrada[50];
-    
-    int idDocTemp = 1;
+    tipoVetPesos vetPesos;
     listaEncadDocs* listaDocs = (listaEncadDocs*) malloc(sizeof(listaEncadDocs));
+    
+
+    int idDocTemp = 1;
+    tipoPalavra Elemento;                  // ------------------ APAGAR ---------------------
+    apontadorCelPalavra i;              //Avaliar a necessidade
+
 
     flDocsVazia(listaDocs);
-    criaHashTablePalavras(Tabela, 7);
-    criaHashTablePalavras(Tabela2, 101);
-    geraVetPesos(p);
+    criaHashTablePalavras(tambela1, M1);
+    criaHashTablePalavras(tambela2, M2);
+    criaHashTablePalavras(tambela3, M3);
+    geraVetPesos(vetPesos);
 
-    printf("\n|----------------- Universidade Federal De Vicosa - Campus Florestal -----------------|\n|------------- Trabalho pratico 1 de Algoritimos e estrutura de dados 2 -----------------|\n\n");
+    printf("\n\n|----------------- Universidade Federal De Vicosa - Campus Florestal -----------------|\n|------------- Trabalho pratico 1 de Algoritimos e estrutura de dados 2 -----------------|\n\n");
     printf("Professora responsavel:\n    Glaucia Braga e Silva\n\nIntegrantes do Gupo:\n    Caio Oliveira Almeida - 4237\n    Guilherme Augusto Schwann Wilke - 4685\n    Joao Vitor Chagas Lobo - 4693\n\n\n");
     
     printf("\nSelecione uma opcao digitando o numero correspondente:\n    1 - Ler arquivos.\n    2 - Criar indice invertido.\n    3 - Imprimir indice invertido.\n    4 - Fazer busca.\n    0 - Encerar programa.\n\n");
@@ -59,18 +67,21 @@ int main(){
         case 2:
             printf("Gerando indice invertido...\n");
 
-            //Colocar confimação para cada TAD
-            escrevePalavrasDocs(p, Tabela, *listaDocs, 7);
-            escrevePalavrasDocs(p, Tabela2, *listaDocs, 101);
+            //Colocar confimação e dados (tempo e memória) para cada TAD
+            escrevePalavrasDocs(vetPesos, tambela1, *listaDocs, M1);
+            escrevePalavrasDocs(vetPesos, tambela2, *listaDocs, M2);
+            escrevePalavrasDocs(vetPesos, tambela3, *listaDocs, M3);
 
             printf("\nFim da criacao do indice invertido\n");
             break;
 
         case 3:
             //Função pra imprimir os 2 TADs em ordem alfabética
-            imprimeHashTable(Tabela, 7);
+            imprimeHashTable(tambela1, M1);
             putchar('\n');
-            imprimeHashTable(Tabela2, 101);
+            imprimeHashTable(tambela2, M2);
+            putchar('\n');
+            imprimeHashTable(tambela3, M3);
             break;
 
         case 4:
@@ -79,7 +90,7 @@ int main(){
             lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
             while (strcmp(Elemento.valPalavra, "fim") != 0){
-                i = pesquisaPalavra(Elemento.valPalavra, idDocTemp, p, Tabela, 7);
+                i = pesquisaPalavra(Elemento.valPalavra, idDocTemp, vetPesos, tambela1, M1);
 
                 if (i == NULL)
                     printf("pesquisa sem sucesso \n");
@@ -91,8 +102,6 @@ int main(){
                 lerPalavra(Elemento.valPalavra, tamMaxPalavra);
 
             }
-            printf("---------------4\n");
-            imprimeListaDocs(*listaDocs);
             break;
 
         case 0:

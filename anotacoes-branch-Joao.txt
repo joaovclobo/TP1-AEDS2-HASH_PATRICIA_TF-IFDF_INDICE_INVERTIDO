@@ -94,7 +94,7 @@ Anotações dia 22/:
 
         Organizar o algoritimo de preenchimento do TAD
 
-        Definir os valores de M e colocar na main
+        - Ok - Definir os valores de M e colocar na main
 
         mudar o nome do vetor pesos
 

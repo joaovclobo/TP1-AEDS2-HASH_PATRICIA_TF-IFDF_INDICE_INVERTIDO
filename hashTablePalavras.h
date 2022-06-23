@@ -22,6 +22,7 @@
 typedef unsigned int tipoVetPesos[tamMaxPalavra];
 
 typedef unsigned int tipoIndice;
+
 typedef struct tipoCelulaPalavra *apontadorCelPalavra;
 
 typedef struct tipoCelulaPalavra{
@@ -33,28 +34,28 @@ typedef struct tipoListaPalavras{
     tipoCelulaPalavra *primeiro, *ultimo;
 } tipoListaPalavras;
 
-
 typedef tipoListaPalavras* hashTablePalavras;
+
 
 void flPalavrasVazia(tipoListaPalavras *listaPalvras);  
 
 short listaPalavrasVazia(tipoListaPalavras listaPalvras);
 
-void geraVetPesos(tipoVetPesos p);                                      //Mudar nome do vetor de pesos
+void geraVetPesos(tipoVetPesos vetPesos);                                      //Mudar nome do vetor de pesos
 
-tipoIndice hashPalavra(char* valPalavra, tipoVetPesos p, int tamTabela);
+tipoIndice hashPalavra(char* valPalavra, tipoVetPesos vetPesos, int tamTabela);
 
 void criaHashTablePalavras(hashTablePalavras tabela, int tamTabela);
 
 void insereHashTablePalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras);
 
-void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela);
+void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela);
 
 void insereListaPalavras(tipoPalavra palavra, tipoListaPalavras *listaPalvras);
 
 void insereListaOrdenadaTemp(tipoListaPalavras listaPalvrasHash, tipoListaPalavras* listaOrdenadaTemp);
 
-apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela);
+apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela);
 
 void imprimeListaPalavras(tipoListaPalavras listaPalvras);
 

@@ -91,7 +91,7 @@ int buscaNomeDoc(char *nomeDoc, listaEncadDocs listaDocs){
     return 0;
 }
 
-void escrevePalavrasDocs(tipoVetPesos p, hashTablePalavras tabela, listaEncadDocs listaDocs, int tamTabela){
+void escrevePalavrasDocs(tipoVetPesos vetPesos, hashTablePalavras tabela, listaEncadDocs listaDocs, int tamTabela){
     apontadorDoc aux;
 
     aux = listaDocs.primeiro->prox;
@@ -101,7 +101,7 @@ void escrevePalavrasDocs(tipoVetPesos p, hashTablePalavras tabela, listaEncadDoc
             printf("As palavras do documento *%s* ja foram inseridas no indice invertido e nao foram inseridas novamente\n", aux->doc.nomeDoc);
 
         } else{
-            lerPalavras(aux->doc.nomeDoc, aux->doc.idDoc, p, tabela, tamTabela);
+            lerPalavras(aux->doc.nomeDoc, aux->doc.idDoc, vetPesos, tabela, tamTabela);
             printf("Inseriu TAD hash M = %d - Para o arquivo %s\n", tamTabela, aux->doc.nomeDoc);
             // aux->doc.documentoLido = lido;
 
@@ -110,7 +110,7 @@ void escrevePalavrasDocs(tipoVetPesos p, hashTablePalavras tabela, listaEncadDoc
     }
 }
 
-void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela){
+void lerPalavras(char* arquivo, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela){
     FILE *fp;
     char palavra[50];
     fp = fopen(arquivo, "r");
@@ -131,7 +131,7 @@ void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, hashTablePalavras tab
 
                 }
             }
-            insereHashTablePalavras(palavra, idDoc, p, tabela, tamTabela);
+            insereHashTablePalavras(palavra, idDoc, vetPesos, tabela, tamTabela);
             
         }
     }

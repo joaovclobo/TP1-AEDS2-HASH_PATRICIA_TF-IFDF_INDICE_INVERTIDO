@@ -49,8 +49,6 @@ int listaParesVazia(listaEncadPares listaPares);
 
 void insereListaPares(tipoPar par, listaEncadPares *listaPares);
 
-void retiraListaPares(apontadorCelPar p, listaEncadPares *listaPares, tipoPar *par);
-
 void imprimeListaPares(listaEncadPares listaPares);
 
 void aumentaQtde(listaEncadPares listaPares, int idDoc);
