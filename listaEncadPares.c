@@ -151,5 +151,5 @@ int getQtde(listaEncadPares listaPares, int idDoc){
         }
 
    }
-    return -1;
+    return 0;
 }

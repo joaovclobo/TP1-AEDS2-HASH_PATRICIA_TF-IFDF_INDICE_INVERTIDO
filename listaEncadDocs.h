@@ -38,17 +38,22 @@ typedef struct tipoDoc{
     docLido documentoLido;
 } tipoDoc;
 
-typedef struct tipoCelulaDoc *apontadorDoc;
+typedef struct tipoCelulaDoc *apontadorCellDoc;
 
 typedef struct tipoCelulaDoc{
     tipoDoc doc;
-    apontadorDoc prox;
+    apontadorCellDoc prox;
 } tipoCelulaDoc;
 
 typedef struct{
-    apontadorDoc primeiro, ultimo;
+    apontadorCellDoc primeiro, ultimo;
     int qtdeDocs;
 } listaEncadDocs;
+
+typedef struct tipoDocRelevancia{
+    tipoDoc doc;
+    double relevancia;
+}tipoDocRelevancia;
 
 void flDocsVazia(listaEncadDocs *listaDocs);
 
@@ -71,3 +76,7 @@ void lerArquivos(char* arquivo, listaEncadDocs* listaDocs);
 void pesquisTFIDFHash(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, hashTablePalavras tabela, tipoVetPesos vetPesos, int tamTabela);
 
 double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela, int idDoc, int N);
+
+void Shellsort(tipoDocRelevancia *relevancias, int N);
+
+void selecaoOrdena(tipoDocRelevancia *relevancias, int n);

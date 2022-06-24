@@ -66,3 +66,5 @@ void lerPalavra(char *p, int Tam);
 int palavrasUnicasDoc(hashTablePalavras tabela, int tamTabela, int idDoc);
 
 int palavrasUnicasDocI(tipoListaPalavras listaPalvras, int idDoc);
+
+void imprimeListaPalavrasValores(tipoListaPalavras listaPalvras);

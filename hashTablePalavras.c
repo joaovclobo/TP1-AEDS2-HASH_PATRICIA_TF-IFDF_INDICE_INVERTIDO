@@ -165,6 +165,18 @@ void imprimeListaPalavras(tipoListaPalavras listaPalvras){
   }
 }
 
+void imprimeListaPalavrasValores(tipoListaPalavras listaPalvras){
+  apontadorCelPalavra aux;
+
+  aux = listaPalvras.primeiro->prox;
+
+  while (aux != NULL){
+    printf("Palavra: %s\n", aux->palavra.valPalavra);
+    aux = aux->prox;
+
+  }
+}
+
 void imprimeHashTable(hashTablePalavras tabela, int tamTabela){
   int i;
   
@@ -175,9 +187,8 @@ void imprimeHashTable(hashTablePalavras tabela, int tamTabela){
   for (i = 0; i < tamTabela; i++){
 
     if (!listaPalavrasVazia(tabela[i])){
-
-      printf("\nIndice: %d\n\n", i);
       insereListaOrdenadaTemp(tabela[i], listaOrdenadaTemp);
+      
     }
   }
 
@@ -188,7 +199,7 @@ void imprimeHashTable(hashTablePalavras tabela, int tamTabela){
 }
 
 int palavrasUnicasDoc(hashTablePalavras tabela, int tamTabela, int idDoc){
-  int conta;
+  int conta = 0;
 
   for (int i = 0; i < tamTabela; i++){
 

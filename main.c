@@ -25,25 +25,21 @@
 
 int main(){
     hashTablePalavras tabela1 = (hashTablePalavras) malloc(M1*sizeof(tipoListaPalavras));
-    hashTablePalavras tambela2 = (hashTablePalavras) malloc(M2*sizeof(tipoListaPalavras));
-    hashTablePalavras tambela3 = (hashTablePalavras) malloc(M3*sizeof(tipoListaPalavras));
+    hashTablePalavras tabela2 = (hashTablePalavras) malloc(M2*sizeof(tipoListaPalavras));
+    hashTablePalavras tabela3 = (hashTablePalavras) malloc(M3*sizeof(tipoListaPalavras));
     
     int opcao;
-    char valPalavraPesq[tamMaxPalavra] = "Exemplo";
+    char valPalavraPesq[tamMaxPalavra];
     char arqEntrada[tamMaxPalavra];
 
     tipoVetPesos vetPesos;
     listaEncadDocs* listaDocs = (listaEncadDocs*) malloc(sizeof(listaEncadDocs));
 
-    int idDocTemp = 1;
-    apontadorCelPalavra i;              //Avaliar a necessidade
-
-
     flDocsVazia(listaDocs);
 
     criaHashTablePalavras(tabela1, M1);
-    criaHashTablePalavras(tambela2, M2);
-    criaHashTablePalavras(tambela3, M3);
+    criaHashTablePalavras(tabela2, M2);
+    criaHashTablePalavras(tabela3, M3);
     geraVetPesos(vetPesos);
 
     printf("\n\n|----------------- Universidade Federal De Vicosa - Campus Florestal -----------------|\n|------------- Trabalho pratico 1 de Algoritimos e estrutura de dados 2 -----------------|\n\n");
@@ -57,7 +53,7 @@ int main(){
         switch (opcao){
 
         case 1:
-            printf("Digite o nome do arquivo de entrada com os textos a serem indexados com sua extensao (Ex.: entrada.txt):\n");
+            printf("Digite o nome do arquivo de entrada com os textos a serem indexados com sua extensao (Ex.: entrada.txt): ");
             scanf("%s", arqEntrada);
 
             lerArquivos(arqEntrada, listaDocs);
@@ -69,9 +65,12 @@ int main(){
             printf("Gerando indice invertido...\n");
 
             //Colocar confimação e dados (tempo e memória) para cada TAD
+
             escrevePalavrasDocs(vetPesos, tabela1, *listaDocs, M1);
-            escrevePalavrasDocs(vetPesos, tambela2, *listaDocs, M2);
-            escrevePalavrasDocs(vetPesos, tambela3, *listaDocs, M3);
+            putchar('\n');
+            escrevePalavrasDocs(vetPesos, tabela2, *listaDocs, M2);
+            putchar('\n');
+            escrevePalavrasDocs(vetPesos, tabela3, *listaDocs, M3);
 
             printf("\nFim da criacao do indice invertido\n");
             break;
@@ -80,21 +79,20 @@ int main(){
             //Função pra imprimir os 2 TADs em ordem alfabética
             imprimeHashTable(tabela1, M1);
             putchar('\n');
-            imprimeHashTable(tambela2, M2);
+            imprimeHashTable(tabela2, M2);
             putchar('\n');
-            imprimeHashTable(tambela3, M3);
+            imprimeHashTable(tabela3, M3);
             break;
 
         case 4:
-            //Função pra buscar um ou mais termos nos TADs
             tipoListaPalavras* listaPalavrasPesquisa = (tipoListaPalavras*) malloc(sizeof(tipoListaPalavras));
 
             flPalavrasVazia(listaPalavrasPesquisa);
 
-            printf("Digite as palavras que serão pessquisadas:\n");
+            printf("Digite as palavras que serão pessquisadas ou '-' para pesquisar as palavras digitadas: ");
             scanf("%s", valPalavraPesq);
             
-            while (strcmp(valPalavraPesq, "fim") != 0){
+            while (strcmp(valPalavraPesq, "-") != 0){
                 tipoPalavra* palavraPesquisaTemp = (tipoPalavra*) malloc(sizeof(tipoPalavra));
                 inicializaPalavra(palavraPesquisaTemp, valPalavraPesq, 0);
 
@@ -102,12 +100,19 @@ int main(){
                 
                 free(palavraPesquisaTemp);
                 
-                printf("Digite as palavras que serão pessquisadas:\n");
+                printf("Digite as palavras que serão pessquisadas ou '-' para pesquisar as palavras digitadas: ");
                 scanf("%s", valPalavraPesq);                
                 
             }
-            imprimeListaPalavras(*listaPalavrasPesquisa);
+            imprimeListaPalavrasValores(*listaPalavrasPesquisa);
+
+            printf("\nResultado da pesquisa no TAD hash com M = %d :\n", M1);
             pesquisTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela1, vetPesos, M1);
+            printf("\nResultado da pesquisa no TAD hash com M = %d :\n", M2);
+            pesquisTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela2, vetPesos, M2);
+            printf("\nResultado da pesquisa no TAD hash com M = %d :\n", M3);
+            pesquisTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela3, vetPesos, M3);
+
             free(listaPalavrasPesquisa);
             break;
 

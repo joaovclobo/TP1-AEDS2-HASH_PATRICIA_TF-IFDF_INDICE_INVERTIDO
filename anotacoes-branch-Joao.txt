@@ -96,8 +96,8 @@ Anotações dia 22/:
 
         - Ok - Definir os valores de M e colocar na main
 
-        mudar o nome do vetor pesos
+        - Ok - mudar o nome do vetor pesos
 
-        mudar nome apontador docs
+        - Ok - mudar nome apontador docs
 
         renomear as demais variaveis do Ziviani

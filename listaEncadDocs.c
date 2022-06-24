@@ -21,7 +21,7 @@
 #include "listaEncadDocs.h"
 
 void flDocsVazia(listaEncadDocs *listaDocs){
-    listaDocs->primeiro = (apontadorDoc) malloc(sizeof(tipoCelulaDoc));
+    listaDocs->primeiro = (apontadorCellDoc) malloc(sizeof(tipoCelulaDoc));
     
     listaDocs->qtdeDocs = 0;
     listaDocs->ultimo = listaDocs->primeiro;
@@ -33,7 +33,7 @@ int listaDocsVazia(listaEncadDocs listaDocs){
 }
 
 void insereDocI(tipoDoc doc, listaEncadDocs *listaDocs){
-    listaDocs->ultimo->prox = (apontadorDoc) malloc(sizeof(tipoCelulaDoc));
+    listaDocs->ultimo->prox = (apontadorCellDoc) malloc(sizeof(tipoCelulaDoc));
 
     listaDocs->ultimo = listaDocs->ultimo->prox;
     listaDocs->ultimo->doc = doc;
@@ -58,26 +58,31 @@ void insereDoc(char *nomeDoc, listaEncadDocs *listaDocs){
 }
 
 void imprimeListaDocs(listaEncadDocs listaDocs){
-    apontadorDoc aux;
+    apontadorCellDoc aux;
 
     aux = listaDocs.primeiro->prox;
-    printf("\nDocumentos inseridos:\n\n");
 
-    while (aux != NULL){
-        if (aux->doc.documentoLido == lido){
-            printf("Nome doc: %-5s | idDoc: %-3d | docLido: Sim\n", aux->doc.nomeDoc, aux->doc.idDoc);
+    if (listaDocsVazia(listaDocs)){
+        printf("Nenhum documento foi inserido! - Lista vazia!\n");
+    } else{
+        printf("\nDocumentos inseridos:\n\n");
+    
+        while (aux != NULL){
+            if (aux->doc.documentoLido == lido){
+                printf("Nome documento: %-20s | idDoc: %-3d | docLido: Sim\n", aux->doc.nomeDoc, aux->doc.idDoc);
 
-        } else{
-            printf("Nome doc: %-5s | idDoc: %-3d | docLido: Nao\n", aux->doc.nomeDoc, aux->doc.idDoc);
+            } else{
+                printf("Nome documento: %-20s | idDoc: %-3d | docLido: Nao\n", aux->doc.nomeDoc, aux->doc.idDoc);
+
+            }
+            aux = aux->prox;
 
         }
-        aux = aux->prox;
-
     }
 }
 
 int buscaNomeDoc(char *nomeDoc, listaEncadDocs listaDocs){
-    apontadorDoc aux;
+    apontadorCellDoc aux;
 
     aux = listaDocs.primeiro->prox;
 
@@ -92,7 +97,7 @@ int buscaNomeDoc(char *nomeDoc, listaEncadDocs listaDocs){
 }
 
 void escrevePalavrasDocs(tipoVetPesos vetPesos, hashTablePalavras tabela, listaEncadDocs listaDocs, int tamTabela){
-    apontadorDoc aux;
+    apontadorCellDoc aux;
 
     aux = listaDocs.primeiro->prox;
 
@@ -102,7 +107,7 @@ void escrevePalavrasDocs(tipoVetPesos vetPesos, hashTablePalavras tabela, listaE
 
         } else{
             lerPalavras(aux->doc.nomeDoc, aux->doc.idDoc, vetPesos, tabela, tamTabela);
-            printf("Inseriu TAD hash M = %d - Para o arquivo %s\n", tamTabela, aux->doc.nomeDoc);
+            printf("Inseriu no TAD hash com M = %d - As palavras do arquivo %s\n", tamTabela, aux->doc.nomeDoc);
             // aux->doc.documentoLido = lido;
 
         }
@@ -171,51 +176,46 @@ void lerArquivos(char* arquivo, listaEncadDocs* listaDocs){
     
 }
 
-typedef struct idDocRelevancia{
-    int idDoc;
-    double relevancia;
-}idDocRelevancia;
-
-
 void pesquisTFIDFHash(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, hashTablePalavras tabela, tipoVetPesos vetPesos, int tamTabela){
     //variaveis para os loops
     int N = listaDocs.qtdeDocs;
     int ni;
     int i = 0;
-    idDocRelevancia* relevancias = (idDocRelevancia*) malloc(N*sizeof(idDocRelevancia));
-    idDocRelevancia* idDocRelevanciaTemp = (idDocRelevancia*) malloc(sizeof(idDocRelevancia));
+    tipoDocRelevancia* relevancias = (tipoDocRelevancia*) malloc(N*sizeof(tipoDocRelevancia));
+    tipoDocRelevancia* docRelevTemp = (tipoDocRelevancia*) malloc(sizeof(tipoDocRelevancia));
 
-    apontadorDoc aux;
+    apontadorCellDoc aux;
 
     aux = listaDocs.primeiro->prox;
 
-    while (aux != NULL){
+    while (aux != NULL){ //Calula a relevancia para cada documento
         
         ni = palavrasUnicasDoc(tabela, tamTabela, aux->doc.idDoc);
-        printf("Doc %d", aux->doc.idDoc);
-        idDocRelevanciaTemp->relevancia = somatorioPesos(listaPalavrasPesquisa, vetPesos, tabela, tamTabela, aux->doc.idDoc, N)/ni;
-        idDocRelevanciaTemp->idDoc = aux->doc.idDoc;
+        docRelevTemp->relevancia = somatorioPesos(listaPalavrasPesquisa, vetPesos, tabela, tamTabela, aux->doc.idDoc, N)/ni;
+        docRelevTemp->doc.idDoc = aux->doc.idDoc;
+        strcpy(docRelevTemp->doc.nomeDoc, aux->doc.nomeDoc);
         
         aux = aux->prox;
 
-        relevancias[i] = *idDocRelevanciaTemp;
+        relevancias[i] = *docRelevTemp;
         i++;
-        
-    }
-
-    for (int j = 0; j < i; j++){
-        printf("IdDoc: %d, Relevancia: %lf\n", relevancias->idDoc, relevancias->relevancia);
 
     }
+    selecaoOrdena(relevancias, N-1);
     
+    for (int j = 0; j < N; j++){
+        printf("Doc: %-3d (%s) Relevancia: %lf\n", relevancias[j].doc.idDoc, relevancias[j].doc.nomeDoc, relevancias[j].relevancia);
+
+    }
+    free(relevancias);
+    free(docRelevTemp);
 }
 
 double calculaPesoDeTJemi(tipoPalavra palavra, int idDoc, int N){
     double logN = log(N);
     int dj = contaRepsPalavra(palavra, &dj);
     int fj = getQtdePalavra(palavra, idDoc);
-
-    return fj * (logN/dj);
+    return (fj * ((log2(N))/dj));
 }
 
 double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela, int idDoc, int N){
@@ -234,11 +234,30 @@ double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetP
             return 0;
             
         } else{
-
-            // printf("Palavra: %s\n", celTemp->prox->palavra.valPalavra);     
             totalPesos += calculaPesoDeTJemi(celPesq->prox->palavra, idDoc, N);
+
         }
         aux = aux->prox;
     }
     return totalPesos;
+}
+
+void selecaoOrdena(tipoDocRelevancia *relevancias, int n){
+    int i, j, Min;
+    tipoDocRelevancia x;
+
+    for (i = 1; i <= n - 1; i++){
+        Min = i;
+
+        for (j = i + 1; j <= n; j++){
+            if (relevancias[j].relevancia > relevancias[Min].relevancia){
+                Min = j;
+
+            }
+        x = relevancias[Min];
+        relevancias[Min] = relevancias[i];
+        relevancias[i] = x;
+
+        }
+    }
 }
