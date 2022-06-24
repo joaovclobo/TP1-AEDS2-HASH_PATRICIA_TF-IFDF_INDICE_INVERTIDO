@@ -14,7 +14,7 @@
     Arquivo: 
         listaEncadPares.h
         Descrição do arquivo: Cabeçalho do TAD tipo lista encadeada de pares (qtde, idDoc)
-        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 23/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -54,3 +54,7 @@ void imprimeListaPares(listaEncadPares listaPares);
 void aumentaQtde(listaEncadPares listaPares, int idDoc);
 
 int buscaIdDoc(listaEncadPares listaPares, int idDoc);
+
+int contaQtdePares(listaEncadPares listaPares);
+
+int getQtde(listaEncadPares pares, int idDoc);

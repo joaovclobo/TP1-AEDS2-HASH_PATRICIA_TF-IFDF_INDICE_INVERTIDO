@@ -14,7 +14,7 @@
     Arquivo: 
         listaEncadPares.c
         Descrição do arquivo: Arquivo de código do TAD tipo lista encadeada de pares (qtde, idDoc)
-        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 23/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -120,4 +120,36 @@ int buscaIdDoc(listaEncadPares listaPares, int idDoc){
 
    }
     return 0;
+}
+
+int contaQtdePares(listaEncadPares listaPares){
+    int conta = 0;
+    apontadorCelPar aux;
+    
+    aux = listaPares.primeiro->prox;
+
+    while (aux != NULL){
+        conta++;
+        aux = aux->prox;
+
+    }
+    return conta;
+}
+
+int getQtde(listaEncadPares listaPares, int idDoc){
+    apontadorCelPar aux;
+
+    aux = listaPares.primeiro->prox;
+
+    while (aux != NULL){
+        if (aux->par.idDoc == idDoc) {
+            return aux->par.qtde;
+
+        }else{
+            aux = aux->prox;
+
+        }
+
+   }
+    return -1;
 }

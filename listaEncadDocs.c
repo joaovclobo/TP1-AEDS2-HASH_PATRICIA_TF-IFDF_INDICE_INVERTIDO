@@ -170,3 +170,75 @@ void lerArquivos(char* arquivo, listaEncadDocs* listaDocs){
     fclose(fp);
     
 }
+
+typedef struct idDocRelevancia{
+    int idDoc;
+    double relevancia;
+}idDocRelevancia;
+
+
+void pesquisTFIDFHash(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, hashTablePalavras tabela, tipoVetPesos vetPesos, int tamTabela){
+    //variaveis para os loops
+    int N = listaDocs.qtdeDocs;
+    int ni;
+    int i = 0;
+    idDocRelevancia* relevancias = (idDocRelevancia*) malloc(N*sizeof(idDocRelevancia));
+    idDocRelevancia* idDocRelevanciaTemp = (idDocRelevancia*) malloc(sizeof(idDocRelevancia));
+
+    apontadorDoc aux;
+
+    aux = listaDocs.primeiro->prox;
+
+    while (aux != NULL){
+        
+        ni = palavrasUnicasDoc(tabela, tamTabela, aux->doc.idDoc);
+        printf("Doc %d", aux->doc.idDoc);
+        idDocRelevanciaTemp->relevancia = somatorioPesos(listaPalavrasPesquisa, vetPesos, tabela, tamTabela, aux->doc.idDoc, N)/ni;
+        idDocRelevanciaTemp->idDoc = aux->doc.idDoc;
+        
+        aux = aux->prox;
+
+        relevancias[i] = *idDocRelevanciaTemp;
+        i++;
+        
+    }
+
+    for (int j = 0; j < i; j++){
+        printf("IdDoc: %d, Relevancia: %lf\n", relevancias->idDoc, relevancias->relevancia);
+
+    }
+    
+}
+
+double calculaPesoDeTJemi(tipoPalavra palavra, int idDoc, int N){
+    double logN = log(N);
+    int dj = contaRepsPalavra(palavra, &dj);
+    int fj = getQtdePalavra(palavra, idDoc);
+
+    return fj * (logN/dj);
+}
+
+double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela, int idDoc, int N){
+    apontadorCelPalavra aux;
+    apontadorCelPalavra celPesq;
+
+    double totalPesos = 0;
+
+    aux = listaPalavrasPesquisa.primeiro->prox;
+    
+    while (aux != NULL){
+        celPesq = pesquisaPalavra(aux->palavra.valPalavra, 1, vetPesos, tabela, tamTabela);
+
+        if (celPesq == NULL){
+            printf("Palavra *%s* nao encontrada\n", aux->palavra.valPalavra);
+            return 0;
+            
+        } else{
+
+            // printf("Palavra: %s\n", celTemp->prox->palavra.valPalavra);     
+            totalPesos += calculaPesoDeTJemi(celPesq->prox->palavra, idDoc, N);
+        }
+        aux = aux->prox;
+    }
+    return totalPesos;
+}

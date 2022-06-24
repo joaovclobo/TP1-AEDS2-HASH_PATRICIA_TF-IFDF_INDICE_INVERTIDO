@@ -98,4 +98,6 @@ Anotações dia 22/:
 
         mudar o nome do vetor pesos
 
+        mudar nome apontador docs
+
         renomear as demais variaveis do Ziviani

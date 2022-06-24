@@ -23,6 +23,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
+
 #include "hashTablePalavras.h"
 
 typedef enum docLido{
@@ -65,3 +67,7 @@ void escrevePalavrasDocs(tipoVetPesos p, hashTablePalavras tabela, listaEncadDoc
 void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela);
 
 void lerArquivos(char* arquivo, listaEncadDocs* listaDocs);
+
+void pesquisTFIDFHash(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, hashTablePalavras tabela, tipoVetPesos vetPesos, int tamTabela);
+
+double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela, int idDoc, int N);

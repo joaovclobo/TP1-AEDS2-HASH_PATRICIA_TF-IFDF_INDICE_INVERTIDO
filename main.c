@@ -21,26 +21,27 @@
 #include "listaEncadDocs.h"
 #define M1 37
 #define M2 677
-#define M3 7
+#define M3 2477
 
 int main(){
-    hashTablePalavras tambela1 = (hashTablePalavras) malloc(M1*sizeof(tipoListaPalavras));
+    hashTablePalavras tabela1 = (hashTablePalavras) malloc(M1*sizeof(tipoListaPalavras));
     hashTablePalavras tambela2 = (hashTablePalavras) malloc(M2*sizeof(tipoListaPalavras));
     hashTablePalavras tambela3 = (hashTablePalavras) malloc(M3*sizeof(tipoListaPalavras));
     
     int opcao;
-    char arqEntrada[50];
+    char valPalavraPesq[tamMaxPalavra] = "Exemplo";
+    char arqEntrada[tamMaxPalavra];
+
     tipoVetPesos vetPesos;
     listaEncadDocs* listaDocs = (listaEncadDocs*) malloc(sizeof(listaEncadDocs));
-    
 
     int idDocTemp = 1;
-    tipoPalavra Elemento;                  // ------------------ APAGAR ---------------------
     apontadorCelPalavra i;              //Avaliar a necessidade
 
 
     flDocsVazia(listaDocs);
-    criaHashTablePalavras(tambela1, M1);
+
+    criaHashTablePalavras(tabela1, M1);
     criaHashTablePalavras(tambela2, M2);
     criaHashTablePalavras(tambela3, M3);
     geraVetPesos(vetPesos);
@@ -68,7 +69,7 @@ int main(){
             printf("Gerando indice invertido...\n");
 
             //Colocar confimação e dados (tempo e memória) para cada TAD
-            escrevePalavrasDocs(vetPesos, tambela1, *listaDocs, M1);
+            escrevePalavrasDocs(vetPesos, tabela1, *listaDocs, M1);
             escrevePalavrasDocs(vetPesos, tambela2, *listaDocs, M2);
             escrevePalavrasDocs(vetPesos, tambela3, *listaDocs, M3);
 
@@ -77,7 +78,7 @@ int main(){
 
         case 3:
             //Função pra imprimir os 2 TADs em ordem alfabética
-            imprimeHashTable(tambela1, M1);
+            imprimeHashTable(tabela1, M1);
             putchar('\n');
             imprimeHashTable(tambela2, M2);
             putchar('\n');
@@ -86,22 +87,28 @@ int main(){
 
         case 4:
             //Função pra buscar um ou mais termos nos TADs
-            printf("Pesquisar :  ");
-            lerPalavra(Elemento.valPalavra, tamMaxPalavra);
+            tipoListaPalavras* listaPalavrasPesquisa = (tipoListaPalavras*) malloc(sizeof(tipoListaPalavras));
 
-            while (strcmp(Elemento.valPalavra, "fim") != 0){
-                i = pesquisaPalavra(Elemento.valPalavra, idDocTemp, vetPesos, tambela1, M1);
+            flPalavrasVazia(listaPalavrasPesquisa);
 
-                if (i == NULL)
-                    printf("pesquisa sem sucesso \n");
+            printf("Digite as palavras que serão pessquisadas:\n");
+            scanf("%s", valPalavraPesq);
+            
+            while (strcmp(valPalavraPesq, "fim") != 0){
+                tipoPalavra* palavraPesquisaTemp = (tipoPalavra*) malloc(sizeof(tipoPalavra));
+                inicializaPalavra(palavraPesquisaTemp, valPalavraPesq, 0);
 
-                else
-                    printf("sucesso \n");
-
-                printf("Pesquisar :  ");
-                lerPalavra(Elemento.valPalavra, tamMaxPalavra);
-
+                insereListaPalavras(*palavraPesquisaTemp, listaPalavrasPesquisa);
+                
+                free(palavraPesquisaTemp);
+                
+                printf("Digite as palavras que serão pessquisadas:\n");
+                scanf("%s", valPalavraPesq);                
+                
             }
+            imprimeListaPalavras(*listaPalavrasPesquisa);
+            pesquisTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela1, vetPesos, M1);
+            free(listaPalavrasPesquisa);
             break;
 
         case 0:

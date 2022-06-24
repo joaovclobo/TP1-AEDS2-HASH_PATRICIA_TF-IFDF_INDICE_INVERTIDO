@@ -62,3 +62,7 @@ void imprimeListaPalavras(tipoListaPalavras listaPalvras);
 void imprimeHashTable(hashTablePalavras tabela, int tamTabela);
 
 void lerPalavra(char *p, int Tam);
+
+int palavrasUnicasDoc(hashTablePalavras tabela, int tamTabela, int idDoc);
+
+int palavrasUnicasDocI(tipoListaPalavras listaPalvras, int idDoc);

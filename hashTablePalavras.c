@@ -187,6 +187,35 @@ void imprimeHashTable(hashTablePalavras tabela, int tamTabela){
   free(listaOrdenadaTemp);
 }
 
+int palavrasUnicasDoc(hashTablePalavras tabela, int tamTabela, int idDoc){
+  int conta;
+
+  for (int i = 0; i < tamTabela; i++){
+
+    if (!listaPalavrasVazia(tabela[i])){
+      conta += palavrasUnicasDocI(tabela[i], idDoc);
+
+    }
+  }
+  return conta;
+  
+}
+
+int palavrasUnicasDocI(tipoListaPalavras listaPalvras, int idDoc){
+  apontadorCelPalavra aux;
+  int conta = 0;
+
+  aux = listaPalvras.primeiro->prox;
+
+  while (aux != NULL){
+    conta += palavraNoDocumento(aux->palavra, idDoc);
+    aux = aux->prox;
+
+  }
+  return conta;
+
+}
+
 void lerPalavra(char *p, int tam){ 
   char c;
   int i, j;
