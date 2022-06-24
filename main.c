@@ -18,7 +18,8 @@
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
-#include "listaEncadDocs.h"
+#include "operacoesIndiceInvertido.c"
+
 #define M1 37
 #define M2 677
 #define M3 2477
@@ -66,12 +67,15 @@ int main(){
 
             //Colocar confimação e dados (tempo e memória) para cada TAD
 
-            escrevePalavrasDocs(vetPesos, tabela1, *listaDocs, M1);
+            escrevePalavrasDocsHash(vetPesos, tabela1, *listaDocs, M1);
             putchar('\n');
-            escrevePalavrasDocs(vetPesos, tabela2, *listaDocs, M2);
+            escrevePalavrasDocsHash(vetPesos, tabela2, *listaDocs, M2);
             putchar('\n');
-            escrevePalavrasDocs(vetPesos, tabela3, *listaDocs, M3);
+            escrevePalavrasDocsHash(vetPesos, tabela3, *listaDocs, M3);
+            putchar('\n');
 
+            atualizaListaLidos(*listaDocs);
+            imprimeListaDocs(*listaDocs);
             printf("\nFim da criacao do indice invertido\n");
             break;
 
@@ -107,11 +111,11 @@ int main(){
             imprimeListaPalavrasValores(*listaPalavrasPesquisa);
 
             printf("\nResultado da pesquisa no TAD hash com M = %d :\n", M1);
-            pesquisTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela1, vetPesos, M1);
+            pesquisaTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela1, vetPesos, M1);
             printf("\nResultado da pesquisa no TAD hash com M = %d :\n", M2);
-            pesquisTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela2, vetPesos, M2);
+            pesquisaTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela2, vetPesos, M2);
             printf("\nResultado da pesquisa no TAD hash com M = %d :\n", M3);
-            pesquisTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela3, vetPesos, M3);
+            pesquisaTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela3, vetPesos, M3);
 
             free(listaPalavrasPesquisa);
             break;

@@ -50,11 +50,6 @@ typedef struct{
     int qtdeDocs;
 } listaEncadDocs;
 
-typedef struct tipoDocRelevancia{
-    tipoDoc doc;
-    double relevancia;
-}tipoDocRelevancia;
-
 void flDocsVazia(listaEncadDocs *listaDocs);
 
 int listaDocsVazia(listaEncadDocs listaDocs);
@@ -66,17 +61,3 @@ void insereDoc(char *nomeDoc, listaEncadDocs *listaDocs);
 void imprimeListaDocs(listaEncadDocs listaDocs);
 
 int buscaNomeDoc(char *nomeDoc, listaEncadDocs listaDocs);
-
-void escrevePalavrasDocs(tipoVetPesos p, hashTablePalavras tabela, listaEncadDocs listaDocs, int tamTabela);
-
-void lerPalavras(char* arquivo, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela);
-
-void lerArquivos(char* arquivo, listaEncadDocs* listaDocs);
-
-void pesquisTFIDFHash(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, hashTablePalavras tabela, tipoVetPesos vetPesos, int tamTabela);
-
-double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela, int idDoc, int N);
-
-void Shellsort(tipoDocRelevancia *relevancias, int N);
-
-void selecaoOrdena(tipoDocRelevancia *relevancias, int n);
