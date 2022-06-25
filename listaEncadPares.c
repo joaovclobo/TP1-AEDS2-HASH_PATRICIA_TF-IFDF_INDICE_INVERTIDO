@@ -14,7 +14,7 @@
     Arquivo: 
         listaEncadPares.c
         Descrição do arquivo: Arquivo de código do TAD tipo lista encadeada de pares (qtde, idDoc)
-        Ultima modificação: 17/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 23/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -26,7 +26,7 @@ void inicializaPar(tipoPar* par, int idDoc){
 }
 
 void imprimePar(tipoPar par){
-    printf("<%d, %d> | ", par.qtde, par.idDoc);
+    printf("<%3d, %3d> | ", par.qtde, par.idDoc);
 }
 
 void flParesVazia(listaEncadPares *listaPares){
@@ -71,24 +71,6 @@ void insereListaPares(tipoPar par, listaEncadPares *listaPares){        //Funç�
     }
 }
 
-void retiraListaPares(apontadorCelPar p, listaEncadPares *listaPares, tipoPar *par){ /*  ---   Obs.: o item a ser retirado e  o seguinte ao apontado por  p --- */
-    apontadorCelPar q;
-
-    if (listaParesVazia(*listaPares) || p == NULL || p->prox == NULL){
-        printf(" Erro listaPares vazia ou posicao nao existe\n");
-        return;
-
-    }
-    q = p->prox;
-    *par = q->par;
-    p->prox = q->prox;
-
-    if (p->prox == NULL)
-        listaPares->ultimo = p;
-        
-    free(q);
-}
-
 void imprimeListaPares(listaEncadPares listaPares){
     apontadorCelPar aux;
 
@@ -130,6 +112,38 @@ int buscaIdDoc(listaEncadPares listaPares, int idDoc){
     while (aux != NULL){
         if (aux->par.idDoc == idDoc) {
             return 1;
+
+        }else{
+            aux = aux->prox;
+
+        }
+
+   }
+    return 0;
+}
+
+int contaQtdePares(listaEncadPares listaPares){
+    int conta = 0;
+    apontadorCelPar aux;
+    
+    aux = listaPares.primeiro->prox;
+
+    while (aux != NULL){
+        conta++;
+        aux = aux->prox;
+
+    }
+    return conta;
+}
+
+int getQtde(listaEncadPares listaPares, int idDoc){
+    apontadorCelPar aux;
+
+    aux = listaPares.primeiro->prox;
+
+    while (aux != NULL){
+        if (aux->par.idDoc == idDoc) {
+            return aux->par.qtde;
 
         }else{
             aux = aux->prox;

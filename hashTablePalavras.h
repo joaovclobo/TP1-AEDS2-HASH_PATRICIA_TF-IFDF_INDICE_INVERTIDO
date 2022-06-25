@@ -13,17 +13,16 @@
     Arquivo:
         hashTablePalavras.h
         Descrição do arquivo: Cabeçalho do TAD hash table de palavras
-        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 22/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 #include "tipoPalavra.h"
-#define M 7
-#define TAMALFABETO 256
 
 typedef unsigned int tipoVetPesos[tamMaxPalavra];
 
 typedef unsigned int tipoIndice;
+
 typedef struct tipoCelulaPalavra *apontadorCelPalavra;
 
 typedef struct tipoCelulaPalavra{
@@ -35,32 +34,37 @@ typedef struct tipoListaPalavras{
     tipoCelulaPalavra *primeiro, *ultimo;
 } tipoListaPalavras;
 
-
-typedef tipoListaPalavras TipoDicionario[M];        //Ver se da pra variar o "M"
-TipoDicionario Tabela;              //Avaliar a necessidade
-tipoPalavra Elemento;                  //Avaliar a necessidade
-tipoVetPesos p;                     //Avaliar a necessidade
-apontadorCelPalavra i;              //Avaliar a necessidade
+typedef tipoListaPalavras* hashTablePalavras;
 
 
 void flPalavrasVazia(tipoListaPalavras *listaPalvras);  
 
 short listaPalavrasVazia(tipoListaPalavras listaPalvras);
 
-void geraVetPesos(tipoVetPesos p);                                      //Mudar nome do vetor de pesos
+void geraVetPesos(tipoVetPesos vetPesos);                                      //Mudar nome do vetor de pesos
 
-tipoIndice hashPalavra(char* valPalavra, tipoVetPesos p);
+tipoIndice hashPalavra(char* valPalavra, tipoVetPesos vetPesos, int tamTabela);
 
-void criaHashTablePalavras(TipoDicionario T);
+void criaHashTablePalavras(hashTablePalavras tabela, int tamTabela);
 
-void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras);
+void insereHashTablePalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras);
 
-void insereListaPalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T);
+void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela);
 
-apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T);
+void insereListaPalavras(tipoPalavra palavra, tipoListaPalavras *listaPalvras);
 
-void imprimeListaPalavrasI(tipoListaPalavras listaPalvras);
+void insereListaOrdenadaTemp(tipoListaPalavras listaPalvrasHash, tipoListaPalavras* listaOrdenadaTemp);
 
-void imprimeListaPalavras(TipoDicionario Tabela);
+apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela);
+
+void imprimeListaPalavras(tipoListaPalavras listaPalvras);
+
+void imprimeHashTable(hashTablePalavras tabela, int tamTabela);
 
 void lerPalavra(char *p, int Tam);
+
+int palavrasUnicasDoc(hashTablePalavras tabela, int tamTabela, int idDoc);
+
+int palavrasUnicasDocI(tipoListaPalavras listaPalvras, int idDoc);
+
+void imprimeListaPalavrasValores(tipoListaPalavras listaPalvras);

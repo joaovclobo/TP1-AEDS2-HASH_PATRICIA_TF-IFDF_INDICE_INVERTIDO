@@ -78,12 +78,26 @@ Anotações dia 18/06
 
     1 - Variar o numero de "M"
 
-    2 - Ok - Ordenar a lista de palavras
+    2 - Ok - Não é mais nemcessário - Ordenar a lista de palavras
 
     3 - Falta:
         
-        Metodo para aramazenar os docs e idDocs
+        - Ok - Metodo para aramazenar os docs e idDocs
 
-        *Como imprimir as palavras pelo indice em ordem alfabetica?
+        - Ok - Como imprimir as palavras pelo indice em ordem alfabetica?
 
         *Funcao de busca
+
+Anotações dia 22/:
+    
+    1 - Falta:
+
+        Organizar o algoritimo de preenchimento do TAD
+
+        - Ok - Definir os valores de M e colocar na main
+
+        - Ok - mudar o nome do vetor pesos
+
+        - Ok - mudar nome apontador docs
+
+        renomear as demais variaveis do Ziviani

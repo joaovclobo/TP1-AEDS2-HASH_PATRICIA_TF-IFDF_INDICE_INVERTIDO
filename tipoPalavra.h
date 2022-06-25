@@ -49,3 +49,9 @@ int comparaPalavra(tipoPalavra palavra1, tipoPalavra palavra2); //Retorna 1 se f
 void imprimePalavra(tipoPalavra palavra);
 
 void insereNovoIdDoc(tipoPalavra* palavra, int idDoc);
+
+int contaRepsPalavra(tipoPalavra palavra, int* reps); // Função retorna -1 caso não encontre a palavra e um valor positvo caso encontre
+
+int getQtdePalavra(tipoPalavra palavra, int idDoc);
+
+int palavraNoDocumento(tipoPalavra palavra, int idDoc);

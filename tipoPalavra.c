@@ -78,3 +78,21 @@ void insereNovoIdDoc(tipoPalavra* palavra, int idDoc){
     inicializaPar(par, idDoc);
     insereListaPares(*par, getListaPares(palavra));
 }
+
+int contaRepsPalavra(tipoPalavra palavra, int* reps){
+    if (contaQtdePares(*palavra.listaPares) > 0){
+        return contaQtdePares(*palavra.listaPares);
+
+    }else{
+        printf("ERRO: Palavra nao essta em nenhum documento");
+        return -1;
+    }
+}
+
+int getQtdePalavra(tipoPalavra palavra, int idDoc){
+    return getQtde(*palavra.listaPares, idDoc);
+}
+
+int palavraNoDocumento(tipoPalavra palavra, int idDoc){
+    return buscaIdDoc(*palavra.listaPares, idDoc);
+}

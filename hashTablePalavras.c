@@ -13,7 +13,7 @@
     Arquivo: 
         hashTablePalavras.c
         Descrição do arquivo: Arquivo de código do TAD hash table de palavras
-        Ultima modificação: 18/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 22/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -30,39 +30,39 @@ short listaPalavrasVazia(tipoListaPalavras listaPalvras){
   return (listaPalvras.primeiro == listaPalvras.ultimo);
 }
 
-void geraVetPesos(tipoVetPesos p){      //Mudar nome do vetor de pesos
+void geraVetPesos(tipoVetPesos vetPesos){      //Mudar nome do vetor de pesos
     int i;
 
     srand(13);
     for (i = 0; i < tamMaxPalavra; i++)
-        p[i] = 1 + (int)(10000.0 * rand() / (RAND_MAX + 1.0));
+        vetPesos[i] = 1 + (int)(10000.0 * rand() / (RAND_MAX + 1.0));
 }
 
-tipoIndice hashPalavra(char* valPalavra, tipoVetPesos p){
+tipoIndice hashPalavra(char* valPalavra, tipoVetPesos vetPesos, int tamTabela){
     int i;
     unsigned int soma = 0;
     int comp = strlen(valPalavra);
 
     for (i = 0; i < comp; i++)
-        soma += (unsigned int) valPalavra[i] * p[i];
+        soma += (unsigned int) valPalavra[i] * vetPesos[i];
 
-    return (soma % M);
+    return (soma % tamTabela);
 }
 
-void criaHashTablePalavras(TipoDicionario T){
+void criaHashTablePalavras(hashTablePalavras tabela, int tamTabela){
   int i;
 
-  for (i = 0; i < M; i++)
-    flPalavrasVazia(&T[i]);
+  for (i = 0; i < tamTabela; i++)
+    flPalavrasVazia(&tabela[i]);
 }
 
-void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras){
+void insereListaPalavras(tipoPalavra palavra, tipoListaPalavras *listaPalvras){ /* Esta função é utilizada para ordenar em uma lista encadeada as palavras inseridas na hash table*/
 
   apontadorCelPalavra novaCelula, ant, atual = listaPalvras->primeiro->prox;
-  tipoPalavra* palavra = (tipoPalavra*) malloc(sizeof(tipoPalavra));
-  inicializaPalavra(palavra, valPalavra, idDoc);
+
   novaCelula = (apontadorCelPalavra) malloc(sizeof(tipoCelulaPalavra));
-  novaCelula->palavra = *palavra;
+  
+  novaCelula->palavra = palavra;
 
   if (listaPalavrasVazia(*listaPalvras)){
     novaCelula->prox = NULL;
@@ -71,7 +71,7 @@ void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaP
 
   } else {
 
-     while (atual != NULL && (strcmp(atual->palavra.valPalavra, valPalavra) == -1)){
+     while ((atual != NULL) && (strcmp(atual->palavra.valPalavra, palavra.valPalavra) < 0)){
             ant = atual;
             atual = atual->prox;
 
@@ -89,11 +89,36 @@ void insereListaPalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaP
   }
 }
 
-void insereListaPalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T){
-  apontadorCelPalavra temp = pesquisaPalavra(valPalavra, idDoc, p, T);
+void insereListaOrdenadaTemp(tipoListaPalavras listaPalvrasHash, tipoListaPalavras* listaOrdenadaTemp){
+  apontadorCelPalavra aux;
+
+  aux = listaPalvrasHash.primeiro->prox;
+
+  while (aux != NULL){
+    insereListaPalavras(aux->palavra, listaOrdenadaTemp);
+    aux = aux->prox;
+
+  }
+}
+
+void insereHashTablePalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *listaPalvras){
+
+  tipoPalavra* palavra = (tipoPalavra*) malloc(sizeof(tipoPalavra));
+
+  inicializaPalavra(palavra, valPalavra, idDoc);
+  
+  listaPalvras->ultimo->prox = (apontadorCelPalavra) malloc(sizeof(tipoCelulaPalavra));
+  listaPalvras->ultimo = listaPalvras->ultimo->prox;
+  listaPalvras->ultimo->palavra = *palavra;
+  listaPalvras->ultimo->prox = NULL;
+
+}
+
+void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela){
+  apontadorCelPalavra temp = pesquisaPalavra(valPalavra, idDoc, vetPesos, tabela, tamTabela);
 
   if (temp == NULL){
-    insereListaPalavrasI(valPalavra, idDoc, &T[hashPalavra(valPalavra, p)]);
+    insereHashTablePalavrasI(valPalavra, idDoc, &tabela[hashPalavra(valPalavra, vetPesos, tamTabela)]);
 
   }
   else {
@@ -107,19 +132,17 @@ void insereListaPalavras(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicion
   }
 }
 
-apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p, TipoDicionario T){ /* Obs.: apontadorCelPalavra de retorno aponta para o item anterior da lista */
+apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela){ /* Obs.: apontadorCelPalavra de retorno aponta para o item anterior da lista */
   tipoIndice i;
   apontadorCelPalavra ap;
 
-  i = hashPalavra(valPalavra, p);
-  if (listaPalavrasVazia(T[i]))
+  i = hashPalavra(valPalavra, vetPesos, tamTabela);
+  if (listaPalavrasVazia(tabela[i]))
     return NULL; /* Pesquisa sem sucesso */
   else{
-    ap = T[i].primeiro;
+    ap = tabela[i].primeiro;
 
-    while (ap->prox->prox != NULL &&
-           strncmp(valPalavra, ap->prox->palavra.valPalavra, sizeof(char[tamMaxPalavra])))
-
+    while (ap->prox->prox != NULL && strncmp(valPalavra, ap->prox->palavra.valPalavra, sizeof(char[tamMaxPalavra])))
       ap = ap->prox;
 
     if (!strncmp(valPalavra, ap->prox->palavra.valPalavra, sizeof(char[tamMaxPalavra])))
@@ -130,35 +153,87 @@ apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos p,
   }
 }
 
-void imprimeListaPalavrasI(tipoListaPalavras listaPalvras){
+void imprimeListaPalavras(tipoListaPalavras listaPalvras){
   apontadorCelPalavra aux;
 
   aux = listaPalvras.primeiro->prox;
+
   while (aux != NULL){
     imprimePalavra(aux->palavra);
     aux = aux->prox;
+
   }
 }
 
-void imprimeListaPalavras(TipoDicionario tabela){
+void imprimeListaPalavrasValores(tipoListaPalavras listaPalvras){
+  apontadorCelPalavra aux;
+
+  aux = listaPalvras.primeiro->prox;
+
+  while (aux != NULL){
+    printf("Palavra: %s\n", aux->palavra.valPalavra);
+    aux = aux->prox;
+
+  }
+}
+
+void imprimeHashTable(hashTablePalavras tabela, int tamTabela){
   int i;
+  
+  tipoListaPalavras* listaOrdenadaTemp = (tipoListaPalavras*) malloc(sizeof(tipoListaPalavras));
+  
+  flPalavrasVazia(listaOrdenadaTemp);
 
-  for (i = 0; i < M; i++){
-    printf("Indice %d:\n", i);
-    if (!listaPalavrasVazia(tabela[i]))
-      imprimeListaPalavrasI(tabela[i]);
+  for (i = 0; i < tamTabela; i++){
 
-    putchar('\n');
+    if (!listaPalavrasVazia(tabela[i])){
+      insereListaOrdenadaTemp(tabela[i], listaOrdenadaTemp);
+      
+    }
   }
+
+  printf("Hash Table com M = %d em ordem alfabetica:\n", tamTabela);
+  imprimeListaPalavras(*listaOrdenadaTemp);
+
+  free(listaOrdenadaTemp);
 }
 
-void lerPalavra(char *p, int Tam){ //Avaliar ncessidade
+int palavrasUnicasDoc(hashTablePalavras tabela, int tamTabela, int idDoc){
+  int conta = 0;
+
+  for (int i = 0; i < tamTabela; i++){
+
+    if (!listaPalavrasVazia(tabela[i])){
+      conta += palavrasUnicasDocI(tabela[i], idDoc);
+
+    }
+  }
+  return conta;
+  
+}
+
+int palavrasUnicasDocI(tipoListaPalavras listaPalvras, int idDoc){
+  apontadorCelPalavra aux;
+  int conta = 0;
+
+  aux = listaPalvras.primeiro->prox;
+
+  while (aux != NULL){
+    conta += palavraNoDocumento(aux->palavra, idDoc);
+    aux = aux->prox;
+
+  }
+  return conta;
+
+}
+
+void lerPalavra(char *p, int tam){ 
   char c;
   int i, j;
 
   fflush(stdin);
   j = 0;
-  while (((c = getchar()) != '\n') && j < Tam - 1)
+  while (((c = getchar()) != '\n') && j < tam - 1)
     p[j++] = c;
 
   p[j] = '\0';
