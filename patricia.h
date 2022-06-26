@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "tipoPalavra.h"
 
 typedef enum {
@@ -19,4 +20,6 @@ typedef struct tipoNo {
   } no;
 } tipoNo;
 
-tipoArvore insere(tipoPalavra k, tipoArvore *t);
+tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t);
+tipoPalavra pesquisa(char* palavra, tipoArvore t);
+int quantasPalavras(tipoArvore t, int idDoc);
