@@ -119,9 +119,7 @@ void aumentaQtde(listaEncadPares listaPares, int idDoc){
         }
 
     }
-    tipoPar par;
-    inicializaPar(&par, idDoc);
-    insereListaPares(par, &listaPares);
+    printf("Erro, id de documento não encontrado!\n");
 }
 
 int buscaIdDoc(listaEncadPares listaPares, int idDoc){

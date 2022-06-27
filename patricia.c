@@ -75,7 +75,10 @@ tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t){
         while ((i <= tamMaxPalavra) && (letra(*palavra, i) == letra(p->no.palavra, i))) 
             i++;
         if (i > tamMaxPalavra){
-            aumentaQtdePar(&(*t)->no.palavra, idDoc);
+            if(buscaIdDoc(*palavra->listaPares, idDoc))
+                aumentaQtdePar(&(*t)->no.palavra, idDoc);
+            else
+                insereNovoIdDoc(&(*t)->no.palavra, idDoc);
             return (*t);
         } 
         else
@@ -107,9 +110,10 @@ tipoPalavra pesquisa(char palavra[50], tipoArvore t){
 }
 
 int quantasPalavras(tipoArvore t, int idDoc){
-    int num;
-    if (eExterno(t))
+    int num = 0;
+    if (eExterno(t)){
         return buscaIdDocQuant(*t->no.palavra.listaPares, idDoc);
+    }
     num += quantasPalavras(t->no.nInterno.esq, idDoc);
     num += quantasPalavras(t->no.nInterno.dir, idDoc);
     return num;
