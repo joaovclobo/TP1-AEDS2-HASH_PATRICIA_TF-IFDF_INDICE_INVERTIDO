@@ -15,7 +15,7 @@ typedef struct tipoNo {
       int index;
       char indexLetra;
       tipoArvore esq, dir;
-    } nInterno ;
+    } nInterno;
     tipoPalavra palavra;
   } no;
 } tipoNo;

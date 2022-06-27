@@ -2,7 +2,7 @@
 
 char letra(tipoPalavra k, int i){
     if (strlen(k.valPalavra) < i)
-        return "0";
+        return ' ';
     return k.valPalavra[i-1];
 }
 
@@ -11,13 +11,15 @@ short eExterno(tipoArvore p){
     return (p->nt == externo);
 }
 
-tipoArvore CriaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
+tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
     tipoArvore p;
     p = (tipoArvore)malloc(sizeof(tipoNo));
     p->nt = interno;
     p->no.nInterno.esq = *esq;
     p->no.nInterno.dir = *dir;
     p->no.nInterno.index = i;
+    p->no.nInterno.indexLetra = letra((*dir)->no.palavra, i);
+    printf("Debug no int esq %s | dir %s | index %d %c\n", (*esq)->no.palavra.valPalavra, (*dir)->no.palavra.valPalavra, i, p->no.nInterno.indexLetra);
     return p;
 } 
 
@@ -41,7 +43,7 @@ tipoArvore insereEntre(tipoPalavra k, tipoArvore *t, int i)
         return (criaNoInt(i, &p, t));
   } 
   else{
-    if (letra(k, (*t)->no.nInterno.index) != (*t)->no.nInterno.indexLetra)
+    if (letra(k, (*t)->no.nInterno.index) == (*t)->no.nInterno.indexLetra)
         (*t)->no.nInterno.dir = insereEntre(k,&(*t)->no.nInterno.dir,i);
     else
         (*t)->no.nInterno.esq = insereEntre(k,&(*t)->no.nInterno.esq,i);
@@ -50,30 +52,30 @@ tipoArvore insereEntre(tipoPalavra k, tipoArvore *t, int i)
 }
 
 tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t){
-    tipoPalavra palavra;
-    inicializaPalavra(&palavra, valPalavra, idDoc);
+    tipoPalavra* palavra = (tipoPalavra*) malloc(sizeof(tipoPalavra));
+    inicializaPalavra(palavra, valPalavra, idDoc);
     tipoArvore p;
     int i;
     if (*t == NULL) 
-        return (criaNoExt(palavra));
+        return (criaNoExt(*palavra));
     else {
         p = *t;
         while (!eExterno(p)){
-            if (letra(palavra, p->no.nInterno.index) == p->no.nInterno.indexLetra)
+            if (letra(*palavra, p->no.nInterno.index) != p->no.nInterno.indexLetra)
                 p = p->no.nInterno.esq;
             else
                 p = p->no.nInterno.dir;
         }
         /* acha o primeiro bit diferente */
         i = 1;
-        while ((i <= tamMaxPalavra) & (letra(palavra, i) == letra(p->no.palavra, i))) 
+        while ((i <= tamMaxPalavra) && (letra(*palavra, i) == letra(p->no.palavra, i))) 
             i++;
         if (i > tamMaxPalavra){
             aumentaQtdePar(&(*t)->no.palavra, idDoc);
             return (*t);
         } 
         else
-            return (insereEntre(palavra, t, i));
+            return (insereEntre(*palavra, t, i));
     }
 }
 
@@ -83,18 +85,20 @@ tipoPalavra pesquisa(char* palavra, tipoArvore t){
         if (palavra == t->no.palavra.valPalavra) 
             return t->no.palavra;
         else printf("Elemento nao encontrado\n");
-    return;
+        tipoPalavra* aux = (tipoPalavra*) malloc(sizeof(tipoPalavra));
+        inicializaPalavra(aux, t->no.palavra.valPalavra, 0);
+        return *aux;
     }
-    if (palavra[t->no.nInterno.index] == t->no.nInterno.indexLetra) 
-        pesquisa(palavra, t->no.nInterno.esq);
-    else
+    if (palavra[t->no.nInterno.index - 1] == t->no.nInterno.indexLetra) 
         pesquisa(palavra, t->no.nInterno.dir);
+    else
+        pesquisa(palavra, t->no.nInterno.esq);
 }
 
 int quantasPalavras(tipoArvore t, int idDoc){
     int num;
     if (eExterno(t))
-        return buscaIdDoc(*t->no.palavra.listaPares, idDoc);
+        return buscaIdDocQuant(*t->no.palavra.listaPares, idDoc);
     num += quantasPalavras(t->no.nInterno.esq, idDoc);
     num += quantasPalavras(t->no.nInterno.dir, idDoc);
     return num;

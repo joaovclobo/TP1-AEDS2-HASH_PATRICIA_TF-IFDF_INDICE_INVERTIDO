@@ -56,3 +56,5 @@ void imprimeListaPares(listaEncadPares listaPares);
 void aumentaQtde(listaEncadPares listaPares, int idDoc);
 
 int buscaIdDoc(listaEncadPares listaPares, int idDoc);
+
+int buscaIdDocQuant(listaEncadPares listaPares, int idDoc);

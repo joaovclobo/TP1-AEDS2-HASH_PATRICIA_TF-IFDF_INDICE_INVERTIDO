@@ -137,7 +137,23 @@ int buscaIdDoc(listaEncadPares listaPares, int idDoc){
             aux = aux->prox;
 
         }
+    }
+    return 0;
+}
 
-   }
+int buscaIdDocQuant(listaEncadPares listaPares, int idDoc){
+    apontadorCelPar aux;
+
+    aux = listaPares.primeiro->prox;
+
+    while (aux != NULL){
+        if (aux->par.idDoc == idDoc) {
+            return aux->par.qtde;
+
+        }else{
+            aux = aux->prox;
+
+        }
+    }
     return 0;
 }
