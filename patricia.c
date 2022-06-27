@@ -127,10 +127,10 @@ tipoPalavra* pesquisaPatricia(char palavra[50], tipoArvore t){
     tipoPalavra* aux = (tipoPalavra*) malloc(sizeof(tipoPalavra));
     inicializaPalavra(aux, palavra, 0);
     if (letra(*aux, t->no.nInterno.index) == t->no.nInterno.indexLetra){
-        pesquisa(palavra, t->no.nInterno.dir);
+        pesquisaPatricia(palavra, t->no.nInterno.dir);
     }
     else{
-        pesquisa(palavra, t->no.nInterno.esq);
+        pesquisaPatricia(palavra, t->no.nInterno.esq);
     }
 }
 
@@ -139,8 +139,8 @@ int quantasPalavrasPatricia(tipoArvore t, int idDoc){
     if (eExterno(t)){
         return getQtde(*t->no.palavra.listaPares, idDoc);
     }
-    num += quantasPalavras(t->no.nInterno.esq, idDoc);
-    num += quantasPalavras(t->no.nInterno.dir, idDoc);
+    num += quantasPalavrasPatricia(t->no.nInterno.esq, idDoc);
+    num += quantasPalavrasPatricia(t->no.nInterno.dir, idDoc);
     return num;
 }
 

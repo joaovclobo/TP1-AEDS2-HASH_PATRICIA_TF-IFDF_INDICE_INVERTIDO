@@ -280,18 +280,18 @@ void pesquisaTFIDFPatricia(tipoListaPalavras listaPalavrasPesquisa, listaEncadDo
 }
 
 double somatorioPesosPatricia(tipoListaPalavras listaPalavrasPesquisa, tipoArvore t, int idDoc, int N){
-    apontadorCelPalavra aux;
-    apontadorCelPalavra celPesq;
+    tipoPalavra* aux;
+    tipoPalavra* celPesq;
 
     double totalPesos = 0;
 
     aux = listaPalavrasPesquisa.primeiro->prox;
     
     while (aux != NULL){
-        celPesq = pesquisaPatricia(aux->palavra.valPalavra, t);
+        celPesq = pesquisaPatricia(aux, t);
 
         if (celPesq == NULL){
-            printf("Palavra *%s* nao encontrada\n", aux->palavra.valPalavra);
+            printf("Palavra *%s* nao encontrada\n", aux->valPalavra);
             return 0;
             
         } else{
