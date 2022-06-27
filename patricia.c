@@ -49,7 +49,7 @@ tipoArvore insereEntre(tipoPalavra k, tipoArvore *t, int i)
   }
 }
 
-tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t){
+tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t){
     tipoPalavra palavra;
     inicializaPalavra(&palavra, valPalavra, idDoc);
     tipoArvore p;
@@ -78,7 +78,7 @@ tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t){
 }
 
 
-tipoPalavra pesquisa(char* palavra, tipoArvore t){
+tipoPalavra pesquisaPatricia(char* palavra, tipoArvore t){
     if (eExterno(t)){
         if (palavra == t->no.palavra.valPalavra) 
             return t->no.palavra;
@@ -86,16 +86,16 @@ tipoPalavra pesquisa(char* palavra, tipoArvore t){
     return;
     }
     if (palavra[t->no.nInterno.index] == t->no.nInterno.indexLetra) 
-        pesquisa(palavra, t->no.nInterno.esq);
+        pesquisaPatricia(palavra, t->no.nInterno.esq);
     else
-        pesquisa(palavra, t->no.nInterno.dir);
+        pesquisaPatricia(palavra, t->no.nInterno.dir);
 }
 
-int quantasPalavras(tipoArvore t, int idDoc){
+int quantasPalavrasPatricia(tipoArvore t, int idDoc){
     int num;
     if (eExterno(t))
         return buscaIdDoc(*t->no.palavra.listaPares, idDoc);
-    num += quantasPalavras(t->no.nInterno.esq, idDoc);
-    num += quantasPalavras(t->no.nInterno.dir, idDoc);
+    num += quantasPalavrasPatricia(t->no.nInterno.esq, idDoc);
+    num += quantasPalavrasPatricia(t->no.nInterno.dir, idDoc);
     return num;
 }

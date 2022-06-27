@@ -20,6 +20,6 @@ typedef struct tipoNo {
   } no;
 } tipoNo;
 
-tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t);
-tipoPalavra pesquisa(char* palavra, tipoArvore t);
-int quantasPalavras(tipoArvore t, int idDoc);
+tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t);
+tipoPalavra pesquisaPatricia(char* palavra, tipoArvore t);
+int quantasPalavrasPatricia(tipoArvore t, int idDoc);

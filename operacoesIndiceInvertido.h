@@ -32,6 +32,10 @@ void escrevePalavrasDocsHash(tipoVetPesos p, hashTablePalavras tabela, listaEnca
 
 void lerPalavrasInsereHash(char* arquivo, int idDoc, tipoVetPesos p, hashTablePalavras tabela, int tamTabela);
 
+void escrevePalavrasDocsPatricia(tipoArvore *t, listaEncadDocs listaDocs);
+
+void lerPalavrasInserePatricia(char* arquivo, int idDoc, tipoArvore *t);
+
 void lerArquivos(char* arquivo, listaEncadDocs* listaDocs);
 
 void atualizaListaLidos(listaEncadDocs listaEncadDocs);

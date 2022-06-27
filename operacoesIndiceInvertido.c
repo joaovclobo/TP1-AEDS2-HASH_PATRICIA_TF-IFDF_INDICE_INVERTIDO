@@ -65,6 +65,49 @@ void lerPalavrasInsereHash(char* arquivo, int idDoc, tipoVetPesos vetPesos, hash
     fclose(fp);
 }
 
+
+void escrevePalavrasDocsPatricia(tipoArvore *t, listaEncadDocs listaDocs){
+    apontadorCellDoc aux;
+
+    aux = listaDocs.primeiro->prox;
+
+    while (aux != NULL){
+        if (aux->doc.documentoLido == naoLido){
+            lerPalavrasInserePatricia(aux->doc.nomeDoc, aux->doc.idDoc, t);
+            printf("Inseriu no TAD patricia - As palavras do arquivo %s\n", aux->doc.nomeDoc);
+        }
+        aux = aux->prox;
+    }
+}
+
+void lerPalavrasInserePatricia(char* arquivo, int idDoc, tipoArvore *t){
+    FILE *fp;
+    char palavra[50];
+    fp = fopen(arquivo, "r");
+    
+    if(fp == NULL){
+        printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
+        return;
+        
+    } else{
+
+    while(fscanf(fp, "%50s", palavra) != EOF){
+
+        for(int i=0; palavra[i] != '\0'; i++){
+                palavra[i] = tolower(palavra[i]);
+
+                if ('a' > palavra[i] || palavra[i] > 'z'){
+                    strcpy(&palavra[i], &palavra[i + 1]);
+
+                }
+            }
+            inserePatricia(palavra, idDoc, t);
+            
+        }
+    }
+    fclose(fp);
+}
+
 void lerArquivos(char* arquivo, listaEncadDocs* listaDocs){
     FILE *fp, *fp2;
     int numArq;

@@ -26,6 +26,7 @@
 #include <math.h>
 
 #include "hashTablePalavras.h"
+#include "patricia.h"
 
 typedef enum docLido{
     lido,
