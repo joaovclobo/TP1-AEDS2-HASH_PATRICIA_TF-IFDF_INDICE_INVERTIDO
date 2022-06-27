@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2'
+make: Leaving directory '/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

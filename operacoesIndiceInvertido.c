@@ -18,6 +18,7 @@
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
+#include <math.h>
 #include "operacoesIndiceInvertido.h"
 
 /*------------------------------------------------------------------- Leitura de arquivos -------------------------------------------------------------------*/
@@ -280,7 +281,7 @@ void pesquisaTFIDFPatricia(tipoListaPalavras listaPalavrasPesquisa, listaEncadDo
 }
 
 double somatorioPesosPatricia(tipoListaPalavras listaPalavrasPesquisa, tipoArvore t, int idDoc, int N){
-    tipoPalavra* aux;
+    apontadorCelPalavra aux;
     tipoPalavra* celPesq;
 
     double totalPesos = 0;
@@ -288,14 +289,14 @@ double somatorioPesosPatricia(tipoListaPalavras listaPalavrasPesquisa, tipoArvor
     aux = listaPalavrasPesquisa.primeiro->prox;
     
     while (aux != NULL){
-        celPesq = pesquisaPatricia(aux, t);
+        celPesq = pesquisaPatricia(aux->palavra.valPalavra, t);
 
         if (celPesq == NULL){
-            printf("Palavra *%s* nao encontrada\n", aux->valPalavra);
+            printf("Palavra *%s* nao encontrada\n", aux->palavra.valPalavra);
             return 0;
             
         } else{
-            totalPesos += calculaPesoDeTJemi(celPesq->prox->palavra, idDoc, N);
+            totalPesos += calculaPesoDeTJemi(*celPesq, idDoc, N);
 
         }
         aux = aux->prox;
