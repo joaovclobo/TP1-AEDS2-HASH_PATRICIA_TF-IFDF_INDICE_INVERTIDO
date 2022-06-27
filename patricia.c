@@ -1,3 +1,23 @@
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------  
+
+    Universidade Federal De Viçosa - Campus Florestal
+    Trabalho prático 1 de Algorítimos e estrutura de dados 2
+    
+    Professora responsável: 
+        Glaucia Braga e Silva
+        
+    Integrantes do Gupo:
+        Caio Oliveira Almeida - 4237
+        Guilherme Augusto Schwann Wilke - 4685
+        João Vitor Chagas Lobo - 4693
+
+    Arquivo: 
+        listaEncadPares.c
+        Descrição do arquivo: Arquivo de código do TAD tipo lista encadeada de pares (qtde, idDoc)
+        Ultima modificação: 23/06 - Por: João Vitor Chagas Lobo
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
 #include "patricia.h"
 
 char letra(tipoPalavra k, int i){
@@ -55,7 +75,7 @@ tipoArvore insereEntre(tipoPalavra k, tipoArvore *t, int i)
   }
 }
 
-tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t){
+tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t){
     tipoPalavra* palavra = (tipoPalavra*) malloc(sizeof(tipoPalavra));
     inicializaPalavra(palavra, valPalavra, idDoc);
     tipoArvore p;
@@ -87,29 +107,25 @@ tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t){
 }
 
 
-tipoPalavra pesquisa(char palavra[50], tipoArvore t){
+tipoPalavra* pesquisaPatricia(char palavra[50], tipoArvore t){
     if (eExterno(t)){
         printf("%s", t->no.palavra.valPalavra);
         if (strcmp(palavra, t->no.palavra.valPalavra) == 0)
-            return t->no.palavra;
-        else printf("Elemento nao encontrado\n");
-        tipoPalavra* aux = (tipoPalavra*) malloc(sizeof(tipoPalavra));
-        inicializaPalavra(aux, t->no.palavra.valPalavra, 0);
-        return *aux;
+            return &t->no.palavra;
+        else
+            return NULL;
     }
     tipoPalavra* aux = (tipoPalavra*) malloc(sizeof(tipoPalavra));
     inicializaPalavra(aux, palavra, 0);
     if (letra(*aux, t->no.nInterno.index) == t->no.nInterno.indexLetra){
-        printf("nó interno: %c\n", t->no.nInterno.indexLetra);
         pesquisa(palavra, t->no.nInterno.dir);
     }
     else{
-        printf("nó interno: %c\n", t->no.nInterno.indexLetra);
         pesquisa(palavra, t->no.nInterno.esq);
     }
 }
 
-int quantasPalavras(tipoArvore t, int idDoc){
+int quantasPalavrasPatricia(tipoArvore t, int idDoc){
     int num = 0;
     if (eExterno(t)){
         return getQtde(*t->no.palavra.listaPares, idDoc);

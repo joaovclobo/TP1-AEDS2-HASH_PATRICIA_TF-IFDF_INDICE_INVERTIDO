@@ -243,3 +243,62 @@ void selecaoOrdena(tipoDocRelevancia *relevancias, int n){
         }
     }
 }
+
+void pesquisaTFIDFPatricia(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, tipoArvore t){
+    //variaveis para os loops
+    int N = listaDocs.qtdeDocs;
+    int ni;
+    int i = 0;
+    tipoDocRelevancia* relevancias = (tipoDocRelevancia*) malloc(N*sizeof(tipoDocRelevancia));
+    tipoDocRelevancia* docRelevTemp = (tipoDocRelevancia*) malloc(sizeof(tipoDocRelevancia));
+
+    apontadorCellDoc aux;
+
+    aux = listaDocs.primeiro->prox;
+
+    while (aux != NULL){ //Calula a relevancia para cada documento
+        
+        ni = quantasPalavrasPatricia(t, aux->doc.idDoc);
+        docRelevTemp->relevancia = somatorioPesosPatricia(listaPalavrasPesquisa, t, aux->doc.idDoc, N)/ni;
+        docRelevTemp->doc.idDoc = aux->doc.idDoc;
+        strcpy(docRelevTemp->doc.nomeDoc, aux->doc.nomeDoc);
+        
+        aux = aux->prox;
+
+        relevancias[i] = *docRelevTemp;
+        i++;
+
+    }
+    selecaoOrdena(relevancias, N-1);
+    
+    for (int j = 0; j < N; j++){
+        printf("Doc: %-3d (%s) Relevancia: %lf\n", relevancias[j].doc.idDoc, relevancias[j].doc.nomeDoc, relevancias[j].relevancia);
+
+    }
+    free(relevancias);
+    free(docRelevTemp);
+}
+
+double somatorioPesosPatricia(tipoListaPalavras listaPalavrasPesquisa, tipoArvore t, int idDoc, int N){
+    apontadorCelPalavra aux;
+    apontadorCelPalavra celPesq;
+
+    double totalPesos = 0;
+
+    aux = listaPalavrasPesquisa.primeiro->prox;
+    
+    while (aux != NULL){
+        celPesq = pesquisaPatricia(aux->palavra.valPalavra, t);
+
+        if (celPesq == NULL){
+            printf("Palavra *%s* nao encontrada\n", aux->palavra.valPalavra);
+            return 0;
+            
+        } else{
+            totalPesos += calculaPesoDeTJemi(celPesq->prox->palavra, idDoc, N);
+
+        }
+        aux = aux->prox;
+    }
+    return totalPesos;
+}

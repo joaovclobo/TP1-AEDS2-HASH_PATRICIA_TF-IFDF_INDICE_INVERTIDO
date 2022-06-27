@@ -49,3 +49,11 @@ double calculaPesoDeTJemi(tipoPalavra palavra, int idDoc, int N);
 double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela, int idDoc, int N);
 
 void selecaoOrdena(tipoDocRelevancia *relevancias, int n);
+
+/*------------------------------------------------------------------- Pesquisa Patricia -------------------------------------------------------------------*/
+
+void pesquisaTFIDFPatricia(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, tipoArvore t);
+
+double somatorioPesosPatricia(tipoListaPalavras listaPalavrasPesquisa, tipoArvore t, int idDoc, int N);
+
+void selecaoOrdena(tipoDocRelevancia *relevancias, int n);
