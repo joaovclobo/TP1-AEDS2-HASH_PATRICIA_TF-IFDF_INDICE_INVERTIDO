@@ -41,7 +41,7 @@ void flPalavrasVazia(tipoListaPalavras *listaPalvras);
 
 short listaPalavrasVazia(tipoListaPalavras listaPalvras);
 
-void geraVetPesos(tipoVetPesos vetPesos);                                      //Mudar nome do vetor de pesos
+void geraVetPesos(tipoVetPesos vetPesos);
 
 tipoIndice hashPalavra(char* valPalavra, tipoVetPesos vetPesos, int tamTabela);
 
@@ -60,8 +60,6 @@ apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos ve
 void imprimeListaPalavras(tipoListaPalavras listaPalvras);
 
 void imprimeHashTable(hashTablePalavras tabela, int tamTabela);
-
-void lerPalavra(char *p, int Tam);
 
 int palavrasUnicasDoc(hashTablePalavras tabela, int tamTabela, int idDoc);
 

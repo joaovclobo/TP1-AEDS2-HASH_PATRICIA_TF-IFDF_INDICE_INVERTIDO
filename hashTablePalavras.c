@@ -30,7 +30,7 @@ short listaPalavrasVazia(tipoListaPalavras listaPalvras){
   return (listaPalvras.primeiro == listaPalvras.ultimo);
 }
 
-void geraVetPesos(tipoVetPesos vetPesos){      //Mudar nome do vetor de pesos
+void geraVetPesos(tipoVetPesos vetPesos){
     int i;
 
     srand(13);
@@ -225,22 +225,4 @@ int palavrasUnicasDocI(tipoListaPalavras listaPalvras, int idDoc){
   }
   return conta;
 
-}
-
-void lerPalavra(char *p, int tam){ 
-  char c;
-  int i, j;
-
-  fflush(stdin);
-  j = 0;
-  while (((c = getchar()) != '\n') && j < tam - 1)
-    p[j++] = c;
-
-  p[j] = '\0';
-  while (c != '\n')
-    c = getchar();
-  /* Desconsiderar espacos ao final
-    da cadeia como ocorre em Pascal.*/
-  for (i = j - 1; (i >= 0 && p[i] == ' '); i--)
-    p[i] = '\0';
 }
