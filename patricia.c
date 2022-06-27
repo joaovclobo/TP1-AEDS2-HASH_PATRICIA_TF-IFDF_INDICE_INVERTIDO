@@ -112,7 +112,7 @@ tipoPalavra pesquisa(char palavra[50], tipoArvore t){
 int quantasPalavras(tipoArvore t, int idDoc){
     int num = 0;
     if (eExterno(t)){
-        return buscaIdDocQuant(*t->no.palavra.listaPares, idDoc);
+        return getQtde(*t->no.palavra.listaPares, idDoc);
     }
     num += quantasPalavras(t->no.nInterno.esq, idDoc);
     num += quantasPalavras(t->no.nInterno.dir, idDoc);
