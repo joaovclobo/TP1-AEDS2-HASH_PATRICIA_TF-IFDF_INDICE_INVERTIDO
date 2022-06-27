@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/main.dir/hashTablePalavras.c.o CMakeFiles/main.dir/tipoPalavra.c.o CMakeFiles/main.dir/listaEncadDocs.c.o CMakeFiles/main.dir/listaEncadPares.c.o CMakeFiles/main.dir/main.c.o CMakeFiles/main.dir/operacoesIndiceInvertido.c.o CMakeFiles/main.dir/patricia.c.o -o main  -lm 

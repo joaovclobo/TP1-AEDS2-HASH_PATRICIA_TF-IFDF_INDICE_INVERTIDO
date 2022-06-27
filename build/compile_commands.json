@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build",
+  "command": "/usr/bin/clang -g -std=gnu99 -o CMakeFiles/main.dir/hashTablePalavras.c.o -c /home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/hashTablePalavras.c",
+  "file": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/hashTablePalavras.c"
+},
+{
+  "directory": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build",
+  "command": "/usr/bin/clang -g -std=gnu99 -o CMakeFiles/main.dir/tipoPalavra.c.o -c /home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/tipoPalavra.c",
+  "file": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/tipoPalavra.c"
+},
+{
+  "directory": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build",
+  "command": "/usr/bin/clang -g -std=gnu99 -o CMakeFiles/main.dir/listaEncadDocs.c.o -c /home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/listaEncadDocs.c",
+  "file": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/listaEncadDocs.c"
+},
+{
+  "directory": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build",
+  "command": "/usr/bin/clang -g -std=gnu99 -o CMakeFiles/main.dir/listaEncadPares.c.o -c /home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/listaEncadPares.c",
+  "file": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/listaEncadPares.c"
+},
+{
+  "directory": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build",
+  "command": "/usr/bin/clang -g -std=gnu99 -o CMakeFiles/main.dir/main.c.o -c /home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/main.c",
+  "file": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/main.c"
+},
+{
+  "directory": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build",
+  "command": "/usr/bin/clang -g -std=gnu99 -o CMakeFiles/main.dir/operacoesIndiceInvertido.c.o -c /home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/operacoesIndiceInvertido.c",
+  "file": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/operacoesIndiceInvertido.c"
+},
+{
+  "directory": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build",
+  "command": "/usr/bin/clang -g -std=gnu99 -o CMakeFiles/main.dir/patricia.c.o -c /home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/patricia.c",
+  "file": "/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/patricia.c"
+}
+]

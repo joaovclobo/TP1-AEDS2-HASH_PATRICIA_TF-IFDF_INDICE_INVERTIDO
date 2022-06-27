@@ -1,0 +1,3 @@
+/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build/CMakeFiles/main.dir
+/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build/CMakeFiles/edit_cache.dir
+/home/guto7k/Documents/UFV-CDC/2022.1/AEDS2/tp01-AEDS2/build/CMakeFiles/rebuild_cache.dir
