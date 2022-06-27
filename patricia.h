@@ -21,5 +21,5 @@ typedef struct tipoNo {
 } tipoNo;
 
 tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t);
-tipoPalavra pesquisa(char* palavra, tipoArvore t);
+tipoPalavra pesquisa(char palavra[50], tipoArvore t);
 int quantasPalavras(tipoArvore t, int idDoc);

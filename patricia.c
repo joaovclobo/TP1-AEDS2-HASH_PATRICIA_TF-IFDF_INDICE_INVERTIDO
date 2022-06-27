@@ -12,13 +12,17 @@ short eExterno(tipoArvore p){
 }
 
 tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
-    tipoArvore p;
-    p = (tipoArvore)malloc(sizeof(tipoNo));
+    tipoArvore p = (tipoArvore)malloc(sizeof(tipoNo));
     p->nt = interno;
     p->no.nInterno.esq = *esq;
     p->no.nInterno.dir = *dir;
     p->no.nInterno.index = i;
-    p->no.nInterno.indexLetra = letra((*dir)->no.palavra, i);
+    tipoArvore aux = (tipoArvore)malloc(sizeof(tipoNo));
+    aux = p;
+    while (!eExterno(aux)){
+        aux = aux->no.nInterno.dir;
+    }
+    p->no.nInterno.indexLetra = letra(aux->no.palavra, i);
     printf("Debug no int esq %s | dir %s | index %d %c\n", (*esq)->no.palavra.valPalavra, (*dir)->no.palavra.valPalavra, i, p->no.nInterno.indexLetra);
     return p;
 } 
@@ -37,7 +41,7 @@ tipoArvore insereEntre(tipoPalavra k, tipoArvore *t, int i)
   if (eExterno(*t) || i < (*t)->no.nInterno.index){
     /* cria um novo no externo */
     p = criaNoExt(k);
-    if (letra(k, i) != (*t)->no.nInterno.indexLetra) 
+    if (letra(k, i) == (*t)->no.nInterno.indexLetra) 
         return (criaNoInt(i, t, &p));
     else
         return (criaNoInt(i, &p, t));
@@ -80,19 +84,26 @@ tipoArvore insere(char* valPalavra, int idDoc, tipoArvore *t){
 }
 
 
-tipoPalavra pesquisa(char* palavra, tipoArvore t){
+tipoPalavra pesquisa(char palavra[50], tipoArvore t){
     if (eExterno(t)){
-        if (palavra == t->no.palavra.valPalavra) 
+        printf("%s", t->no.palavra.valPalavra);
+        if (strcmp(palavra, t->no.palavra.valPalavra) == 0)
             return t->no.palavra;
         else printf("Elemento nao encontrado\n");
         tipoPalavra* aux = (tipoPalavra*) malloc(sizeof(tipoPalavra));
         inicializaPalavra(aux, t->no.palavra.valPalavra, 0);
         return *aux;
     }
-    if (palavra[t->no.nInterno.index - 1] == t->no.nInterno.indexLetra) 
+    tipoPalavra* aux = (tipoPalavra*) malloc(sizeof(tipoPalavra));
+    inicializaPalavra(aux, palavra, 0);
+    if (letra(*aux, t->no.nInterno.index) == t->no.nInterno.indexLetra){
+        printf("nó interno: %c\n", t->no.nInterno.indexLetra);
         pesquisa(palavra, t->no.nInterno.dir);
-    else
+    }
+    else{
+        printf("nó interno: %c\n", t->no.nInterno.indexLetra);
         pesquisa(palavra, t->no.nInterno.esq);
+    }
 }
 
 int quantasPalavras(tipoArvore t, int idDoc){
