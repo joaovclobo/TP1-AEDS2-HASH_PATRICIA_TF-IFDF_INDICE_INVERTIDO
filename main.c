@@ -57,7 +57,7 @@ int main(){
         
         switch (opcao){
 
-        case 1:
+        case 1:;
             printf("Digite o nome do arquivo de entrada com os textos a serem indexados com sua extensao (Ex.: entrada.txt): ");
             scanf("%s", arqEntrada);
 
@@ -66,10 +66,8 @@ int main(){
 
             break;
 
-        case 2:
+        case 2:;
             printf("Gerando indice invertido...\n");
-
-            //Colocar confimação e dados (tempo e memória) para cada TAD
 
             escrevePalavrasDocsHash(vetPesos, tabela1, *listaDocs, M1);
             putchar('\n');
@@ -85,8 +83,8 @@ int main(){
             printf("\nFim da criacao do indice invertido\n");
             break;
 
-        case 3:
-            //Função pra imprimir os 2 TADs em ordem alfabética
+        case 3:;
+
             imprimeHashTable(tabela1, M1);
             putchar('\n');
             imprimeHashTable(tabela2, M2);
@@ -96,7 +94,8 @@ int main(){
             imprimePatricia(*arvore);
             break;
 
-        case 4:
+        case 4:;
+        
             tipoListaPalavras* listaPalavrasPesquisa = (tipoListaPalavras*) malloc(sizeof(tipoListaPalavras));
 
             flPalavrasVazia(listaPalavrasPesquisa);
@@ -130,10 +129,10 @@ int main(){
             free(listaPalavrasPesquisa);
             break;
 
-        case 0:
+        case 0:;
             break;
 
-        default:
+        default:;
             printf("ERRO: Opcao invalida!\n");
             break;
             

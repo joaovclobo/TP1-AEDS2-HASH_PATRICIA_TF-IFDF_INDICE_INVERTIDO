@@ -13,7 +13,7 @@
     Arquivo:
         hashTablePalavras.h
         Descrição do arquivo: Cabeçalho do TAD hash table de palavras
-        Ultima modificação: 22/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 27/06 - Por: João Vitor Chagas Lobo
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -37,11 +37,13 @@ typedef struct tipoListaPalavras{
 typedef tipoListaPalavras* hashTablePalavras;
 
 
+/*------------------------------------------------------------------- Funções da hash table -------------------------------------------------------------------*/
+
 void flPalavrasVazia(tipoListaPalavras *listaPalvras);  
 
 short listaPalavrasVazia(tipoListaPalavras listaPalvras);
 
-void geraVetPesos(tipoVetPesos vetPesos);                                      //Mudar nome do vetor de pesos
+void geraVetPesos(tipoVetPesos vetPesos);
 
 tipoIndice hashPalavra(char* valPalavra, tipoVetPesos vetPesos, int tamTabela);
 
@@ -51,20 +53,20 @@ void insereHashTablePalavrasI(char* valPalavra, int idDoc, tipoListaPalavras *li
 
 void insereHashTablePalavras(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela);
 
-void insereListaPalavras(tipoPalavra palavra, tipoListaPalavras *listaPalvras);
-
-void insereListaOrdenadaTemp(tipoListaPalavras listaPalvrasHash, tipoListaPalavras* listaOrdenadaTemp);
-
 apontadorCelPalavra pesquisaPalavra(char* valPalavra, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela);
 
-void imprimeListaPalavras(tipoListaPalavras listaPalvras);
-
 void imprimeHashTable(hashTablePalavras tabela, int tamTabela);
-
-void lerPalavra(char *p, int Tam);
 
 int palavrasUnicasDoc(hashTablePalavras tabela, int tamTabela, int idDoc);
 
 int palavrasUnicasDocI(tipoListaPalavras listaPalvras, int idDoc);
+
+/*------------------------------------------------------------------- Funções exclusivas para lista encadeada -------------------------------------------------------------------*/
+
+void insereListaPalavras(tipoPalavra palavra, tipoListaPalavras *listaPalvras);
+
+void insereListaOrdenadaTemp(tipoListaPalavras listaPalvrasHash, tipoListaPalavras* listaOrdenadaTemp);
+
+void imprimeListaPalavras(tipoListaPalavras listaPalvras);
 
 void imprimeListaPalavrasValores(tipoListaPalavras listaPalvras);
