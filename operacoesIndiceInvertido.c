@@ -14,7 +14,7 @@
     Arquivo: 
         operacoesIndiceInvertido.c
         Descrição do arquivo: Arquivo que contém as funções de montagem e manipulação do indice invertido
-        Ultima modificação: 24/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 27/06 - Por: Guilherme Augusto Schwann Wilke
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 

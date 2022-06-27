@@ -14,7 +14,7 @@
     Arquivo: 
         operacoesIndiceInvertido.c
         Descrição do arquivo: Arquivo do arquivo operacoesIndiceInvertido.h
-        Ultima modificação: 24/06 - Por: João Vitor Chagas Lobo
+        Ultima modificação: 27/06 - Por: Guilherme Augusto Schwann Wilke
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -44,16 +44,14 @@ void atualizaListaLidos(listaEncadDocs listaEncadDocs);
 
 void pesquisaTFIDFHash(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, hashTablePalavras tabela, tipoVetPesos vetPesos, int tamTabela);
 
-double calculaPesoDeTJemi(tipoPalavra palavra, int idDoc, int N);
+double calculaPesoDeTJemi(tipoPalavra palavra, int idDoc, int N); // Função usada tanto para o cálculo da relevância pela tabela Hash quanto pela arvore patricia 
 
 double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela, int idDoc, int N);
 
-void selecaoOrdena(tipoDocRelevancia *relevancias, int n);
+void selecaoOrdena(tipoDocRelevancia *relevancias, int n); // Função usada tanto para o cálculo da relevância pela tabela Hash quanto pela arvore patricia 
 
 /*------------------------------------------------------------------- Pesquisa Patricia -------------------------------------------------------------------*/
 
 void pesquisaTFIDFPatricia(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, tipoArvore t);
 
 double somatorioPesosPatricia(tipoListaPalavras listaPalavrasPesquisa, tipoArvore t, int idDoc, int N);
-
-void selecaoOrdena(tipoDocRelevancia *relevancias, int n);

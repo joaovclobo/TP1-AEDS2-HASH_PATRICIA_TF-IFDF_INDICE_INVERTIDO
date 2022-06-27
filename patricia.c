@@ -12,14 +12,15 @@
         João Vitor Chagas Lobo - 4693
 
     Arquivo: 
-        listaEncadPares.c
-        Descrição do arquivo: Arquivo de código do TAD tipo lista encadeada de pares (qtde, idDoc)
-        Ultima modificação: 23/06 - Por: João Vitor Chagas Lobo
+        patricia.c
+        Descrição do arquivo: Arquivo de código do TAD árvore patricia;
+        Ultima modificação: 27/06 - Por: Guilherme Augusto Schwann Wilke
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 #include "patricia.h"
 
+// Retorna o i-ésimo caractere da palavra, caso esse número exceda o tamanho da palavra, retorna um espaço em branco;
 char letra(tipoPalavra k, int i){
     if (strlen(k.valPalavra) < i)
         return ' ';
@@ -27,10 +28,10 @@ char letra(tipoPalavra k, int i){
 }
 
 short eExterno(tipoArvore p){
-    /* Verifica se p^ e nodo externo */
     return (p->nt == externo);
 }
 
+//Função que cria nó externo;
 tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
     tipoArvore p = (tipoArvore)malloc(sizeof(tipoNo));
     p->nt = interno;
@@ -38,11 +39,19 @@ tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
     p->no.nInterno.dir = *dir;
     p->no.nInterno.index = i;
     tipoArvore aux = (tipoArvore)malloc(sizeof(tipoNo));
+    tipoArvore aux2 = (tipoArvore)malloc(sizeof(tipoNo));
     aux = p;
+    aux2 = p;
     while (!eExterno(aux)){
         aux = aux->no.nInterno.dir;
     }
-    p->no.nInterno.indexLetra = letra(aux->no.palavra, i);
+    while (!eExterno(aux2)){
+        aux = aux->no.nInterno.esq;
+    }
+    if (letra(aux2->no.palavra, i) > letra(aux->no.palavra, i))
+        p->no.nInterno.indexLetra = letra(aux2->no.palavra, i);
+    else
+        p->no.nInterno.indexLetra = letra(aux->no.palavra, i);
     printf("Debug no int esq %s | dir %s | index %d %c\n", (*esq)->no.palavra.valPalavra, (*dir)->no.palavra.valPalavra, i, p->no.nInterno.indexLetra);
     return p;
 } 
@@ -133,4 +142,20 @@ int quantasPalavrasPatricia(tipoArvore t, int idDoc){
     num += quantasPalavras(t->no.nInterno.esq, idDoc);
     num += quantasPalavras(t->no.nInterno.dir, idDoc);
     return num;
+}
+
+void imprimePatriciaI(tipoArvore t){
+    if (t == NULL)
+        return;
+    if (eExterno(t)){
+        imprimePalavra(t->no.palavra);
+        return;
+    }
+    imprimePatriciaI(t->no.nInterno.esq);
+    imprimePatriciaI(t->no.nInterno.dir);
+}
+
+void imprimePatricia(tipoArvore t){
+    printf("Árvore patricia em ordem alfabetica:\n");
+    imprimePatriciaI(t);
 }

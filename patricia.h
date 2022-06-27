@@ -12,9 +12,9 @@
         João Vitor Chagas Lobo - 4693
 
     Arquivo: 
-        listaEncadPares.c
-        Descrição do arquivo: Arquivo de código do TAD tipo lista encadeada de pares (qtde, idDoc)
-        Ultima modificação: 23/06 - Por: João Vitor Chagas Lobo
+        patricia.h
+        Descrição do arquivo: Cabeçalho do TAD árvore patricia;
+        Ultima modificação: 27/06 - Por: Guilherme Augusto Schwann Wilke
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -41,5 +41,9 @@ typedef struct tipoNo {
 } tipoNo;
 
 tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t);
+
 tipoPalavra* pesquisaPatricia(char palavra[50], tipoArvore t);
+
 int quantasPalavrasPatricia(tipoArvore t, int idDoc);
+
+void imprimePatricia(tipoArvore t);

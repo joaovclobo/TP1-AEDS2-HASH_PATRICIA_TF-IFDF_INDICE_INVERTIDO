@@ -18,7 +18,7 @@
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
-#include "operacoesIndiceInvertido.c"
+#include "operacoesIndiceInvertido.h"
 
 #define M1 37
 #define M2 677
@@ -28,6 +28,8 @@ int main(){
     hashTablePalavras tabela1 = (hashTablePalavras) malloc(M1*sizeof(tipoListaPalavras));
     hashTablePalavras tabela2 = (hashTablePalavras) malloc(M2*sizeof(tipoListaPalavras));
     hashTablePalavras tabela3 = (hashTablePalavras) malloc(M3*sizeof(tipoListaPalavras));
+
+    tipoArvore* arvore;
     
     int opcao;
     char valPalavraPesq[tamMaxPalavra];
@@ -42,6 +44,8 @@ int main(){
     criaHashTablePalavras(tabela2, M2);
     criaHashTablePalavras(tabela3, M3);
     geraVetPesos(vetPesos);
+
+    arvore = NULL;
 
     printf("\n\n|----------------- Universidade Federal De Vicosa - Campus Florestal -----------------|\n|------------- Trabalho pratico 1 de Algoritimos e estrutura de dados 2 -----------------|\n\n");
     printf("Professora responsavel:\n    Glaucia Braga e Silva\n\nIntegrantes do Gupo:\n    Caio Oliveira Almeida - 4237\n    Guilherme Augusto Schwann Wilke - 4685\n    Joao Vitor Chagas Lobo - 4693\n\n\n");
@@ -73,6 +77,8 @@ int main(){
             putchar('\n');
             escrevePalavrasDocsHash(vetPesos, tabela3, *listaDocs, M3);
             putchar('\n');
+            escrevePalavrasDocsPatricia(arvore, *listaDocs);
+            putchar('\n');
 
             atualizaListaLidos(*listaDocs);
             imprimeListaDocs(*listaDocs);
@@ -86,6 +92,8 @@ int main(){
             imprimeHashTable(tabela2, M2);
             putchar('\n');
             imprimeHashTable(tabela3, M3);
+            putchar('\n');
+            imprimePatricia(*arvore);
             break;
 
         case 4:
@@ -116,6 +124,8 @@ int main(){
             pesquisaTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela2, vetPesos, M2);
             printf("\nResultado da pesquisa no TAD hash com M = %d :\n", M3);
             pesquisaTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela3, vetPesos, M3);
+            printf("\nResultado da pesquisa no TAD árvore patricia :\n");
+            pesquisaTFIDFPatricia(*listaPalavrasPesquisa, *listaDocs, *arvore);
 
             free(listaPalavrasPesquisa);
             break;
