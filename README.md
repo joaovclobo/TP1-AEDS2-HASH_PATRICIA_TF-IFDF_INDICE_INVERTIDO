@@ -18,6 +18,7 @@ Arquivo:
 
 Instruções para execução:
 
-    - Copiar os textos da pasta /textos para o mesma pasta que estiver o código
-    - Compilar o código utilizando o arquivo "makefile"
-    - Demais instruções para execução do código serão exibidos durane a execução do programa
+    - Copiar os textos de entrada da pasta /textos para o mesma pasta que estiver o código
+    - Compilar o código abrindo o terminal na pasta dos arquivos de codigo e executando o seguinte comando utilizando o software CMake "cmake CMakeLists.txt" e depois "make all"
+    - Executar o arquivo ./main
+    - Demais instruções para execução do código serão exibidas durane a execução do programa

@@ -41,31 +41,25 @@ void escrevePalavrasDocsHash(tipoVetPesos vetPesos, hashTablePalavras tabela, li
 void lerPalavrasInsereHash(char* arquivo, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela){
     FILE *fp;
     char palavra[50];
-    char * path = strcat("textos/", arquivo);
-    fp = fopen(path, "r");
+    fp = fopen(arquivo, "r");
     
     if(fp == NULL){
-        printf("ERRO: Arquivo %s nao encontrado!\n", arquivo);
+        printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
         return;
         
     } else{
 
     while(fscanf(fp, "%50s", palavra) != EOF){
 
-        int len = strlen(palavra);
-
-        for(int i=0; i<len; i++){
+        for(int i=0; palavra[i] != '\0'; i++){
                 palavra[i] = tolower(palavra[i]);
 
                 if ('a' > palavra[i] || palavra[i] > 'z'){
-                    for(int j=i; j<len; j++){
-                        palavra[j] = palavra[j+1];
-                    }
-                    len--;
-                    i--;
+                    strcpy(&palavra[i], &palavra[i + 1]);
+
                 }
             }
-        insereHashTablePalavras(palavra, idDoc, vetPesos, tabela, tamTabela);
+            insereHashTablePalavras(palavra, idDoc, vetPesos, tabela, tamTabela);
             
         }
     }
@@ -90,43 +84,35 @@ void escrevePalavrasDocsPatricia(tipoArvore *t, listaEncadDocs listaDocs){
 void lerPalavrasInserePatricia(char* arquivo, int idDoc, tipoArvore *t){
     FILE *fp;
     char palavra[50];
-    char * path = strcat("textos/", arquivo);
-    fp = fopen(path, "r");
-    
+    fp = fopen(arquivo, "r");
     if(fp == NULL){
-        printf("ERRO: Arquivo %s nao encontrado!\n", arquivo);
+        printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
         return;
         
     } else{
 
     while(fscanf(fp, "%50s", palavra) != EOF){
 
-        int len = strlen(palavra);
-
-        for(int i=0; i<len; i++){
+        for(int i=0; palavra[i] != '\0'; i++){
                 palavra[i] = tolower(palavra[i]);
 
                 if ('a' > palavra[i] || palavra[i] > 'z'){
-                    for(int j=i; j<len; j++){
-                        palavra[j] = palavra[j+1];
-                    }
-                    len--;
-                    i--;
+                    strcpy(&palavra[i], &palavra[i + 1]);
+
                 }
             }
-        *t = inserePatricia(palavra, idDoc, t);
+            *t = inserePatricia(palavra, idDoc, t);
         }
     }
     fclose(fp);
 }
 
-
 void lerArquivos(char* arquivo, listaEncadDocs* listaDocs){
     FILE *fp, *fp2;
     int numArq;
     char nomeArquivo[100];
-    char * path = strcat("textos/", arquivo);
-    fp = fopen(path, "r");
+
+    fp = fopen(arquivo, "r");
     
     if (fp == NULL){
       printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
@@ -196,7 +182,7 @@ void pesquisaTFIDFHash(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs l
         i++;
 
     }
-    selecaoOrdena(relevancias, N-1);
+    insercaoOrdena(relevancias, N-1);
     
     for (int j = 0; j < N; j++){
         printf("Doc: %-3d (%s) Relevancia: %lf\n", relevancias[j].doc.idDoc, relevancias[j].doc.nomeDoc, relevancias[j].relevancia);
@@ -239,7 +225,7 @@ double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetP
 void insercaoOrdena(tipoDocRelevancia *relevancias, int tam){
    int i, j = 0;
    tipoDocRelevancia x;
- 
+
    for (i=2; i<=tam; i++){
        x = relevancias[i];
        j=i-1;
@@ -277,7 +263,7 @@ void pesquisaTFIDFPatricia(tipoListaPalavras listaPalavrasPesquisa, listaEncadDo
         i++;
 
     }
-    selecaoOrdena(relevancias, N-1);
+    insercaoOrdena(relevancias, N-1);
     
     for (int j = 0; j < N; j++){
         printf("Doc: %-3d (%s) Relevancia: %lf\n", relevancias[j].doc.idDoc, relevancias[j].doc.nomeDoc, relevancias[j].relevancia);
