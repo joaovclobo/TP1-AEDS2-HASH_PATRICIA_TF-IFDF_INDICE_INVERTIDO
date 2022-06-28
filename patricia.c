@@ -49,7 +49,6 @@ tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
         aux2 = aux2->no.nInterno.esq;
     }
     p->no.nInterno.indexLetra = letra(aux->no.palavra, i);
-    nInterno.indexLetra);
     return p;
 } 
 
