@@ -91,7 +91,6 @@ int main(){
             putchar('\n');
             imprimeHashTable(tabela3, M3);
             putchar('\n');
-            printf("debug\n");
             imprimePatricia(arvore);
             break;
 
@@ -116,6 +115,7 @@ int main(){
                 scanf("%s", valPalavraPesq);                
                 
             }
+            printf("Palavras pesquisasdas:\n");
             imprimeListaPalavrasValores(*listaPalavrasPesquisa);
 
             printf("\nResultado da pesquisa no TAD hash com M = %d :\n", M1);

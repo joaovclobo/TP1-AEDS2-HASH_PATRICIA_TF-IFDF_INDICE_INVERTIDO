@@ -41,25 +41,31 @@ void escrevePalavrasDocsHash(tipoVetPesos vetPesos, hashTablePalavras tabela, li
 void lerPalavrasInsereHash(char* arquivo, int idDoc, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela){
     FILE *fp;
     char palavra[50];
-    fp = fopen(arquivo, "r");
+    char * path = strcat("textos/", arquivo);
+    fp = fopen(path, "r");
     
     if(fp == NULL){
-        printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
+        printf("ERRO: Arquivo %s nao encontrado!\n", arquivo);
         return;
         
     } else{
 
     while(fscanf(fp, "%50s", palavra) != EOF){
 
-        for(int i=0; palavra[i] != '\0'; i++){
+        int len = strlen(palavra);
+
+        for(int i=0; i<len; i++){
                 palavra[i] = tolower(palavra[i]);
 
                 if ('a' > palavra[i] || palavra[i] > 'z'){
-                    strcpy(&palavra[i], &palavra[i + 1]);
-
+                    for(int j=i; j<len; j++){
+                        palavra[j] = palavra[j+1];
+                    }
+                    len--;
+                    i--;
                 }
             }
-            insereHashTablePalavras(palavra, idDoc, vetPesos, tabela, tamTabela);
+        insereHashTablePalavras(palavra, idDoc, vetPesos, tabela, tamTabela);
             
         }
     }
@@ -84,35 +90,43 @@ void escrevePalavrasDocsPatricia(tipoArvore *t, listaEncadDocs listaDocs){
 void lerPalavrasInserePatricia(char* arquivo, int idDoc, tipoArvore *t){
     FILE *fp;
     char palavra[50];
-    fp = fopen(arquivo, "r");
+    char * path = strcat("textos/", arquivo);
+    fp = fopen(path, "r");
+    
     if(fp == NULL){
-        printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
+        printf("ERRO: Arquivo %s nao encontrado!\n", arquivo);
         return;
         
     } else{
 
     while(fscanf(fp, "%50s", palavra) != EOF){
 
-        for(int i=0; palavra[i] != '\0'; i++){
+        int len = strlen(palavra);
+
+        for(int i=0; i<len; i++){
                 palavra[i] = tolower(palavra[i]);
 
                 if ('a' > palavra[i] || palavra[i] > 'z'){
-                    strcpy(&palavra[i], &palavra[i + 1]);
-
+                    for(int j=i; j<len; j++){
+                        palavra[j] = palavra[j+1];
+                    }
+                    len--;
+                    i--;
                 }
             }
-            *t = inserePatricia(palavra, idDoc, t);
+        *t = inserePatricia(palavra, idDoc, t);
         }
     }
     fclose(fp);
 }
 
+
 void lerArquivos(char* arquivo, listaEncadDocs* listaDocs){
     FILE *fp, *fp2;
     int numArq;
     char nomeArquivo[100];
-
-    fp = fopen(arquivo, "r");
+    char * path = strcat("textos/", arquivo);
+    fp = fopen(path, "r");
     
     if (fp == NULL){
       printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
@@ -193,7 +207,6 @@ void pesquisaTFIDFHash(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs l
 }
 
 double calculaPesoDeTJemi(tipoPalavra palavra, int idDoc, int N){
-    double logN = log(N);
     int dj = contaRepsPalavra(palavra, &dj);
     int fj = getQtdePalavra(palavra, idDoc);
     return (fj * ((log2(N))/dj));
@@ -223,24 +236,20 @@ double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetP
     return totalPesos;
 }
 
-void selecaoOrdena(tipoDocRelevancia *relevancias, int n){
-    int i, j, Min;
-    tipoDocRelevancia x;
-
-    for (i = 1; i <= n - 1; i++){
-        Min = i;
-
-        for (j = i + 1; j <= n; j++){
-            if (relevancias[j].relevancia > relevancias[Min].relevancia){
-                Min = j;
-
-            }
-        x = relevancias[Min];
-        relevancias[Min] = relevancias[i];
-        relevancias[i] = x;
-
-        }
-    }
+void insercaoOrdena(tipoDocRelevancia *relevancias, int tam){
+   int i, j = 0;
+   tipoDocRelevancia x;
+ 
+   for (i=2; i<=tam; i++){
+       x = relevancias[i];
+       j=i-1;
+       relevancias[0] = x;
+       while (x.relevancia > relevancias[j].relevancia){
+           relevancias[j+1] = relevancias[j];
+           j--;
+       }
+   }
+   relevancias[j+1] = x;
 }
 
 void pesquisaTFIDFPatricia(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, tipoArvore t){
