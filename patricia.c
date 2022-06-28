@@ -35,6 +35,7 @@ short eExterno(tipoArvore p){
 tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
     tipoArvore p = (tipoArvore)malloc(sizeof(tipoNo));
     p->nt = interno;
+    printf("debug TESTE\n");
     p->no.nInterno.esq = *esq;
     p->no.nInterno.dir = *dir;
     p->no.nInterno.index = i;
@@ -46,7 +47,7 @@ tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
         aux = aux->no.nInterno.dir;
     }
     while (!eExterno(aux2)){
-        aux = aux->no.nInterno.esq;
+        aux2 = aux2->no.nInterno.esq;
     }
     if (letra(aux2->no.palavra, i) > letra(aux->no.palavra, i))
         p->no.nInterno.indexLetra = letra(aux2->no.palavra, i);
@@ -59,9 +60,11 @@ tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
 
 tipoArvore criaNoExt(tipoPalavra k){
     tipoArvore p;
+    printf("debug criou no externo\n");
     p = (tipoArvore)malloc(sizeof(tipoNo));
     p->nt = externo;
     p->no.palavra = k;
+    printf("debug ertorna no externo\n");
     return p;
 }  
 
@@ -70,6 +73,7 @@ tipoArvore insereEntre(tipoPalavra k, tipoArvore *t, int i)
   if (eExterno(*t) || i < (*t)->no.nInterno.index){
     /* cria um novo no externo */
     p = criaNoExt(k);
+    printf("debug TA VINDO O INTERNO\n");
     if (letra(k, i) == (*t)->no.nInterno.indexLetra) 
         return (criaNoInt(i, t, &p));
     else
@@ -93,6 +97,7 @@ tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t){
         return (criaNoExt(*palavra));
     else {
         p = *t;
+        printf("debug passou do null\n");
         while (!eExterno(p)){
             if (letra(*palavra, p->no.nInterno.index) != p->no.nInterno.indexLetra)
                 p = p->no.nInterno.esq;
@@ -101,13 +106,20 @@ tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t){
         }
         /* acha o primeiro bit diferente */
         i = 1;
-        while ((i <= tamMaxPalavra) && (letra(*palavra, i) == letra(p->no.palavra, i))) 
+        while ((i <= tamMaxPalavra) && (letra(*palavra, i) == letra(p->no.palavra, i))){
             i++;
+        }
+        printf("%d", i);
         if (i > tamMaxPalavra){
-            if(buscaIdDoc(*palavra->listaPares, idDoc))
+            printf("debug AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+            if(buscaIdDoc(*p->no.palavra.listaPares, idDoc) == 1){
                 aumentaQtdePar(&(*t)->no.palavra, idDoc);
-            else
+                printf("asdasd");
+            }
+            else{
                 insereNovoIdDoc(&(*t)->no.palavra, idDoc);
+                printf("NOVO ID DOC");
+            }
             return (*t);
         } 
         else
@@ -151,6 +163,7 @@ void imprimePatriciaI(tipoArvore t){
         imprimePalavra(t->no.palavra);
         return;
     }
+    printf("debug\n");
     imprimePatriciaI(t->no.nInterno.esq);
     imprimePatriciaI(t->no.nInterno.dir);
 }

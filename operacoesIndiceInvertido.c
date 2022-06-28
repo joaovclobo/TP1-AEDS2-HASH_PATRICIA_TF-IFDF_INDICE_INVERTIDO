@@ -74,6 +74,7 @@ void escrevePalavrasDocsPatricia(tipoArvore *t, listaEncadDocs listaDocs){
 
     while (aux != NULL){
         if (aux->doc.documentoLido == naoLido){
+            printf("debug\n");
             lerPalavrasInserePatricia(aux->doc.nomeDoc, aux->doc.idDoc, t);
             printf("Inseriu no TAD patricia - As palavras do arquivo %s\n", aux->doc.nomeDoc);
         }
@@ -85,7 +86,6 @@ void lerPalavrasInserePatricia(char* arquivo, int idDoc, tipoArvore *t){
     FILE *fp;
     char palavra[50];
     fp = fopen(arquivo, "r");
-    
     if(fp == NULL){
         printf("ERRO: Arquivo *%s* nao encontrado!\n", arquivo);
         return;
@@ -102,8 +102,9 @@ void lerPalavrasInserePatricia(char* arquivo, int idDoc, tipoArvore *t){
 
                 }
             }
-            inserePatricia(palavra, idDoc, t);
-            
+            printf("INSEREEEEEEE\n");
+            *t = inserePatricia(palavra, idDoc, t);
+            printf("debug saiu dali\n");
         }
     }
     fclose(fp);

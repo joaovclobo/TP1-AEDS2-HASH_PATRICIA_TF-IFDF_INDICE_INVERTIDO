@@ -29,7 +29,7 @@ int main(){
     hashTablePalavras tabela2 = (hashTablePalavras) malloc(M2*sizeof(tipoListaPalavras));
     hashTablePalavras tabela3 = (hashTablePalavras) malloc(M3*sizeof(tipoListaPalavras));
 
-    tipoArvore* arvore;
+    tipoArvore arvore;
     
     int opcao;
     char valPalavraPesq[tamMaxPalavra];
@@ -75,7 +75,7 @@ int main(){
             putchar('\n');
             escrevePalavrasDocsHash(vetPesos, tabela3, *listaDocs, M3);
             putchar('\n');
-            escrevePalavrasDocsPatricia(arvore, *listaDocs);
+            escrevePalavrasDocsPatricia(&arvore, *listaDocs);
             putchar('\n');
 
             atualizaListaLidos(*listaDocs);
@@ -91,7 +91,8 @@ int main(){
             putchar('\n');
             imprimeHashTable(tabela3, M3);
             putchar('\n');
-            imprimePatricia(*arvore);
+            printf("debug\n");
+            imprimePatricia(arvore);
             break;
 
         case 4:;
@@ -124,7 +125,7 @@ int main(){
             printf("\nResultado da pesquisa no TAD hash com M = %d :\n", M3);
             pesquisaTFIDFHash(*listaPalavrasPesquisa, *listaDocs, tabela3, vetPesos, M3);
             printf("\nResultado da pesquisa no TAD árvore patricia :\n");
-            pesquisaTFIDFPatricia(*listaPalavrasPesquisa, *listaDocs, *arvore);
+            pesquisaTFIDFPatricia(*listaPalavrasPesquisa, *listaDocs, arvore);
 
             free(listaPalavrasPesquisa);
             break;
