@@ -48,8 +48,7 @@ double calculaPesoDeTJemi(tipoPalavra palavra, int idDoc, int N); // Função us
 
 double somatorioPesos(tipoListaPalavras listaPalavrasPesquisa, tipoVetPesos vetPesos, hashTablePalavras tabela, int tamTabela, int idDoc, int N);
 
-void selecaoOrdena(tipoDocRelevancia *relevancias, int n); // Função usada tanto para o cálculo da relevância pela tabela Hash quanto pela arvore patricia 
-
+void insercaoOrdena(tipoDocRelevancia *relevancias, int tam); // Função usada tanto para o cálculo da relevância pela tabela Hash quanto pela arvore patricia
 /*------------------------------------------------------------------- Pesquisa Patricia -------------------------------------------------------------------*/
 
 void pesquisaTFIDFPatricia(tipoListaPalavras listaPalavrasPesquisa, listaEncadDocs listaDocs, tipoArvore t);
