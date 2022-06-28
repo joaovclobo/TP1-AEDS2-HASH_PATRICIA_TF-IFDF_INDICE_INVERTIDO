@@ -49,7 +49,7 @@ tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
         aux2 = aux2->no.nInterno.esq;
     }
     p->no.nInterno.indexLetra = letra(aux->no.palavra, i);
-    printf("Debug no int esq %s | dir %s | index %d %c\n", (*esq)->no.palavra.valPalavra, (*dir)->no.palavra.valPalavra, i, p->no.nInterno.indexLetra);
+    nInterno.indexLetra);
     return p;
 } 
 
@@ -101,7 +101,6 @@ tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t){
         while ((i <= tamMaxPalavra) && (letra(*palavra, i) == letra(p->no.palavra, i))){
             i++;
         }
-        printf("%d", i);
         tipoArvore* auxx = t;
         if (i > tamMaxPalavra){
             while (!eExterno(*auxx)){
@@ -113,12 +112,10 @@ tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t){
             if(buscaIdDoc(*p->no.palavra.listaPares, idDoc) == 1){
                 aumentaQtdePar(&p->no.palavra, idDoc);
                 (*auxx)->no.palavra.listaPares = p->no.palavra.listaPares;
-                printf("asdasd");
             }
             else{
                 insereNovoIdDoc(&p->no.palavra, idDoc);
                 (*auxx)->no.palavra.listaPares = p->no.palavra.listaPares;
-                printf("NOVO ID DOC");
             }
             return (*t);
         } 
@@ -130,7 +127,6 @@ tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t){
 
 tipoPalavra* pesquisaPatricia(char palavra[50], tipoArvore t){
     if (eExterno(t)){
-        printf("%s", t->no.palavra.valPalavra);
         if (strcmp(palavra, t->no.palavra.valPalavra) == 0)
             return &t->no.palavra;
         else
@@ -168,6 +164,6 @@ void imprimePatriciaI(tipoArvore t){
 }
 
 void imprimePatricia(tipoArvore t){
-    printf("Árvore patricia em ordem alfabetica:\n");
+    printf("Árvore patricia:\n");
     imprimePatriciaI(t);
 }
