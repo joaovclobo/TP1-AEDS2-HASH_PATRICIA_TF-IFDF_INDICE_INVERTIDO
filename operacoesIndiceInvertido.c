@@ -101,7 +101,6 @@ void lerPalavrasInserePatricia(char* arquivo, int idDoc, tipoArvore *t){
 
                 }
             }
-            printf("INSEREEEEEEE\n");
             *t = inserePatricia(palavra, idDoc, t);
         }
     }
