@@ -7,9 +7,9 @@ Professora responsável:
     
 Integrantes do Gupo:
 
-    - Caio Oliveira Almeida - 4237
-    - Guilherme Augusto Schwann Wilke - 4685
-    - João Vitor Chagas Lobo - 4693
+    - Caio Almeida - 4237
+    - Guilherme Wilke - 4685
+    - João Lobo - 4693
     
 Arquivo: 
 
