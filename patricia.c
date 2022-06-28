@@ -33,27 +33,28 @@ short eExterno(tipoArvore p){
 
 //Função que cria nó externo;
 tipoArvore criaNoInt(int i, tipoArvore *esq,  tipoArvore *dir){
+    // define o nó a ser criado
     tipoArvore p = (tipoArvore)malloc(sizeof(tipoNo));
     p->nt = interno;
     p->no.nInterno.esq = *esq;
     p->no.nInterno.dir = *dir;
     p->no.nInterno.index = i;
+
+    //nó auxiliar para resgatar a palavra mais à esquerda do nó a ser inserido
     tipoArvore aux = (tipoArvore)malloc(sizeof(tipoNo));
-    tipoArvore aux2 = (tipoArvore)malloc(sizeof(tipoNo));
     aux = p;
-    aux2 = p;
     while (!eExterno(aux)){
         aux = aux->no.nInterno.dir;
     }
-    while (!eExterno(aux2)){
-        aux2 = aux2->no.nInterno.esq;
-    }
+
+    // definição do caractere de diferenciação
     p->no.nInterno.indexLetra = letra(aux->no.palavra, i);
     return p;
 } 
 
 
 tipoArvore criaNoExt(tipoPalavra k){
+    // função que gera o nó e define sua natureza (externo)
     tipoArvore p;
     p = (tipoArvore)malloc(sizeof(tipoNo));
     p->nt = externo;
@@ -64,9 +65,11 @@ tipoArvore criaNoExt(tipoPalavra k){
 tipoArvore insereEntre(tipoPalavra k, tipoArvore *t, int i)
 { tipoArvore p;
   if (eExterno(*t) || i < (*t)->no.nInterno.index){
-    /* cria um novo no externo */
+    // cria um novo no externo
     p = criaNoExt(k);
-    if (letra(k, i) == (*t)->no.nInterno.indexLetra) 
+    if (letra(k, i) == (*t)->no.nInterno.indexLetra) /* caso a i-ésima letra da palavra em questão
+    for igual ao caractere (...) de diferenciação, os nós passados para a esquerda e direita do nó a ser
+    criado são, respectivamente, o nó na posição de inserção e o nó externo criado para comportar a nova palavra */
         return (criaNoInt(i, t, &p));
     else
         return (criaNoInt(i, &p, t));
@@ -91,6 +94,8 @@ tipoArvore inserePatricia(char* valPalavra, int idDoc, tipoArvore *t){
         p = *t;
         while (!eExterno(p)){
             if (letra(*palavra, p->no.nInterno.index) != p->no.nInterno.indexLetra)
+            /* caso a letra de n° index da palavra a ser inserida for igual ao caractere de diferenciação
+            a ação é direcionada à subárvore à direita do nó em questão */
                 p = p->no.nInterno.esq;
             else
                 p = p->no.nInterno.dir;
@@ -152,6 +157,7 @@ int quantasPalavrasPatricia(tipoArvore t, int idDoc){
 }
 
 void imprimePatriciaI(tipoArvore t){
+    /* função recursiva que imprime  */
     if (t == NULL)
         return;
     if (eExterno(t)){
